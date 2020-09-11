@@ -1,0 +1,22 @@
+{
+  "name": "dashboard_v0",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "server": "cd server && npm run dev",
+    "client": "cd client && npm run start",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/siagaairbersih/dashboard_v0.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/siagaairbersih/dashboard_v0/issues"
+  },
+  "homepage": "https://github.com/siagaairbersih/dashboard_v0#readme"
+}
