@@ -6,8 +6,8 @@
  */
 const epochToDate = (epoch) => {
   const d = new Date(0)
-  d.setUTCSeconds(epoch / 1000)
-  return d.toString()
+  d.setSeconds(epoch / 1000)
+  return d.toUTCString()
 }
 
 export default epochToDate

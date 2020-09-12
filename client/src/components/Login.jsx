@@ -5,8 +5,10 @@ import { Link } from 'react-router-dom'
 function Login() {
   const [uoe, setUoe] = useState('')
   const [password, setPassword] = useState('')
+  const [isLoading, setIsLoading] = useState(false)
 
-  const submitHandler = (event) => {
+  const submitHandler = async (event) => {
+    setIsLoading(true)
     event.preventDefault()
     loginHandler()
   }
@@ -18,9 +20,12 @@ function Login() {
         password,
       })
 
-      localStorage.setItem('_s_t', response.data)
-      window.location.reload()
+      if (response) {
+        localStorage.setItem('_s_t', response.data)
+        window.location.reload()
+      }
     } catch (error) {
+      setIsLoading(false)
       console.error(error.response.data)
     }
   }
@@ -38,7 +43,9 @@ function Login() {
           placeholder="Password"
           required
         />
-        <button type="submit">Login</button>
+        <button type="submit" disabled={isLoading}>
+          Login
+        </button>
         <Link to="/forget_password">
           <button>Forget My Password</button>
         </Link>

@@ -4,12 +4,13 @@ import axios from 'axios'
 
 function ResetPass() {
   const [password, setPassword] = useState('')
+  const [isLoading, setIsLoading] = useState(false)
   const { token } = useParams()
   const history = useHistory()
 
   const submitHandler = (event) => {
+    setIsLoading(true)
     event.preventDefault()
-
     resetHandler()
   }
 
@@ -27,6 +28,7 @@ function ResetPass() {
         history.push('/')
       }
     } catch (error) {
+      setIsLoading(false)
       console.error(error.response.data)
     }
   }
@@ -40,7 +42,9 @@ function ResetPass() {
           onChange={(event) => setPassword(event.target.value)}
           required
         />
-        <button type="submit">Reset Password</button>
+        <button type="submit" disabled={isLoading}>
+          Reset Password
+        </button>
       </form>
     </div>
   )

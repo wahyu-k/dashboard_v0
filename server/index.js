@@ -307,7 +307,7 @@ app.post('/v1/check_token', async (req, res) => {
     }
 
     const response = await pool.query(
-      'SELECT * FROM logins WHERE username = $1',
+      'SELECT username FROM logins WHERE username = $1',
       [username],
     )
 
@@ -326,6 +326,46 @@ app.get('/v1/admin/logins', async (req, res) => {
     res.send(response.rows)
   } catch (error) {
     res.send(error.message)
+  }
+})
+
+app.post('/v1/update_password', async (req, res) => {
+  const { token, currentPass, newPassword } = req.body
+
+  try {
+    const { id } = await jwt.decode(token, process.env.JWT_SECRET)
+
+    if (!id) {
+      throw new Error('Token invalid!')
+    }
+    const response = await pool.query(
+      'SELECT password FROM logins WHERE id = $1',
+      [id],
+    )
+
+    if (response.rowCount === 0) {
+      throw new Error('Invalid data!')
+    }
+
+    const password = await bcrypt.compare(
+      currentPass,
+      response.rows[0].password,
+    )
+
+    if (!password) {
+      throw new Error('Wrong current password!')
+    }
+
+    const hashPassword = await bcrypt.hash(newPassword, 7)
+
+    const updatePassword = await pool.query(
+      'UPDATE logins SET password = $1 WHERE id = $2 RETURNING *',
+      [hashPassword, id],
+    )
+
+    res.send(updatePassword)
+  } catch (error) {
+    res.status(400).send(error.message)
   }
 })
 

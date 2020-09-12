@@ -6,9 +6,11 @@ function Register() {
   const [username, setUsername] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [isLoading, setIsLoading] = useState(false)
   const history = useHistory()
 
   const sumbitHandler = (event) => {
+    setIsLoading(true)
     event.preventDefault()
     registerHandler()
   }
@@ -25,6 +27,7 @@ function Register() {
         history.push('/')
       }
     } catch (error) {
+      setIsLoading(false)
       console.error(error.response.data)
     }
   }
@@ -49,7 +52,9 @@ function Register() {
           required
         />
 
-        <button type="submit">Register</button>
+        <button type="submit" disabled={isLoading}>
+          Register
+        </button>
         <Link to="/">
           <button>Cancel</button>
         </Link>

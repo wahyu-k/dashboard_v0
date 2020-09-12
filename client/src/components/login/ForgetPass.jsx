@@ -1,10 +1,14 @@
 import React, { useState } from 'react'
 import axios from 'axios'
+import { useHistory } from 'react-router-dom'
 
 function ForgetPass() {
   const [email, setEmail] = useState('')
+  const [isLoading, setIsLoading] = useState(false)
+  const history = useHistory()
 
   const submitHandler = (event) => {
+    setIsLoading(true)
     event.preventDefault()
     sendResetPass()
   }
@@ -18,8 +22,12 @@ function ForgetPass() {
         },
       )
 
-      console.log(response.data)
+      if (response) {
+        alert("We've send you an email to reset your password...")
+        history.push('/')
+      }
     } catch (error) {
+      setIsLoading(false)
       console.error(error.response.data)
     }
   }
@@ -33,7 +41,9 @@ function ForgetPass() {
           onChange={(event) => setEmail(event.target.value)}
           required
         />
-        <button type="submit">Send Reset Password Link</button>
+        <button type="submit" disabled={isLoading}>
+          Send Reset Password Link
+        </button>
       </form>
     </div>
   )
