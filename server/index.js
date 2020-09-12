@@ -13,7 +13,10 @@ app.use(express.json())
 app.use(cors())
 
 /**
+ * @GET
  * Hello API
+ *
+ * @readonly
  */
 app.get('/', (req, res) => {
   res.json({
@@ -22,9 +25,10 @@ app.get('/', (req, res) => {
 })
 
 /**
- * Getting data
+ * @GET
+ * Device API
  *
- * no requirement
+ * @readonly
  */
 app.get('/v1/devices', async (req, res) => {
   try {
@@ -38,13 +42,13 @@ app.get('/v1/devices', async (req, res) => {
 })
 
 /**
+ * @POST
  * Posting data
  *
- * require: {
- *  name: string,
- *  lng: double,
- *  lat: double,
- * }
+ * @requires
+ *  @name - the device name
+ *  @lng - the longitude
+ *  @lat - the latitude
  */
 app.post('/v1/devices', async (req, res) => {
   const { name, lng, lat } = req.body
@@ -63,16 +67,16 @@ app.post('/v1/devices', async (req, res) => {
 })
 
 /**
+ * @POST
  * Posting the sensors data
  *
- * require: {
- *  ph: double,
- *  tds: double,
- *  turb: double,
- *  temp: double,
- *  flow: double
- *  device_id: integer device id
- * }
+ * @requires
+ *  @ph - the ph value
+ *  @tds - the tds value
+ *  @turb - the turbidity value
+ *  @temp - the temperature value
+ *  @flow - the flow value
+ *  @device_id - the device id
  */
 app.post('/v1/sensors', async (req, res) => {
   const { ph, tds, turb, temp, flow, device_id } = req.body
@@ -91,13 +95,13 @@ app.post('/v1/sensors', async (req, res) => {
 })
 
 /**
+ * @POST
  * Register API
  *
- * require: {
- *  username: string.
- *  email: string,
- *  password, string
- * }
+ * @requires
+ *  @username - the username
+ *  @email - the email
+ *  @password - the password
  */
 app.post('/v1/register', async (req, res) => {
   const { username, email, password } = req.body
@@ -134,12 +138,12 @@ app.post('/v1/register', async (req, res) => {
 })
 
 /**
+ * @POST
  * Login API
  *
- * require: {
- *  uoe: string (this is the username or email)
- *  password: string
- * }
+ * @requires
+ *  @uoe -this is the username or email
+ *  @password - the password
  */
 app.post('/v1/login', async (req, res) => {
   const { uoe, password } = req.body
@@ -165,6 +169,7 @@ app.post('/v1/login', async (req, res) => {
 
     const jwtToken = await jwt.sign(
       {
+        id: data.rows[0].id,
         username: data.rows[0].username,
       },
       process.env.JWT_SECRET,
@@ -177,9 +182,10 @@ app.post('/v1/login', async (req, res) => {
 })
 
 /**
- * Sensors API (GET the sensors data)
+ * @GET
+ * Sensors API
  *
- * no requirement
+ * @readonly
  */
 app.get('/v1/sensors', async (req, res) => {
   try {
@@ -191,10 +197,25 @@ app.get('/v1/sensors', async (req, res) => {
   }
 })
 
+/**
+ * @POST
+ * Forget Password API
+ *
+ * @requires
+ *  @receiver - the receiver's email
+ */
 app.post('/v1/forget_password', async (req, res) => {
   const { receiver } = req.body
 
   try {
+    const response = await pool.query('SELECT * FROM logins WHERE email = $1', [
+      receiver,
+    ])
+
+    if (response.rowCount === 0) {
+      throw new Error("Can't find the email!")
+    }
+
     const testAccount = await nodemailer.createTestAccount()
 
     // create reusable transporter object using the default SMTP transport
@@ -208,7 +229,13 @@ app.post('/v1/forget_password', async (req, res) => {
       },
     })
 
-    const jwtAuth = await jwt.sign({ email: receiver }, process.env.JWT_SECRET)
+    const jwtAuth = await jwt.sign(
+      { email: receiver },
+      process.env.JWT_SECRET,
+      {
+        expiresIn: '2h',
+      },
+    )
 
     const info = await mail.sendMail({
       from: '"Siaga Air Bersih" <no-reply@siagaairbersih.com>', // sender address
@@ -216,7 +243,7 @@ app.post('/v1/forget_password', async (req, res) => {
       subject: 'Password Reset', // Subject line
       html: `<p>Here is the link to reset your password<p>
              <br />
-             <a>localhost:3000/v1/reset_password/${jwtAuth}</a>`, // html body
+             <a>localhost:3000/reset_password/${jwtAuth}</a>`, // html body
     })
 
     // console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info))
@@ -232,11 +259,74 @@ app.post('/v1/forget_password', async (req, res) => {
   }
 })
 
-app.post('/v1/reset_password/:token', async (req, res) => {
-  const { email, newPassword } = req.body
-  const token = req.params.token
+/**
+ * @POST
+ * Reset Password API
+ *
+ * @requires
+ *  @token - token from the email that contains the email (exp in 2 hour)
+ *  @newPassword - the new password
+ */
+app.post('/v1/reset_password', async (req, res) => {
+  const { token, newPassword } = req.body
 
-  console.log(email, newPassword, token)
+  try {
+    const { email } = await jwt.decode(token, process.env.JWT_SECRET)
+
+    if (!email) {
+      throw new Error('Failed!')
+    }
+
+    const password = await bcrypt.hash(newPassword, 7)
+
+    const response = await pool.query(
+      'UPDATE logins SET password = $1 WHERE email = $2 RETURNING *',
+      [password, email],
+    )
+
+    res.send(response.rows)
+  } catch (error) {
+    res.status(400).send(error.message)
+  }
+})
+
+/**
+ * @POST
+ * Check Token API
+ *
+ * @requires
+ *  @token - token from the local storage
+ */
+app.post('/v1/check_token', async (req, res) => {
+  const { token } = req.body
+  try {
+    const { username } = await jwt.decode(token, process.env.JWT_SECRET)
+
+    if (!username) {
+      throw new Error('Failed token!')
+    }
+
+    const response = await pool.query(
+      'SELECT * FROM logins WHERE username = $1',
+      [username],
+    )
+
+    if (response.rowCount !== 0) {
+      res.send(response.rows[0])
+    }
+  } catch (error) {
+    res.status(400).send(error.message)
+  }
+})
+
+app.get('/v1/admin/logins', async (req, res) => {
+  try {
+    const response = await pool.query('SELECT * FROM logins')
+
+    res.send(response.rows)
+  } catch (error) {
+    res.send(error.message)
+  }
 })
 
 app.listen(5000, () => {

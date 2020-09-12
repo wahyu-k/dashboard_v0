@@ -1,11 +1,12 @@
 import React, { useState } from 'react'
 import axios from 'axios'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 
 function Register() {
   const [username, setUsername] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const history = useHistory()
 
   const sumbitHandler = (event) => {
     event.preventDefault()
@@ -20,9 +21,11 @@ function Register() {
         password,
       })
 
-      console.log(response.data)
+      if (response) {
+        history.push('/')
+      }
     } catch (error) {
-      console.error(error.message)
+      console.error(error.response.data)
     }
   }
 

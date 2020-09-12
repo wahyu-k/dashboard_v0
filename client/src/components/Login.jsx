@@ -8,7 +8,6 @@ function Login() {
 
   const submitHandler = (event) => {
     event.preventDefault()
-    console.log(uoe, password)
     loginHandler()
   }
 
@@ -19,15 +18,15 @@ function Login() {
         password,
       })
 
-      console.log(response.data)
       localStorage.setItem('_s_t', response.data)
+      window.location.reload()
     } catch (error) {
-      console.error(error.message)
+      console.error(error.response.data)
     }
   }
   return (
     <div>
-      <h1>Login</h1>{' '}
+      <h1>Login</h1>
       <form onSubmit={(event) => submitHandler(event)}>
         <input
           onChange={(event) => setUoe(event.target.value)}
@@ -40,6 +39,9 @@ function Login() {
           required
         />
         <button type="submit">Login</button>
+        <Link to="/forget_password">
+          <button>Forget My Password</button>
+        </Link>
         <Link to="/register">
           <button>Register</button>
         </Link>
