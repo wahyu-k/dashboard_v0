@@ -1,0 +1,31 @@
+const pool = require('../../config/db')
+
+/**
+ * @POST
+ * Posting the sensors data
+ *
+ * @requires
+ *  @ph - the ph value
+ *  @tds - the tds value
+ *  @turb - the turbidity value
+ *  @temp - the temperature value
+ *  @flow - the flow value
+ *  @device_id - the device id
+ */
+const postSensorVal = async (req, res) => {
+  const { ph, tds, turb, temp, flow, device_id } = req.body
+
+  try {
+    const response = await pool.query(
+      'INSERT INTO sensors(ph, tds, turb, temp, flow, device_id) VALUES($1, $2, $3, $4, $5) RETURNING *',
+      [ph, tds, turb, temp, flow, device_id],
+    )
+
+    res.send(response.rows)
+  } catch (error) {
+    res.send(error)
+    console.error(error)
+  }
+}
+
+module.exports = postSensorVal

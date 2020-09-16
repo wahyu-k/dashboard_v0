@@ -1,25 +1,32 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 
-function RegisterDevice(props) {
+function EditDevices(props) {
+  const [id, setId] = useState('')
   const [name, setName] = useState('')
   const [lat, setLat] = useState('')
   const [lng, setLng] = useState('')
   const [userId, setUserId] = useState('')
 
+  useEffect(() => {
+    const { id, name, lat, lng, user_id } = props.data
+    setId(id)
+    setName(name)
+    setLat(lat)
+    setLng(lng)
+    setUserId(user_id)
+  }, [props.data])
+
   const saveHandler = async () => {
-    props.onStart()
     const data = {
+      id,
       name,
       lat,
       lng,
       user_id: userId,
     }
     try {
-      const response = await axios.post(
-        'http://localhost:5000/v1/devices',
-        data,
-      )
+      const response = await axios.put('http://localhost:5000/v1/devices', data)
 
       if (response) {
         props.onFinish()
@@ -39,16 +46,19 @@ function RegisterDevice(props) {
         <p>-</p>
       </td>
       <td>
-        <input onChange={(event) => setName(event.target.value)} />
+        <input value={name} onChange={(event) => setName(event.target.value)} />
       </td>
       <td>
-        <input onChange={(event) => setLat(event.target.value)} />
+        <input value={lat} onChange={(event) => setLat(event.target.value)} />
       </td>
       <td>
-        <input onChange={(event) => setLng(event.target.value)} />
+        <input value={lng} onChange={(event) => setLng(event.target.value)} />
       </td>
       <td>
-        <input onChange={(event) => setUserId(event.target.value)} />
+        <input
+          value={userId}
+          onChange={(event) => setUserId(event.target.value)}
+        />
       </td>
       <td>
         <button onClick={() => saveHandler()} disabled={props.isLoading}>
@@ -62,4 +72,4 @@ function RegisterDevice(props) {
   )
 }
 
-export default RegisterDevice
+export default EditDevices
