@@ -34,6 +34,7 @@ function Devices() {
         'http://localhost:5000/v1/devices',
         data,
       )
+      console.log(response.data)
       if (response) {
         setIsLoading(false)
         setAddDevice(false)
@@ -59,6 +60,7 @@ function Devices() {
             <th>Name</th>
             <th>Latitude</th>
             <th>Longitude</th>
+            <th>User Id</th>
             <th>Created At</th>
             <th>Edit</th>
           </tr>
@@ -68,6 +70,7 @@ function Devices() {
               <td>{device.name}</td>
               <td>{device.lat}</td>
               <td>{device.lng}</td>
+              <td>{device.user_id}</td>
               <td>{epochToDate(device.created_at)}</td>
               <td>
                 <button>Edit</button>

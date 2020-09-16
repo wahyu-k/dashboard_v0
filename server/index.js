@@ -51,18 +51,25 @@ app.get('/v1/devices', async (req, res) => {
  *  @lat - the latitude
  */
 app.post('/v1/devices', async (req, res) => {
-  const { name, lng, lat } = req.body
+  const { name, lng, lat, user_id } = req.body
 
   try {
+    const isUserId = await pool.query('SELECT id FROM logins WHERE id = $1', [
+      user_id,
+    ])
+
+    if (isUserId.rowCount === 0) {
+      throw new Error('No user exist!')
+    }
+
     const response = await pool.query(
-      'INSERT INTO devices(name, lng, lat, created_at) VALUES($1, $2, $3, $4) RETURNING *',
-      [name, lng, lat, Date.now()],
+      'INSERT INTO devices(name, lng, lat, user_id, created_at) VALUES($1, $2, $3, $4, $5) RETURNING *',
+      [name, lng, lat, user_id, Date.now()],
     )
 
     res.send(response.rows)
   } catch (error) {
-    res.send(error)
-    console.error(error)
+    res.status(404).send(error.message)
   }
 })
 
@@ -364,6 +371,49 @@ app.post('/v1/update_password', async (req, res) => {
     )
 
     res.send(updatePassword)
+  } catch (error) {
+    res.status(400).send(error.message)
+  }
+})
+
+app.post('/v1/update_username', async (req, res) => {
+  const { token, newUsername, password } = req.body
+  try {
+    const { id } = jwt.decode(token, process.env.JWT_SECRET)
+
+    const response = await pool.query('SELECT * FROM logins WHERE id = $1', [
+      id,
+    ])
+
+    if (response.rowCount === 0) {
+      throw new Error('Who are you?')
+    }
+
+    const isPassword = await bcrypt.compare(password, response.rows[0].password)
+
+    if (!isPassword) {
+      throw new Error('Check your password again!')
+    }
+
+    const isUsername = await pool.query(
+      'SELECT * FROM logins WHERE username = $1',
+      [newUsername],
+    )
+
+    if (isUsername.rowCount !== 0) {
+      throw new Error('Username already exist')
+    }
+
+    const update = await pool.query(
+      'UPDATE logins SET username = $1 where id = $2 RETURNING *',
+      [newUsername, id],
+    )
+
+    if (update.rowCount === 0) {
+      throw new Error('Error while updating your username!')
+    }
+
+    res.send(update)
   } catch (error) {
     res.status(400).send(error.message)
   }

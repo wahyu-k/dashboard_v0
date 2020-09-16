@@ -4,12 +4,14 @@ function RegisterDevice(props) {
   const [name, setName] = useState('')
   const [lat, setLat] = useState('')
   const [lng, setLng] = useState('')
+  const [userId, setUserId] = useState('')
 
   const saveHandler = () => {
     const data = {
       name,
       lat,
       lng,
+      user_id: userId,
     }
     props.saveHandler(data)
   }
@@ -31,6 +33,9 @@ function RegisterDevice(props) {
       </td>
       <td>
         <input onChange={(event) => setLng(event.target.value)} />
+      </td>
+      <td>
+        <input onChange={(event) => setUserId(event.target.value)} />
       </td>
       <td>
         <button onClick={() => saveHandler()} disabled={props.isLoading}>
