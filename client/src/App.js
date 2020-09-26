@@ -8,6 +8,7 @@ import axios from 'axios'
 import Home from './components/Home'
 import NoMatch from './components/NoMatch'
 import Admin from './components/Admin'
+import AksiBerbagi from './components/AksiBerbagi'
 
 function App() {
   const [isLogin, setIsLogin] = useState(false)
@@ -63,6 +64,9 @@ function App() {
         </Route>
         <Route path="/admin">
           <Admin />
+        </Route>
+        <Route path="/aksiberbagi">
+          <AksiBerbagi />
         </Route>
         <Route path="*">
           <NoMatch />

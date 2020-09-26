@@ -38,9 +38,14 @@ const register = async (req, res) => {
       [username, email, hashPassword, Date.now()],
     )
 
-    res.send(response.rows)
+    const postPersonData = await pool.query(
+      'INSERT INTO users(id, first_name, last_name, dob, prov, region, plan, created_at) VALUES($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *',
+      [response.rows[0].id, '', '', '', '', '', 0, Date.now()],
+    )
+
+    res.send({ createdData: response.rows, personData: postPersonData.rows })
   } catch (error) {
-    res.status(409).send(error.message)
+    res.status(400).send(error.message)
   }
 }
 

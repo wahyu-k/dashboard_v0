@@ -47,6 +47,11 @@ const helperApi = require('./components/helper/helperApi')
 
 app.post('/v1/check_token', helperApi.checkToken)
 
+const userApi = require('./components/user/userApi')
+
+app.post('/v1/users', userApi.getPersonalData)
+app.put('/v1/users', userApi.updatePersData)
+
 app.listen(5000, () => {
   console.log('Server started on 5000')
 })

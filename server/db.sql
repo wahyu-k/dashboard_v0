@@ -27,3 +27,14 @@ CREATE TABLE sensors(
   device_id VARCHAR(20) NOT NULL,
   created_at VARCHAR(50) NOT NULL
 )
+
+CREATE TABLE users(
+  id BIGINT PRIMARY KEY,
+  first_name VARCHAR(70) ,
+  last_name VARCHAR(70),
+  dob VARCHAR(30),
+  prov VARCHAR(50),
+  region VARCHAR(50),
+  plan INT NOT NULL,
+  created_at VARCHAR(50) NOT NULL
+)
