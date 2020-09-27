@@ -52,6 +52,10 @@ const userApi = require('./components/user/userApi')
 app.post('/v1/users', userApi.getPersonalData)
 app.put('/v1/users', userApi.updatePersData)
 
+const aksiBerbagiApi = require('./components/aksiBerbagi/aksiBerbagiApi')
+
+app.post('/v1/aksi_berbagi', aksiBerbagiApi.getColData)
+
 app.listen(5000, () => {
   console.log('Server started on 5000')
 })

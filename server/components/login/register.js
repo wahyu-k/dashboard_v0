@@ -34,13 +34,13 @@ const register = async (req, res) => {
     const hashPassword = await bcrypt.hash(password, 7)
 
     const response = await pool.query(
-      'INSERT INTO logins(username, email, password, created_at) VALUES($1, $2, $3, $4) RETURNING *',
-      [username, email, hashPassword, Date.now()],
+      'INSERT INTO logins(username, email, password, created_at, modified_at) VALUES($1, $2, $3, $4, $5) RETURNING *',
+      [username, email, hashPassword, Date.now(), Date.now()],
     )
 
     const postPersonData = await pool.query(
-      'INSERT INTO users(id, first_name, last_name, dob, prov, region, plan, created_at) VALUES($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *',
-      [response.rows[0].id, '', '', '', '', '', 0, Date.now()],
+      'INSERT INTO users(id, first_name, last_name, dob, prov, region, plan, created_at, modified_at) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING *',
+      [response.rows[0].id, '', '', '', '', '', 0, Date.now(), Date.now()],
     )
 
     res.send({ createdData: response.rows, personData: postPersonData.rows })

@@ -41,8 +41,8 @@ const updatePass = async (req, res) => {
     const hashPassword = await bcrypt.hash(newPassword, 7)
 
     const updatePassword = await pool.query(
-      'UPDATE logins SET password = $1 WHERE id = $2 RETURNING *',
-      [hashPassword, id],
+      'UPDATE logins SET password = $1, modified_date = $2 WHERE id = $3 RETURNING *',
+      [hashPassword, Date.now(), id],
     )
 
     res.send(updatePassword)

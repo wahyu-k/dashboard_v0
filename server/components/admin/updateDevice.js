@@ -13,8 +13,8 @@ const updateDevice = async (req, res) => {
     }
 
     const response = await pool.query(
-      'UPDATE devices SET name = $1, lat = $2, lng = $3, user_id = $4 WHERE id = $5 RETURNING *',
-      [name, lat, lng, user_id, id],
+      'UPDATE devices SET name = $1, lat = $2, lng = $3, user_id = $4, modified_at = $5 WHERE id = $6 RETURNING *',
+      [name, lat, lng, user_id, Date.now(), id],
     )
 
     res.send(response.rows)

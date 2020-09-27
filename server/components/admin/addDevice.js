@@ -23,8 +23,8 @@ const addDevice = async (req, res) => {
     }
 
     const response = await pool.query(
-      'INSERT INTO devices(name, lng, lat, user_id, created_at) VALUES($1, $2, $3, $4, $5) RETURNING *',
-      [name, lng, lat, user_id, Date.now()],
+      'INSERT INTO devices(name, lng, lat, user_id, created_at, modified_at) VALUES($1, $2, $3, $4, $5, $6) RETURNING *',
+      [name, lng, lat, user_id, Date.now(), Date.now()],
     )
 
     res.send(response.rows)

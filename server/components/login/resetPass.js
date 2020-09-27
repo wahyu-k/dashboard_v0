@@ -23,8 +23,8 @@ const resetPass = async (req, res) => {
     const password = await bcrypt.hash(newPassword, 7)
 
     const response = await pool.query(
-      'UPDATE logins SET password = $1 WHERE email = $2 RETURNING *',
-      [password, email],
+      'UPDATE logins SET password = $1, modified_at = $2 WHERE email = $3 RETURNING *',
+      [password, Date.now(), email],
     )
 
     res.send(response.rows)

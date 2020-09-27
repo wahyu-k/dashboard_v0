@@ -31,8 +31,8 @@ const updateUname = async (req, res) => {
     }
 
     const update = await pool.query(
-      'UPDATE logins SET username = $1 where id = $2 RETURNING *',
-      [newUsername, id],
+      'UPDATE logins SET username = $1, modified_at = $2 WHERE id = $3 RETURNING *',
+      [newUsername, Date.now(), id],
     )
 
     if (update.rowCount === 0) {
