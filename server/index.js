@@ -1,8 +1,8 @@
-require('dotenv').config()
+﻿require('dotenv').config()
 
 const express = require('express')
 const cors = require('cors')
-
+//Ini test
 const app = express()
 app.use(express.json())
 app.use(cors())
