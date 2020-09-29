@@ -1,4 +1,4 @@
-require('dotenv').config()
+﻿require('dotenv').config()
 
 const express = require('express')
 const cors = require('cors')
@@ -55,6 +55,16 @@ app.put('/v1/users', userApi.updatePersData)
 const aksiBerbagiApi = require('./components/aksiBerbagi/aksiBerbagiApi')
 
 app.post('/v1/aksi_berbagi', aksiBerbagiApi.getColData)
+
+const calcApi = require('./components/calc/calcApi')
+
+app.post('/v1/calc', calcApi.calcPost)
+
+app.get('/v1/calc', calcApi.calcGet)
+
+app.put('/v1/calc', calcApi.calcPut)
+
+app.get('/v1/calc/dashboard', calcApi.calcDash)
 
 app.listen(5000, () => {
   console.log('Server started on 5000')
