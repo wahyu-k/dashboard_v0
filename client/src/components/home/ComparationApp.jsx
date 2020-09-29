@@ -21,20 +21,19 @@ const ComparationApp = () => {
 
   return (
     <Fragment>
-      <h1 className="text-center mt-5">SIAB INDONESIA</h1>
-      <h2 className="text-center mt-5">Input Perhitungan Biaya Air</h2>
-      <h3 className="text-center mt-5">Harga Air</h3>
+      <h1>SIAB INDONESIA</h1>
+      <h2>Input Perhitungan Biaya Air</h2>
+      <h3>Harga Air</h3>
       <input
         type="text"
-        className="form-control"
         value={input}
         onChange={(e) => setInput(e.target.value)}
       />
-      <h3 className="text-center mt-5">Harga Air SIAB</h3>
+      <h3>Harga Air SIAB</h3>
       <p>{a}</p>
-      <h3 className="text-center mt-5">Harga Air PDAM</h3>
+      <h3>Harga Air PDAM</h3>
       <p>{input} </p>
-      <h3 className="text-center mt-5">Anda dapat menghemat seharga</h3>
+      <h3>Anda dapat menghemat seharga</h3>
       <p>{input - a}</p>
     </Fragment>
   )

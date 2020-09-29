@@ -40,32 +40,17 @@ function UpdateCompApp() {
   return (
     <div>
       <h1>UpdateCompApp</h1>
-      <h2 className="text-center mt-5">Update Nilai Variabel</h2>
-      <h3 className="text-center mt-5">Nilai Variabel X</h3>
-      <form className="d-flex mt-5" onSubmit={onSubmitForm}>
-        <input
-          type="real"
-          className="form-control"
-          onChange={(e) => setX1(e.target.value)}
-          value={x1}
-        />
-        <h3 className="text-center mt-5">Nilai Variabel Y</h3>
-        <input
-          type="real"
-          className="form-control"
-          value={y1}
-          onChange={(e) => setY1(e.target.value)}
-        />
-        <h3 className="text-center mt-5">Nilai Variabel Z</h3>
-        <input
-          type="real"
-          className="form-control"
-          value={z1}
-          onChange={(e) => setZ1(e.target.value)}
-        />
-        <button className="btn btn-success">Ubah Nilai</button>
+      <h2>Update Nilai Variabel</h2>
+      <h3>Nilai Variabel X</h3>
+      <form onSubmit={onSubmitForm}>
+        <input type="real" onChange={(e) => setX1(e.target.value)} value={x1} />
+        <h3>Nilai Variabel Y</h3>
+        <input type="real" value={y1} onChange={(e) => setY1(e.target.value)} />
+        <h3>Nilai Variabel Z</h3>
+        <input type="real" value={z1} onChange={(e) => setZ1(e.target.value)} />
+        <button>Ubah Nilai</button>
       </form>
-      <h3 className="text-center mt-5">Dimodifikasi pada tanggal</h3>
+      <h3>Dimodifikasi pada tanggal</h3>
       <p>{epochToDate(date)}</p>
     </div>
   )
