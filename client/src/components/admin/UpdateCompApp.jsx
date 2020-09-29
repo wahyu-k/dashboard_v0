@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
+import epochToDate from '../../helper/epochToDate'
 
 function UpdateCompApp() {
   const [x1, setX1] = useState('')
   const [y1, setY1] = useState('')
   const [z1, setZ1] = useState('')
+  const [date, setDate] = useState('')
 
   const onSubmitForm = async (e) => {
     e.preventDefault()
@@ -27,6 +29,7 @@ function UpdateCompApp() {
         setX1(resp.data.x)
         setY1(resp.data.y)
         setZ1(resp.data.z)
+        setDate(resp.data.modified_at)
       } catch (err) {
         console.error(err.data.message)
       }
@@ -62,6 +65,8 @@ function UpdateCompApp() {
         />
         <button className="btn btn-success">Ubah Nilai</button>
       </form>
+      <h3 className="text-center mt-5">Dimodifikasi pada tanggal</h3>
+      <p>{epochToDate(date)}</p>
     </div>
   )
 }
