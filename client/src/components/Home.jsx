@@ -1,4 +1,6 @@
 import React from 'react'
+import ComparationApp from './home/ComparationApp'
+import DashboardSensors from './home/DashboardSensors'
 import UpdatePassword from './settings/UpdatePassword'
 import UpdatePersonalData from './settings/UpdatePersonalData'
 import UpdateUsername from './settings/UpdateUsername'
@@ -16,6 +18,8 @@ function Home() {
       <UpdateUsername />
       <UpdatePassword />
       <UpdatePersonalData />
+      <ComparationApp />
+      <DashboardSensors />
       <button onClick={() => logoutHandler()}>Logout</button>
     </div>
   )
