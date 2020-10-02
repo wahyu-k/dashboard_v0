@@ -10,11 +10,9 @@ const getColData = async (req, res) => {
     )
 
     const result = response.rows
-    console.log(result)
     res.send(result)
   } catch (error) {
     res.send(error)
-    console.error(error)
   }
 }
 
