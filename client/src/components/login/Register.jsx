@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import axios from 'axios'
 import { Link, useHistory } from 'react-router-dom'
+import { useFormik } from 'formik'
+import * as Yup from 'yup'
 
 function Register() {
   const [username, setUsername] = useState('')
@@ -9,9 +11,8 @@ function Register() {
   const [isLoading, setIsLoading] = useState(false)
   const history = useHistory()
 
-  const sumbitHandler = (event) => {
+  const sumbitHandler = () => {
     setIsLoading(true)
-    event.preventDefault()
     registerHandler()
   }
 
@@ -35,23 +36,64 @@ function Register() {
     }
   }
 
+  const formik = useFormik({
+    initialValues: {
+      username: '',
+      email: '',
+      password: '',
+    },
+    validationSchema: Yup.object({
+      username: Yup.string()
+        .matches(/^.[a-zA-Z0-9]+$/, {
+          message: 'Alphanumeric characters',
+          excludeEmptyString: true,
+        })
+        .min(4)
+        .max(20)
+        .required(),
+      email: Yup.string().email().required(),
+      password: Yup.string().min(8).max(100).required(),
+    }),
+    onSubmit: (values) => {
+      setUsername(values.username)
+      setEmail(values.email)
+      setPassword(values.password)
+      sumbitHandler()
+    },
+  })
+
   return (
     <div>
       <h1>Register</h1>
-      <form onSubmit={(event) => sumbitHandler(event)}>
+      <form onSubmit={formik.handleSubmit}>
         <input
+          id="username"
+          name="username"
+          type="text"
           placeholder="Username"
-          onChange={(event) => setUsername(event.target.value)}
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          value={formik.values.username}
           required
         />
         <input
+          id="email"
+          name="email"
+          type="text"
           placeholder="E-mail"
-          onChange={(event) => setEmail(event.target.value)}
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          value={formik.values.email}
           required
         />
         <input
+          id="password"
+          name="password"
+          type="text"
           placeholder="Password"
-          onChange={(event) => setPassword(event.target.value)}
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          value={formik.values.password}
           required
         />
 
