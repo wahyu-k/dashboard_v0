@@ -7,7 +7,9 @@ function DashboardSensors() {
 
   useEffect(() => {
     async function fetchData() {
-      const dash = await axios.get('http://localhost:5000/v1/calc/dashboard')
+      const dash = await axios.get(
+        `${process.env.REACT_APP_BASE_URL}/v1/calc/dashboard`,
+      )
       setDash(dash.data)
     }
     fetchData()

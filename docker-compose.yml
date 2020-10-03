@@ -8,3 +8,29 @@ services:
       - /usr/src/app/server/node_modules
     ports:
       - 5000:5000
+    environment:
+      - JWT_SECRET=forbiddenfruit
+      - EMAIL_PASSWORD=Y5$6RPCs3jOW
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=siab
+      - POSTGRES_PASS=admin
+      - POSTGRES_HOST=localhost
+      - POSTGRES_PORT=5432
+
+  client:
+    build: ./client
+    volumes:
+      - ./client:/usr/src/app/client
+      - /usr/src/app/client/node_modules
+    ports:
+      - 80:80
+    environment:
+      - REACT_APP_BASE_URL=http://postgresdb:5000
+      - REACT_APP_MAP_API=AIzaSyDw6-MBsHBhZqS4DSDBlXGr1fO_21Y6PQI
+
+  postgresdb:
+    image: 'postgres:12.4'
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_PASSWORD: admin

@@ -3,6 +3,7 @@ FROM node:current-slim
 WORKDIR /usr/src/app/server
 
 COPY package.json .
+COPY package-lock.json .
 
 RUN npm install
 

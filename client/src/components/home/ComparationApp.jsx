@@ -13,7 +13,7 @@ const ComparationApp = () => {
 
   useEffect(() => {
     async function fetchData() {
-      const resp = await axios.get('http://localhost:5000/v1/calc')
+      const resp = await axios.get(`${process.env.REACT_APP_BASE_URL}/v1/calc`)
       setResp(resp.data)
     }
     fetchData()

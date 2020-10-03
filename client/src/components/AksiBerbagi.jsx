@@ -20,7 +20,7 @@ function AksiBerbagi() {
     const data = [1, 2]
     try {
       const response = await axios.post(
-        'http://localhost:5000/v1/aksi_berbagi',
+        `${process.env.REACT_APP_BASE_URL}/v1/aksi_berbagi`,
         {
           device_id: data,
         },

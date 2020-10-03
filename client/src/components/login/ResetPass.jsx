@@ -17,7 +17,7 @@ function ResetPass() {
   const resetHandler = async () => {
     try {
       const response = await axios.post(
-        'http://localhost:5000/v1/reset_password/',
+        `${process.env.REACT_APP_BASE_URL}/v1/reset_password/`,
         {
           token,
           newPassword: password,

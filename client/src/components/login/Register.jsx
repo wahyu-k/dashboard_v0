@@ -17,11 +17,14 @@ function Register() {
 
   const registerHandler = async () => {
     try {
-      const response = await axios.post('http://localhost:5000/v1/register', {
-        username,
-        email,
-        password,
-      })
+      const response = await axios.post(
+        `${process.env.REACT_APP_BASE_URL}/v1/register`,
+        {
+          username,
+          email,
+          password,
+        },
+      )
 
       if (response) {
         history.push('/')
