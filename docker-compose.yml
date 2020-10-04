@@ -10,11 +10,11 @@ services:
       - 5000:5000
     environment:
       - JWT_SECRET=forbiddenfruit
-      - EMAIL_PASSWORD=Y5$6RPCs3jOW
+      - EMAIL_PASSWORD=Y5$$6RPCs3jOW
       - POSTGRES_USER=postgres
       - POSTGRES_DB=siab
       - POSTGRES_PASS=admin
-      - POSTGRES_HOST=localhost
+      - POSTGRES_HOST=postgres
       - POSTGRES_PORT=5432
 
   client:
@@ -25,7 +25,7 @@ services:
     ports:
       - 80:80
     environment:
-      - REACT_APP_BASE_URL=http://postgresdb:5000
+      - REACT_APP_BASE_URL=http://server:5000
       - REACT_APP_MAP_API=AIzaSyDw6-MBsHBhZqS4DSDBlXGr1fO_21Y6PQI
 
   postgresdb:
