@@ -1,4 +1,4 @@
-FROM node:current-slim
+FROM node:12.8
 
 WORKDIR /usr/src/app/server
 

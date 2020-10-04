@@ -1,5 +1,5 @@
 # NODE BUILD
-FROM node:current-slim as build
+FROM node:12.18 as build
 
 WORKDIR /usr/src/app/client
 
@@ -10,10 +10,16 @@ RUN npm install
 
 COPY . .
 
+ARG REACT_APP_BASE_URL
+ENV REACT_APP_BASE_URL $REACT_APP_BASE_URL
+
+ARG REACT_APP_MAP_API
+ENV REACT_APP_MAP_API $REACT_APP_MAP_API
+
 RUN npm run build
 
 #NGINX STAGE
-FROM nginx:alpine
+FROM nginx:1.18
 
 COPY --from=build /usr/src/app/client/build /usr/share/nginx/html
 
@@ -23,4 +29,4 @@ COPY ./nginx.conf /etc/nginx
 
 EXPOSE 80
 
-CMD ["nginx", "-g", "daemon off;"]
+CMD [ "nginx", "-g", "daemon off;" ]

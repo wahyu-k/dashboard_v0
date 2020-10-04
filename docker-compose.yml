@@ -14,23 +14,26 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_DB=siab
       - POSTGRES_PASS=admin
-      - POSTGRES_HOST=postgres
+      - POSTGRES_HOST=postgresdb
       - POSTGRES_PORT=5432
 
   client:
-    build: ./client
+    build:
+      context: ./client
+      args:
+        - REACT_APP_BASE_URL= http://server:5000
+        - REACT_APP_MAP_API= AIzaSyDw6-MBsHBhZqS4DSDBlXGr1fO_21Y6PQI
     volumes:
       - ./client:/usr/src/app/client
       - /usr/src/app/client/node_modules
     ports:
       - 80:80
-    environment:
-      - REACT_APP_BASE_URL=http://server:5000
-      - REACT_APP_MAP_API=AIzaSyDw6-MBsHBhZqS4DSDBlXGr1fO_21Y6PQI
 
   postgresdb:
     image: 'postgres:12.4'
     ports:
       - 5432:5432
+    volumes:
+      - ./pgdata:/var/lib/postgresql/data
     environment:
       POSTGRES_PASSWORD: admin
