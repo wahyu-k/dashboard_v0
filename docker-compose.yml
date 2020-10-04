@@ -21,7 +21,7 @@ services:
     build:
       context: ./client
       args:
-        - REACT_APP_BASE_URL= http://server:5000
+        - REACT_APP_BASE_URL= http://52.14.80.34:5000
         - REACT_APP_MAP_API= AIzaSyDw6-MBsHBhZqS4DSDBlXGr1fO_21Y6PQI
     volumes:
       - ./client:/usr/src/app/client
@@ -30,7 +30,7 @@ services:
       - 80:80
 
   postgresdb:
-    image: 'postgres:12.4'
+    image: 'postgres:12.4-alpine'
     ports:
       - 5432:5432
     volumes:

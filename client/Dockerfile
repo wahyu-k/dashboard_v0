@@ -1,5 +1,5 @@
 # NODE BUILD
-FROM node:12.18 as build
+FROM node:12.18-alpine as build
 
 WORKDIR /usr/src/app/client
 
@@ -19,7 +19,7 @@ ENV REACT_APP_MAP_API $REACT_APP_MAP_API
 RUN npm run build
 
 #NGINX STAGE
-FROM nginx:1.18
+FROM nginx:1.18-alpine
 
 COPY --from=build /usr/src/app/client/build /usr/share/nginx/html
 
