@@ -24,6 +24,7 @@ services:
         - REACT_APP_BASE_URL= http://52.14.80.34:5000
         - REACT_APP_MAP_API= AIzaSyDw6-MBsHBhZqS4DSDBlXGr1fO_21Y6PQI
     volumes:
+      - /etc/letsencrypt/live/test01.siagaairbersih.com:/etc/nginx/certs
       - ./client:/usr/src/app/client
       - /usr/src/app/client/node_modules
     ports:
