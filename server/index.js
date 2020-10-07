@@ -51,6 +51,7 @@ const userApi = require('./components/user/userApi')
 
 app.post('/v1/users', userApi.getPersonalData)
 app.put('/v1/users', userApi.updatePersData)
+app.post('/v1/users/sensors', userApi.getSensors)
 
 const aksiBerbagiApi = require('./components/aksiBerbagi/aksiBerbagiApi')
 
@@ -59,12 +60,11 @@ app.post('/v1/aksi_berbagi', aksiBerbagiApi.getColData)
 const calcApi = require('./components/calc/calcApi')
 
 app.post('/v1/calc', calcApi.calcPost)
-
 app.get('/v1/calc', calcApi.calcGet)
-
 app.put('/v1/calc', calcApi.calcPut)
-
-app.get('/v1/calc/dashboard', calcApi.calcDash)
+// app.get('/v1/calc/dashboard', calcApi.calcDash)
+// app.post('/v1/calc/dashboard', calcApi.calcDashrec)
+// app.put('/v1/calc/dashboard', calcApi.filter)
 
 app.listen(5000, () => {
   console.log('Server started on 5000')
