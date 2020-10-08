@@ -10,6 +10,8 @@ import {
   XAxis,
 } from 'recharts'
 
+//recommit jancuk
+
 function DashboardSensors() {
   const [getSens, setGetSens] = useState([])
   const [page, setPage] = useState(0)
@@ -209,7 +211,7 @@ function DashboardSensors() {
       </table>
       <p>
         Halaman {Math.round(page + 1)} dari{' '}
-        {Math.round(getSens.length / rowsPerPage) + 1} halaman
+        {Math.round(getSens.length / rowsPerPage)} halaman
       </p>
       <button onClick={() => pagination('home')}>Halaman Awal</button>
       <button onClick={() => pagination('before')}>Halaman Sebelumnya</button>
