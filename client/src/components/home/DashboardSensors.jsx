@@ -9,12 +9,11 @@ import {
   Tooltip,
   XAxis,
 } from 'recharts'
-// import TablePagination from '@material-ui/core/TablePagination'
 
 function DashboardSensors() {
   const [getSens, setGetSens] = useState([])
   const [page, setPage] = useState(0)
-  const [rowsPerPage, setRowsPerPage] = useState(10)
+  const rowsPerPage = 10
   const [latest, setLatest] = useState({
     ph: 0,
     tds: 0,
@@ -24,18 +23,6 @@ function DashboardSensors() {
     device_id: 0,
     created_at: 0,
   })
-  // const handleChangePage = (event, newPage) => {
-  //   setPage(newPage)
-  // }
-
-  // const handleChangeRowsPerPage = (event) => {
-  //   setRowsPerPage(parseInt(event.target.value, 10))
-  //   setPage(0)
-  // }
-
-  // const endPage = (event, endPage) => {
-  //   setPage(endPage)
-  // }
 
   const emptyRows =
     rowsPerPage - Math.min(rowsPerPage, getSens.length - page * rowsPerPage)
@@ -96,21 +83,12 @@ function DashboardSensors() {
 
   useEffect(() => {
     async function fetchData() {
-      // const late = await axios.post('http://localhost:5000/v1/users/sensors', {
-      //   device_id: 1,
-      //   time: 1,
-      // })
-      // setLatest(late.data)
-      // console.log('latest', late)
-      // const latest = await axios.post('http://localhost:5000/v1/users/sensors')
-      // setGetSens(latest.data)
       const getSens = await axios.post(
         'http://localhost:5000/v1/users/sensors',
         { device_id: 1, time: 0 },
       )
       setGetSens(getSens.data)
       setLatest(getSens.data[0])
-      // console.log(getSens.data[0].ph)
     }
     fetchData()
   }, [])
@@ -226,20 +204,14 @@ function DashboardSensors() {
           )}
         </tbody>
       </table>
-      <p>{Math.round(page + 1)}</p>
+      <p>
+        Halaman {Math.round(page + 1)} dari{' '}
+        {Math.round(getSens.length / rowsPerPage)} halaman
+      </p>
       <button onClick={() => pagination('home')}>Halaman Awal</button>
       <button onClick={() => pagination('before')}>Halaman Sebelumnya</button>
       <button onClick={() => pagination('after')}>Halaman Setelahnya</button>
       <button onClick={() => pagination('last')}>Halaman Terakhir</button>
-      {/* <TablePagination
-        rowsPerPageOptions={[5, 10, 25]}
-        component="div"
-        count={getSens.length}
-        rowsPerPage={rowsPerPage}
-        page={page}
-        onChangePage={handleChangePage}
-        onChangeRowsPerPage={handleChangeRowsPerPage}
-      /> */}
     </div>
   )
 }

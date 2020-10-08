@@ -62,9 +62,6 @@ const calcApi = require('./components/calc/calcApi')
 app.post('/v1/calc', calcApi.calcPost)
 app.get('/v1/calc', calcApi.calcGet)
 app.put('/v1/calc', calcApi.calcPut)
-// app.get('/v1/calc/dashboard', calcApi.calcDash)
-// app.post('/v1/calc/dashboard', calcApi.calcDashrec)
-// app.put('/v1/calc/dashboard', calcApi.filter)
 
 app.listen(5000, () => {
   console.log('Server started on 5000')

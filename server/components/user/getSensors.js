@@ -11,18 +11,7 @@ const getSensors = async (req, res) => {
         'SELECT * FROM sensors WHERE device_id = $1 ORDER BY created_at DESC',
         [device_id],
       )
-      // const vw = await pool.query(
-      //   'SELECT * FROM sensors WHERE created_at=(SELECT MAX(created_at) FROM sensors)',
-      //   [device_id],
-      // )
-      // res.json(vw.rows)
       res.json(view.rows)
-      // } else if (time === 1) {
-      //   const vw = await pool.query(
-      //     'SELECT * FROM sensors WHERE created_at=(SELECT MAX(created_at) FROM sensors)',
-      //     [device_id],
-      //   )
-      //   res.json(vw.rows[0])
     } else {
       const view = await pool.query(
         'SELECT * FROM sensors WHERE device_id = $1 AND created_at >= (ROUND(EXTRACT(EPOCH FROM NOW()) * 1000) - $2) ORDER BY created_at DESC',
