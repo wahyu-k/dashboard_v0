@@ -1,7 +1,7 @@
 const pool = require('../../config/db')
 const nodemailer = require('nodemailer')
 const jwt = require('jsonwebtoken')
-// const mail = require('./config/mail')
+const mail = require('../../config/mail')
 
 /**
  * @POST
@@ -25,15 +25,15 @@ const forgetPass = async (req, res) => {
     const testAccount = await nodemailer.createTestAccount()
 
     // create reusable transporter object using the default SMTP transport
-    const mail = nodemailer.createTransport({
-      host: 'smtp.ethereal.email',
-      port: 587,
-      secure: false, // true for 465, false for other ports
-      auth: {
-        user: testAccount.user, // generated ethereal user
-        pass: testAccount.pass, // generated ethereal password
-      },
-    })
+    // const mail = nodemailer.createTransport({
+    //   host: 'smtp.ethereal.email',
+    //   port: 587,
+    //   secure: false, // true for 465, false for other ports
+    //   auth: {
+    //     user: testAccount.user, // generated ethereal user
+    //     pass: testAccount.pass, // generated ethereal password
+    //   },
+    // })
 
     const jwtAuth = await jwt.sign(
       { email: receiver },

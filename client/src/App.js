@@ -22,7 +22,7 @@ function App() {
 
       try {
         const response = await axios.post(
-          'http://localhost:5000/v1/check_token',
+          `${process.env.REACT_APP_BASE_URL}/v1/check_token`,
           {
             token,
           },

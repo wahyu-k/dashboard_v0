@@ -11,11 +11,14 @@ function UpdateCompApp() {
   const onSubmitForm = async (e) => {
     e.preventDefault()
     try {
-      const update = await axios.put('http://localhost:5000/v1/calc', {
-        x: parseInt(x1),
-        y: parseInt(y1),
-        z: parseInt(z1),
-      })
+      const update = await axios.put(
+        `${process.env.REACT_APP_BASE_URL}/v1/calc`,
+        {
+          x: parseInt(x1),
+          y: parseInt(y1),
+          z: parseInt(z1),
+        },
+      )
       console.log(update.data)
     } catch (err) {
       alert(err.response.data)
@@ -25,7 +28,9 @@ function UpdateCompApp() {
   useEffect(() => {
     async function fetchData() {
       try {
-        const resp = await axios.get('http://localhost:5000/v1/calc')
+        const resp = await axios.get(
+          `${process.env.REACT_APP_BASE_URL}/v1/calc`,
+        )
         setX1(resp.data.x)
         setY1(resp.data.y)
         setZ1(resp.data.z)

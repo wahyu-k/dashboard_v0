@@ -26,7 +26,10 @@ function EditDevices(props) {
       user_id: userId,
     }
     try {
-      const response = await axios.put('http://localhost:5000/v1/devices', data)
+      const response = await axios.put(
+        `${process.env.REACT_APP_BASE_URL}/v1/devices`,
+        data,
+      )
 
       if (response) {
         props.onFinish()

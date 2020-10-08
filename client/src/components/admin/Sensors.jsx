@@ -9,7 +9,9 @@ function Sensors() {
   const getSensorsHandler = async () => {
     setIsLoading(true)
     try {
-      const response = await axios.get('http://localhost:5000/v1/sensors')
+      const response = await axios.get(
+        `${process.env.REACT_APP_BASE_URL}/v1/sensors`,
+      )
       if (response) {
         setIsLoading(false)
         setSensors(response.data)

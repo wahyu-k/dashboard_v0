@@ -1,0 +1,40 @@
+version: '3.8'
+
+services:
+  server:
+    build: ./server
+    volumes:
+      - ./server:/usr/src/app/server
+      - /usr/src/app/server/node_modules
+    ports:
+      - 5000:5000
+    environment:
+      - JWT_SECRET=forbiddenfruit
+      - EMAIL_PASSWORD=Y5$$6RPCs3jOW
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=siab
+      - POSTGRES_PASS=admin
+      - POSTGRES_HOST=postgresdb
+      - POSTGRES_PORT=5432
+
+  client:
+    build:
+      context: ./client
+      args:
+        - REACT_APP_BASE_URL= http://52.14.80.34:5000
+        - REACT_APP_MAP_API= AIzaSyDw6-MBsHBhZqS4DSDBlXGr1fO_21Y6PQI
+    volumes:
+      - /etc/letsencrypt/live/test01.siagaairbersih.com:/etc/nginx/certs
+      - ./client:/usr/src/app/client
+      - /usr/src/app/client/node_modules
+    ports:
+      - 80:80
+
+  postgresdb:
+    image: 'postgres:12.4-alpine'
+    ports:
+      - 5432:5432
+    volumes:
+      - ./pgdata:/var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD: admin
