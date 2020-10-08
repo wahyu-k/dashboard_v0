@@ -10,6 +10,8 @@ import {
   XAxis,
 } from 'recharts'
 
+//recommit jancuk
+
 function DashboardSensors() {
   const [getSens, setGetSens] = useState([])
   const [page, setPage] = useState(0)
