@@ -24,8 +24,8 @@ function DashboardSensors() {
     created_at: 0,
   })
 
-  const emptyRows =
-    rowsPerPage - Math.min(rowsPerPage, getSens.length - page * rowsPerPage)
+  // const emptyRows =
+  //   rowsPerPage - Math.min(rowsPerPage, getSens.length - page * rowsPerPage)
 
   const pagination = async (p) => {
     if (p === 'home') {
@@ -33,17 +33,25 @@ function DashboardSensors() {
     } else if (p === 'before') {
       if (page === 0) {
         setPage(0)
+      } else if (getSens.length <= rowsPerPage) {
+        setPage(0)
       } else {
         setPage(page - 1)
       }
     } else if (p === 'after') {
-      if (page >= getSens.length / rowsPerPage - 1) {
+      if (getSens.length <= rowsPerPage) {
+        setPage(0)
+      } else if (page >= getSens.length / rowsPerPage - 1) {
         setPage(getSens.length / rowsPerPage - 1)
       } else {
         setPage(page + 1)
       }
     } else if (p === 'last') {
-      setPage(getSens.length / rowsPerPage - 1)
+      if (getSens.length <= rowsPerPage) {
+        setPage(0)
+      } else {
+        setPage(getSens.length / rowsPerPage - 1)
+      }
     }
   }
 
@@ -192,11 +200,11 @@ function DashboardSensors() {
                 <td>{epochToDate(theGetSens.created_at)}</td>
               </tr>
             ))}
-          {emptyRows > 0 && (
+          {/* {emptyRows > 0 && (
             <tr style={{ height: 53 * emptyRows }}>
               <td colSpan={6} />
             </tr>
-          )}
+          )} */}
         </tbody>
       </table>
       <p>
