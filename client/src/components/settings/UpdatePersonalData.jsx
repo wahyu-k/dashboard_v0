@@ -22,9 +22,12 @@ export class UpdatePersonalData extends Component {
     const token = await localStorage.getItem('_s_t')
 
     try {
-      const response = await axios.post('http://localhost:5000/v1/users', {
-        token,
-      })
+      const response = await axios.post(
+        `${process.env.REACT_APP_BASE_URL}/v1/users`,
+        {
+          token,
+        },
+      )
 
       console.log(response.data)
 

@@ -17,7 +17,7 @@ function RegisterDevice(props) {
     }
     try {
       const response = await axios.post(
-        'http://localhost:5000/v1/devices',
+        `${process.env.REACT_APP_BASE_URL}/v1/devices`,
         data,
       )
 

@@ -1,6 +1,7 @@
 const pool = require('../../config/db')
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt')
+const Joi = require('joi')
 
 /**
  * @POST
@@ -18,6 +19,16 @@ const resetPass = async (req, res) => {
 
     if (!email) {
       throw new Error('Failed!')
+    }
+
+    const schema = Joi.object({
+      newPassword: Joi.string().min(8).max(100),
+    })
+
+    const validate = schema.validate({ newPassword })
+
+    if (validate.error) {
+      throw new Error(validate.error)
     }
 
     const password = await bcrypt.hash(newPassword, 7)

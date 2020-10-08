@@ -37,7 +37,7 @@ function DashboardSensors() {
         setPage(page - 1)
       }
     } else if (p === 'after') {
-      if (page === getSens.length / rowsPerPage - 1) {
+      if (page >= getSens.length / rowsPerPage - 1) {
         setPage(getSens.length / rowsPerPage - 1)
       } else {
         setPage(page + 1)
@@ -48,43 +48,38 @@ function DashboardSensors() {
   }
 
   const filter = async (duration) => {
-    if (duration === 'day') {
-      const ro = await axios.post('http://localhost:5000/v1/users/sensors', {
-        device_id: 1,
-        time: 86400000,
-      })
-      setGetSens(ro.data)
-    } else if (duration === 'week') {
-      const ro7 = await axios.post('http://localhost:5000/v1/users/sensors', {
-        device_id: 1,
-        time: 604800000,
-      })
-      setGetSens(ro7.data)
-    } else if (duration === 'month') {
-      const ro30 = await axios.post('http://localhost:5000/v1/users/sensors', {
-        device_id: 1,
-        time: 86400000 * 30,
-      })
-      setGetSens(ro30.data)
-    } else if (duration === 'year') {
-      const roy = await axios.post('http://localhost:5000/v1/users/sensors', {
-        device_id: 1,
-        time: 86400000 * 366,
-      })
-      setGetSens(roy.data)
-    } else {
-      const all = await axios.post('http://localhost:5000/v1/users/sensors', {
-        device_id: 1,
-        time: 0,
-      })
-      setGetSens(all.data)
+    let time = 0
+    switch (duration) {
+      case 'day':
+        time = 86400000
+        break
+      case 'week':
+        time = 86400000 * 7
+        break
+      case 'month':
+        time = 86400000 * 30
+        break
+      case 'year':
+        time = 86400000 * 365
+        break
+      default:
+        time = 0
+        break
     }
+    const resp = await axios.post(
+      `${process.env.REACT_APP_BASE_URL}/v1/users/sensors`,
+      {
+        device_id: 1,
+        time,
+      },
+    )
+    setGetSens(resp.data)
   }
 
   useEffect(() => {
     async function fetchData() {
       const getSens = await axios.post(
-        'http://localhost:5000/v1/users/sensors',
+        `${process.env.REACT_APP_BASE_URL}/v1/users/sensors`,
         { device_id: 1, time: 0 },
       )
       setGetSens(getSens.data)
@@ -97,20 +92,20 @@ function DashboardSensors() {
     <div>
       <div>
         <h1>Premium User</h1>
-        <h2 className="text-center mt-5">Monitoring</h2>
-        <h3 className="text-center mt-5">Nilai PH</h3>
+        <h2>Monitoring</h2>
+        <h3>Nilai PH</h3>
         <p>{latest.ph} </p>
-        <h3 className="text-center mt-5">Nilai TDS</h3>
+        <h3>Nilai TDS</h3>
         <p>{latest.tds}</p>
-        <h3 className="text-center mt-5">Nilai Turb</h3>
+        <h3>Nilai Turb</h3>
         <p>{latest.turb}</p>
-        <h3 className="text-center mt-5">Nilai Temp</h3>
+        <h3>Nilai Temp</h3>
         <p>{latest.temp}</p>
-        <h3 className="text-center mt-5">Nilai Flow</h3>
+        <h3>Nilai Flow</h3>
         <p>{latest.flow}</p>
-        <h3 className="text-center mt-5">Device ID</h3>
+        <h3>Device ID</h3>
         <p>{latest.device_id}</p>
-        <h3 className="text-center mt-5">Diambil pada tanggal</h3>
+        <h3>Diambil pada tanggal</h3>
         <p>{epochToDate(latest.created_at)}</p>
       </div>
 
@@ -206,7 +201,7 @@ function DashboardSensors() {
       </table>
       <p>
         Halaman {Math.round(page + 1)} dari{' '}
-        {Math.round(getSens.length / rowsPerPage)} halaman
+        {Math.round(getSens.length / rowsPerPage) + 1} halaman
       </p>
       <button onClick={() => pagination('home')}>Halaman Awal</button>
       <button onClick={() => pagination('before')}>Halaman Sebelumnya</button>

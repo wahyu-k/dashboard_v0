@@ -1,5 +1,6 @@
 const pool = require('../../config/db')
 const bcrypt = require('bcrypt')
+const Joi = require('joi')
 
 /**
  * @POST
@@ -14,6 +15,18 @@ const register = async (req, res) => {
   const { username, email, password } = req.body
 
   try {
+    const schema = Joi.object({
+      username: Joi.string().alphanum().min(4).max(20),
+      email: Joi.string().email(),
+      password: Joi.string().min(8).max(100),
+    })
+
+    const validate = schema.validate({ username, email, password })
+
+    if (validate.error) {
+      throw new Error(validate.error)
+    }
+
     const isUsername = await pool.query(
       'SELECT * FROM logins WHERE username = $1',
       [username],

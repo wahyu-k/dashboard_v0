@@ -9,7 +9,9 @@ function Users() {
   const getUsersHandler = async () => {
     setIsLoading(true)
     try {
-      const response = await axios.get('http://localhost:5000/v1/admin/logins')
+      const response = await axios.get(
+        `${process.env.REACT_APP_BASE_URL}/v1/admin/logins`,
+      )
       if (response) {
         setIsLoading(false)
         setUsers(response.data)

@@ -15,7 +15,9 @@ function Devices() {
     setEditedData(null)
     setAddDevice(false)
     try {
-      const response = await axios.get('http://localhost:5000/v1/devices')
+      const response = await axios.get(
+        `${process.env.REACT_APP_BASE_URL}/v1/devices`,
+      )
       if (response) {
         setIsLoading(false)
         setDevices(response.data)

@@ -1,6 +1,7 @@
 const pool = require('../../config/db')
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt')
+const Joi = require('joi')
 
 const updateUname = async (req, res) => {
   const { token, newUsername, password } = req.body
@@ -19,6 +20,16 @@ const updateUname = async (req, res) => {
 
     if (!isPassword) {
       throw new Error('Check your password again!')
+    }
+
+    const schema = Joi.object({
+      newUsername: Joi.string().alphanum().min(4).max(20),
+    })
+
+    const validate = schema.validate({ newUsername })
+
+    if (validate.error) {
+      throw new Error(validate.error)
     }
 
     const isUsername = await pool.query(

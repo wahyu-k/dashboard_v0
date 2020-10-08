@@ -22,7 +22,7 @@ function Map({ data }) {
   const libraries = ['places']
 
   const { isLoaded, loadError } = useLoadScript({
-    googleMapsApiKey: 'AIzaSyDw6-MBsHBhZqS4DSDBlXGr1fO_21Y6PQI',
+    googleMapsApiKey: process.env.REACT_APP_MAP_API,
     libraries,
   })
 
