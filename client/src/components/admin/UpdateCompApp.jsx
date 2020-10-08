@@ -45,11 +45,11 @@ function UpdateCompApp() {
   return (
     <div>
       <h1>UpdateCompApp</h1>
-      <h2>Update Nilai Variabel</h2>
-      <h3>Nilai Variabel X</h3>
+      <h2>Update Harga per Meter Kubik</h2>
       <form onSubmit={onSubmitForm}>
+        <h3>Harga Air SIAB</h3>
         <input type="real" onChange={(e) => setX1(e.target.value)} value={x1} />
-        <h3>Nilai Variabel Y</h3>
+        <h3>Harga Air PDAM</h3>
         <input type="real" value={y1} onChange={(e) => setY1(e.target.value)} />
         <h3>Nilai Variabel Z</h3>
         <input type="real" value={z1} onChange={(e) => setZ1(e.target.value)} />
