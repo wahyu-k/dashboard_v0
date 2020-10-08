@@ -3,8 +3,8 @@ CREATE TABLE logins(
   username VARCHAR(20) NOT NULL,
   email VARCHAR(70) NOT NULL,
   password VARCHAR(170) NOT NULL,
-  created_at VARCHAR(50) NOT NULL,
-  modified_at VARCHAR(50) NOT NULL
+  created_at BIGINT NOT NULL,
+  modified_at BIGINT NOT NULL
 );
 
 CREATE TABLE devices(
@@ -13,8 +13,8 @@ CREATE TABLE devices(
   lat DOUBLE PRECISION NOT NULL,
   lng DOUBLE PRECISION NOT NULL,
   user_id BIGINT REFERENCES logins(id) NOT NULL,
-  created_at VARCHAR(50) NOT NULL,
-  modified_at VARCHAR(50) NOT NULL
+  created_at BIGINT NOT NULL,
+  modified_at BIGINT NOT NULL
 );
 
 CREATE TABLE sensors(
@@ -25,7 +25,7 @@ CREATE TABLE sensors(
   temp REAL NOT NULL,
   flow REAL NOT NULL,
   device_id BIGINT REFERENCES devices(id) NOT NULL,
-  created_at VARCHAR(50) NOT NULL
+  created_at BIGINT NOT NULL
 );
 
 CREATE TABLE users(
@@ -36,8 +36,8 @@ CREATE TABLE users(
   prov VARCHAR(50),
   region VARCHAR(50),
   plan INT NOT NULL,
-  created_at VARCHAR(50) NOT NULL,
-  modified_at VARCHAR(50) NOT NULL
+  created_at BIGINT NOT NULL,
+  modified_at BIGINT NOT NULL
 );
 
 CREATE TABLE calcs
@@ -46,8 +46,8 @@ CREATE TABLE calcs
   x REAL NOT NULL,
   y REAL NOT NULL,
   z REAL NOT NULL,
-  created_at VARCHAR(50) NOT NULL,
-  modified_at VARCHAR (50) NOT NULL
+  created_at BIGINT NOT NULL,
+  modified_at BIGINT NOT NULL
 );
 
 -- DUMMY DATA
