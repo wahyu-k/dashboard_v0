@@ -1,8 +1,12 @@
 import React, { useState } from 'react'
 import axios from 'axios'
-import { Link, useHistory } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
+import './register.modules.css'
+import banner from '../../img/register/banner.png'
+import logo_siab from '../../img/register/logo_siab.png'
+import { TextField } from '@material-ui/core'
 
 function Register() {
   const [username, setUsername] = useState('')
@@ -63,47 +67,72 @@ function Register() {
   })
 
   return (
-    <div>
-      <h1>Register</h1>
-      <form onSubmit={formik.handleSubmit}>
-        <input
-          id="username"
-          name="username"
-          type="text"
-          placeholder="Username"
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          value={formik.values.username}
-          required
-        />
-        <input
-          id="email"
-          name="email"
-          type="text"
-          placeholder="E-mail"
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          value={formik.values.email}
-          required
-        />
-        <input
-          id="password"
-          name="password"
-          type="text"
-          placeholder="Password"
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          value={formik.values.password}
-          required
-        />
+    <div className="backdrop">
+      <div className="register-container">
+        <div className="left-container">
+          <div className="menu-container">
+            <img alt="logo-siab" src={logo_siab} />
+            <div className="menu-link-container">
+              <a className="link-menu-daftar" href="/#">
+                Daftar
+              </a>
+              <a className="link-menu-masuk" href="/#">
+                Masuk
+              </a>
+            </div>
+          </div>
+          <div className="form-container">
+            <h1 className="title">DAFTAR</h1>
+            <form onSubmit={formik.handleSubmit}>
+              <label>Username</label>
+              <TextField
+                id="username"
+                name="username"
+                type="text"
+                placeholder="username"
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                value={formik.values.username}
+                required
+              />
+              <label>Email</label>
+              <TextField
+                id="email"
+                name="email"
+                type="text"
+                placeholder="akun@gmail.com"
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                value={formik.values.email}
+                required
+              />
+              <label>Kata Sandi</label>
+              <TextField
+                id="password"
+                name="password"
+                type="text"
+                placeholder="kata sandi"
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                value={formik.values.password}
+                required
+              />
 
-        <button type="submit" disabled={isLoading}>
-          Register
-        </button>
-        <Link to="/">
-          <button>Cancel</button>
-        </Link>
-      </form>
+              <br />
+              <button type="submit" disabled={isLoading}>
+                Register
+              </button>
+              <a className="cancel" href="/#">
+                sudah punya akun?
+              </a>
+            </form>
+          </div>
+        </div>
+        <div className="right-container">
+          <p className="subtitle">Your Digital Water Solution</p>
+          <img alt="banner" src={banner} />
+        </div>
+      </div>
     </div>
   )
 }
