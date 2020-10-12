@@ -1,6 +1,9 @@
 import React, { useState } from 'react'
 import axios from 'axios'
+import css from "./forgetPass.module.css"
 import { useHistory } from 'react-router-dom'
+import logo_siab from '../../img/register/logo_siab.png'
+import { TextField } from '@material-ui/core'
 
 function ForgetPass() {
   const [email, setEmail] = useState('')
@@ -33,18 +36,29 @@ function ForgetPass() {
   }
 
   return (
-    <div>
-      <h1>Forget Password</h1>
-      <form onSubmit={(event) => submitHandler(event)}>
-        <input
-          placeholder="Email"
+    <div className={css.backdrop}>
+      <div className={css.smalldrop}>
+        <div className={css.forget__container}>
+          <img alt="logo-siab" src={logo_siab}/>
+          <div className={css.pass__container}>
+            <h1>Lupa Kata Sandi ?</h1>
+          </div>
+          <form onSubmit={(event) => submitHandler(event)}>
+          <label>Email</label>
+          <TextField
+          placeholder="akun@gmail.com"
           onChange={(event) => setEmail(event.target.value)}
           required
-        />
-        <button type="submit" disabled={isLoading}>
-          Send Reset Password Link
-        </button>
-      </form>
+          />
+
+          <button type="submit" disabled={isLoading}>
+          Kirim
+          </button>
+          <p>SIAB Indonesia akan mengirim kode verifikasi ke email anda, silahkan cek email anda</p>
+          </form>
+        </div>
+      
+      </div>
     </div>
   )
 }

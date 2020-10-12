@@ -95,15 +95,6 @@
   color: #ffffff;
 }
 
-.form > button:hover {
-  background: #6599ae;
-}
-
-.form > button:disabled {
-  background: #dddddd;
-  cursor: default;
-}
-
 .form > button > img {
   width: 25px;
   height: 25px;
