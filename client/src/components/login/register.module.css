@@ -32,15 +32,7 @@
   align-items: center;
 }
 
-<<<<<<< HEAD:client/src/components/login/register.modules.css
-.menu-link-container > a {
-  text-decoration: none;
-}
-
-.link-menu-daftar {
-=======
 .menu__daftar {
->>>>>>> upstream/master:client/src/components/login/register.module.css
   font-family: Poppins;
   font-style: normal;
   font-weight: bold;
@@ -79,11 +71,7 @@
   color: rgba(0, 0, 0, 0.5);
 }
 
-<<<<<<< HEAD:client/src/components/login/register.modules.css
-.form-container > form > button {
-=======
 .form > button {
->>>>>>> upstream/master:client/src/components/login/register.module.css
   background: linear-gradient(
     180deg,
     #6599ae 0%,
@@ -105,15 +93,6 @@
   cursor: pointer;
 
   color: #ffffff;
-}
-
-.form > button:hover {
-  background: #6599ae;
-}
-
-.form > button:disabled {
-  background: #dddddd;
-  cursor: default;
 }
 
 .form > button > img {
