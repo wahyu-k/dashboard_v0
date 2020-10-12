@@ -209,7 +209,7 @@ function DashboardSensors() {
       </table>
       <p>
         Halaman {Math.round(page + 1)} dari{' '}
-        {Math.round(getSens.length / rowsPerPage) + 1} halaman
+        {Math.ceil(getSens.length / rowsPerPage)} halaman
       </p>
       <button onClick={() => pagination('home')}>Halaman Awal</button>
       <button onClick={() => pagination('before')}>Halaman Sebelumnya</button>
