@@ -1,0 +1,186 @@
+.backdrop {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+
+  background: #efefef;
+}
+
+.register__container {
+  width: 80%;
+  height: 80%;
+  display: flex;
+  margin: auto;
+
+  background: #ffffff;
+  box-shadow: 0px 4px 24px rgba(0, 0, 0, 0.15);
+  border-radius: 10px;
+}
+
+.left__container {
+  flex: 6;
+  display: flex;
+  flex-direction: column;
+}
+
+.top__menu__container {
+  display: flex;
+  margin: 21px 40px 5% 40px;
+  justify-content: space-between;
+  align-items: center;
+}
+
+<<<<<<< HEAD:client/src/components/login/register.modules.css
+.menu-link-container > a {
+  text-decoration: none;
+}
+
+.link-menu-daftar {
+=======
+.menu__daftar {
+>>>>>>> upstream/master:client/src/components/login/register.module.css
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 18px;
+  line-height: 27px;
+  margin-right: 17px;
+
+  color: #6599ae;
+}
+
+.menu__masuk {
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 18px;
+  line-height: 27px;
+
+  color: #818181;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  margin: 0 51px 0 51px;
+}
+
+.form > label {
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+  margin-top: 8px;
+  margin-bottom: 2px;
+
+  color: rgba(0, 0, 0, 0.5);
+}
+
+<<<<<<< HEAD:client/src/components/login/register.modules.css
+.form-container > form > button {
+=======
+.form > button {
+>>>>>>> upstream/master:client/src/components/login/register.module.css
+  background: linear-gradient(
+    180deg,
+    #6599ae 0%,
+    rgba(163, 213, 217, 0.97) 100%
+  );
+  mix-blend-mode: normal;
+  border-radius: 10px;
+  border: none;
+  margin: 0 auto;
+  padding: 8px 49px 8px 49px;
+
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 18px;
+  line-height: 27px;
+
+  text-align: center;
+  cursor: pointer;
+
+  color: #ffffff;
+}
+
+.form > button:hover {
+  background: #6599ae;
+}
+
+.form > button:disabled {
+  background: #dddddd;
+  cursor: default;
+}
+
+.form > button > img {
+  width: 25px;
+  height: 25px;
+  display: flex;
+  margin: 0 auto;
+}
+
+.form > a {
+  margin: 0 auto;
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 24px;
+  margin-top: 10px;
+  text-align: center;
+
+  color: #6599ae;
+}
+
+.right__container {
+  flex: 6;
+
+  background: linear-gradient(
+    180deg,
+    rgba(163, 213, 217, 0.97) 38.02%,
+    rgba(163, 213, 217, 0) 100%
+  );
+  border-radius: 0px 10px 10px 0px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.right__container > p {
+  font-family: Poppins;
+  font-style: italic;
+  font-weight: bold;
+  font-size: 20px;
+  line-height: 30px;
+  text-align: center;
+  margin-bottom: 24px;
+
+  color: #ffffff;
+}
+
+.right__container > img {
+  width: 80%;
+  margin: 0 auto;
+}
+
+@media only screen and (max-width: 966px) {
+  .right__container {
+    display: none;
+  }
+}
+
+@media only screen and (max-width: 436px) {
+  .right__container {
+    display: none;
+  }
+
+  .register__container {
+    width: 100%;
+    height: 100%;
+    border-radius: 0;
+  }
+}
