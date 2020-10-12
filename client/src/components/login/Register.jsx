@@ -3,31 +3,29 @@ import axios from 'axios'
 import { useHistory } from 'react-router-dom'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
-import './register.modules.css'
+import css from './register.module.css'
 import banner from '../../img/register/banner.png'
 import logo_siab from '../../img/register/logo_siab.png'
-import { TextField } from '@material-ui/core'
+import loading from '../../img/loading.gif'
+import { TextField, Collapse } from '@material-ui/core'
+import { Alert } from '@material-ui/lab'
 
 function Register() {
-  const [username, setUsername] = useState('')
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
   const [isLoading, setIsLoading] = useState(false)
+  const [isError, setIsError] = useState(false)
+  const [errorMsg, setErrorMsg] = useState('')
   const history = useHistory()
 
-  const sumbitHandler = () => {
+  const registerHandler = async (values) => {
     setIsLoading(true)
-    registerHandler()
-  }
-
-  const registerHandler = async () => {
+    setIsError(false)
     try {
       const response = await axios.post(
         `${process.env.REACT_APP_BASE_URL}/v1/register`,
         {
-          username,
-          email,
-          password,
+          username: values.username,
+          email: values.email,
+          password: values.password,
         },
       )
 
@@ -36,7 +34,21 @@ function Register() {
       }
     } catch (error) {
       setIsLoading(false)
-      console.error(error.response.data)
+      setIsError(true)
+      try {
+        const msg = error.response.data
+        console.error(msg)
+        if (msg === 'Username already exist!') {
+          setErrorMsg('Nama akun telah digunakan!')
+        } else if (msg === 'Email already exist!') {
+          setErrorMsg('Alamat email telah digunakan!')
+        } else {
+          setErrorMsg(msg)
+        }
+      } catch (error) {
+        setErrorMsg(error)
+        console.error(error)
+      }
     }
   }
 
@@ -49,87 +61,99 @@ function Register() {
     validationSchema: Yup.object({
       username: Yup.string()
         .matches(/^.[a-zA-Z0-9]+$/, {
-          message: 'Alphanumeric characters',
-          excludeEmptyString: true,
+          message: 'nama akun hanya huruf/angka dan tanpa spasi',
         })
-        .min(4)
-        .max(20)
-        .required(),
-      email: Yup.string().email().required(),
-      password: Yup.string().min(8).max(100).required(),
+        .min(4, 'nama akun minimal 4 karakter')
+        .max(20, 'nama akun maksimal 20 karakter')
+        .required('nama akun harus diisi'),
+      email: Yup.string()
+        .email('masukan email yang valid')
+        .required('email harus diisi'),
+      password: Yup.string()
+        .min(8, 'kata sandi minimal 8 karakter')
+        .max(100, 'kata sandi maksimal 100 karakter')
+        .required('kata sandi harus diisi'),
     }),
-    onSubmit: (values) => {
-      setUsername(values.username)
-      setEmail(values.email)
-      setPassword(values.password)
-      sumbitHandler()
+    validateOnChange: false,
+    validateOnBlur: false,
+    validateOnMount: false,
+    enableReinitialize: true,
+    onSubmit: async (values) => {
+      registerHandler(values)
     },
   })
 
   return (
-    <div className="backdrop">
-      <div className="register-container">
-        <div className="left-container">
-          <div className="menu-container">
+    <div className={css.backdrop}>
+      <div className={css.register__container}>
+        <div className={css.left__container}>
+          <div className={css.top__menu__container}>
             <img alt="logo-siab" src={logo_siab} />
-            <div className="menu-link-container">
-              <a className="link-menu-daftar" href="/#">
+            <div className={css.menu__container}>
+              <a className={css.menu__daftar} href="/register">
                 Daftar
               </a>
-              <a className="link-menu-masuk" href="/#">
+              <a className={css.menu__masuk} href="/">
                 Masuk
               </a>
             </div>
           </div>
-          <div className="form-container">
-            <h1 className="title">DAFTAR</h1>
-            <form onSubmit={formik.handleSubmit}>
-              <label>Username</label>
-              <TextField
-                id="username"
-                name="username"
-                type="text"
-                placeholder="username"
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                value={formik.values.username}
-                required
-              />
-              <label>Email</label>
-              <TextField
-                id="email"
-                name="email"
-                type="text"
-                placeholder="akun@gmail.com"
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                value={formik.values.email}
-                required
-              />
-              <label>Kata Sandi</label>
-              <TextField
-                id="password"
-                name="password"
-                type="text"
-                placeholder="kata sandi"
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                value={formik.values.password}
-                required
-              />
+          <form
+            className={css.form}
+            onSubmit={formik.handleSubmit}
+            onReset={formik.handleReset}
+            noValidate
+          >
+            <Collapse in={isError}>
+              <Alert severity="error">{errorMsg}</Alert>
+            </Collapse>
+            <h1>DAFTAR</h1>
+            <label>Nama Akun</label>
+            <TextField
+              id="username"
+              name="username"
+              placeholder="nama akun"
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={formik.values.username}
+              helperText={formik.errors.username}
+              error={formik.errors.username ? true : false}
+            />
+            <label>Email</label>
+            <TextField
+              id="email"
+              name="email"
+              placeholder="akun@gmail.com"
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={formik.values.email}
+              helperText={formik.errors.email}
+              error={formik.errors.email ? true : false}
+            />
+            <label>Kata Sandi</label>
+            <TextField
+              id="password"
+              name="password"
+              type="password"
+              placeholder="kata sandi"
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={formik.values.password}
+              helperText={formik.errors.password}
+              error={formik.errors.password ? true : false}
+            />
 
-              <br />
-              <button type="submit" disabled={isLoading}>
-                Register
-              </button>
-              <a className="cancel" href="/#">
-                sudah punya akun?
-              </a>
-            </form>
-          </div>
+            <br />
+            <button type="submit" disabled={isLoading}>
+              {isLoading ? <img alt="loading" src={loading} /> : 'Daftar'}
+            </button>
+            <a className="cancel" href="/">
+              sudah punya akun?
+            </a>
+          </form>
         </div>
-        <div className="right-container">
-          <p className="subtitle">Your Digital Water Solution</p>
+        <div className={css.right__container}>
+          <p>Your Digital Water Solution</p>
           <img alt="banner" src={banner} />
         </div>
       </div>
