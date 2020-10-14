@@ -9,6 +9,8 @@ import Home from './components/Home'
 import NoMatch from './components/NoMatch'
 import Admin from './components/Admin'
 import AksiBerbagi from './components/AksiBerbagi'
+import loading_siab from './img/loading_siab.png'
+import css from './app.module.css'
 
 function App() {
   const [isLogin, setIsLogin] = useState(false)
@@ -45,8 +47,13 @@ function App() {
   }, [])
 
   if (isLoading) {
-    return <div></div>
+    return (
+      <div className={css.loading__container}>
+        <img alt="loading_siab" src={loading_siab} />
+      </div>
+    )
   }
+
   return (
     <Router>
       <Switch>

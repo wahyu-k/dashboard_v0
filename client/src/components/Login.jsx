@@ -7,27 +7,52 @@ import mail_icon from '../img/login/mail_icon.png'
 import pass_icon from '../img/login/pass_icon.png'
 import { TextField, InputAdornment, Collapse } from '@material-ui/core'
 import { Alert } from '@material-ui/lab'
+import * as Yup from 'yup'
+import { useFormik } from 'formik'
+import loading from '../img/loading.gif'
 
 function Login() {
-  const [uoe, setUoe] = useState('')
-  const [password, setPassword] = useState('')
   const [isLoading, setIsLoading] = useState(false)
   const [isError, setIsError] = useState(false)
+  const [errorMsg, setErrorMsg] = useState('')
 
-  const submitHandler = async (event) => {
+  const formik = useFormik({
+    initialValues: {
+      uoe: '',
+      password: '',
+    },
+    validationSchema: Yup.object({
+      uoe: Yup.string().required('email atau username harus diisi'),
+      password: Yup.string()
+        .min(8, 'kata sandi lebih dari atau sama dengan 8 karakter')
+        .required('kata sandi harus diisi'),
+    }),
+    validateOnChange: false,
+    validateOnBlur: false,
+    validateOnMount: false,
+    enableReinitialize: true,
+    onSubmit: async (values) => {
+      submitHandler(values)
+    },
+  })
+
+  const submitHandler = async (values) => {
     setIsLoading(true)
     setIsError(false)
-    event.preventDefault()
-    loginHandler()
+    loginHandler(values)
   }
 
-  const loginHandler = async () => {
+  const loginHandler = async ({ uoe, password }) => {
     try {
       const response = await axios.post(
         `${process.env.REACT_APP_BASE_URL}/v1/login`,
         {
           uoe,
           password,
+        },
+        {
+          timeout: 5000,
+          timeoutErrorMessage: 'Koneksi timeout, periksa kembali koneksi anda!',
         },
       )
 
@@ -38,7 +63,11 @@ function Login() {
     } catch (error) {
       setIsLoading(false)
       setIsError(true)
-      console.error(error.response.data)
+      if (error.code === 'ECONNABORTED') {
+        setErrorMsg(error.message)
+      } else {
+        setErrorMsg('Kombinasi email/nama akun dengan kata sandi salah!')
+      }
     }
   }
   return (
@@ -58,20 +87,24 @@ function Login() {
           </div>
           <form
             className={css.form}
-            onSubmit={(event) => submitHandler(event)}
+            onSubmit={formik.handleSubmit}
+            onReset={formik.handleReset}
             noValidate
           >
             <Collapse in={isError}>
-              <Alert severity="error">
-                Kombinasi email/nama akun dengan kata sandi salah!
-              </Alert>
+              <Alert severity="error">{errorMsg}</Alert>
             </Collapse>
             <h1>MASUK</h1>
             <label>Email</label>
             <TextField
-              onChange={(event) => setUoe(event.target.value)}
+              id="uoe"
+              name="uoe"
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={formik.values.uoe}
+              helperText={formik.errors.uoe}
+              error={formik.errors.uoe ? true : false}
               placeholder="alamat email"
-              required
               InputProps={{
                 endAdornment: (
                   <InputAdornment position="end">
@@ -82,10 +115,15 @@ function Login() {
             />
             <label>Sandi</label>
             <TextField
-              onChange={(event) => setPassword(event.target.value)}
-              placeholder="kata sandi"
+              id="password"
+              name="password"
               type="password"
-              required
+              placeholder="kata sandi"
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={formik.values.password}
+              helperText={formik.errors.password}
+              error={formik.errors.password ? true : false}
               InputProps={{
                 endAdornment: (
                   <InputAdornment position="end">
@@ -94,12 +132,8 @@ function Login() {
                 ),
               }}
             />
-            <button
-              className={css.button__login}
-              type="submit"
-              disabled={isLoading}
-            >
-              Masuk
+            <button type="submit" disabled={isLoading}>
+              {isLoading ? <img alt="loading" src={loading} /> : 'Masuk'}
             </button>
             <a href="/forget_password">lupa kata sandi?</a>
             <a href="/register">belum punya akun?</a>

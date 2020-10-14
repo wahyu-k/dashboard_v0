@@ -50,6 +50,13 @@
   flex-direction: column;
 }
 
+.forget__container > form > button > img {
+  width: 25px;
+  height: 25px;
+  display: flex;
+  margin: 0 auto;
+}
+
 .forget__container > form > button {
   background: linear-gradient(
     180deg,

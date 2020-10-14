@@ -12,42 +12,53 @@ import { Alert } from '@material-ui/lab'
 
 function Register() {
   const [isLoading, setIsLoading] = useState(false)
+  const [isSuccess, setIsSuccess] = useState(false)
   const [isError, setIsError] = useState(false)
   const [errorMsg, setErrorMsg] = useState('')
   const history = useHistory()
 
-  const registerHandler = async (values) => {
+  const registerHandler = async ({ username, email, password }) => {
     setIsLoading(true)
+    setIsSuccess(false)
     setIsError(false)
     try {
       const response = await axios.post(
         `${process.env.REACT_APP_BASE_URL}/v1/register`,
         {
-          username: values.username,
-          email: values.email,
-          password: values.password,
+          username,
+          email,
+          password,
+        },
+        {
+          timeout: 5000,
+          timeoutErrorMessage: 'Koneksi timeout, periksa kembali koneksi anda!',
         },
       )
 
       if (response) {
-        history.push('/')
+        setIsSuccess(true)
+        setTimeout(() => {
+          history.push('/')
+        }, 3000)
       }
     } catch (error) {
       setIsLoading(false)
       setIsError(true)
-      try {
-        const msg = error.response.data
-        console.error(msg)
-        if (msg === 'Username already exist!') {
-          setErrorMsg('Nama akun telah digunakan!')
-        } else if (msg === 'Email already exist!') {
-          setErrorMsg('Alamat email telah digunakan!')
-        } else {
-          setErrorMsg(msg)
+      if (error.code === 'ECONNABORTED') {
+        setErrorMsg(error.message)
+      } else {
+        try {
+          const msg = error.response.data
+          if (msg === 'Username already exist!') {
+            setErrorMsg('Nama akun telah digunakan!')
+          } else if (msg === 'Email already exist!') {
+            setErrorMsg('Alamat email telah digunakan!')
+          }
+        } catch (error) {
+          setErrorMsg(
+            'Server kami sedang bermasalah, coba beberapa saat lagi atau hubungi kontak kami!',
+          )
         }
-      } catch (error) {
-        setErrorMsg(error)
-        console.error(error)
       }
     }
   }
@@ -106,6 +117,11 @@ function Register() {
           >
             <Collapse in={isError}>
               <Alert severity="error">{errorMsg}</Alert>
+            </Collapse>
+            <Collapse in={isSuccess}>
+              <Alert severity="success">
+                Akun telah dibuat, silahkan masuk
+              </Alert>
             </Collapse>
             <h1>DAFTAR</h1>
             <label>Nama Akun</label>

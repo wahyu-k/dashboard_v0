@@ -72,7 +72,7 @@
   color: rgba(0, 0, 0, 0.5);
 }
 
-.button__login {
+.form > button {
   padding: 10px;
   padding-left: 40px;
   padding-right: 40px;
@@ -99,8 +99,20 @@
   color: #ffffff;
 }
 
+.form > button > img {
+  width: 25px;
+  height: 25px;
+  display: flex;
+  margin: 0 auto;
+}
+
 .form > button:hover {
   background: #6599ae;
+}
+
+.form > button:disabled {
+  background: #dddddd;
+  cursor: default;
 }
 
 .form > a {
