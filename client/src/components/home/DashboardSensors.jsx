@@ -42,7 +42,7 @@ function DashboardSensors() {
       if (getSens.length <= rowsPerPage) {
         setPage(0)
       } else if (page >= getSens.length / rowsPerPage - 1) {
-        setPage(getSens.length / rowsPerPage - 1)
+        setPage(Math.ceil(getSens.length / rowsPerPage - 1))
       } else {
         setPage(page + 1)
       }
@@ -50,7 +50,7 @@ function DashboardSensors() {
       if (getSens.length <= rowsPerPage) {
         setPage(0)
       } else {
-        setPage(getSens.length / rowsPerPage - 1)
+        setPage(Math.ceil(getSens.length / rowsPerPage - 1))
       }
     }
   }

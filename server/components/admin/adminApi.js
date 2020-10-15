@@ -3,6 +3,7 @@ const addDevice = require('./addDevice')
 const getSensors = require('./getSensors')
 const getUsers = require('./getUsers')
 const updateDevice = require('./updateDevice')
+const binds = require('./binds')
 
 const adminApi = {
   getDevices,
@@ -10,6 +11,7 @@ const adminApi = {
   getSensors,
   getUsers,
   updateDevice,
+  binds,
 }
 
 module.exports = adminApi
