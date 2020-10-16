@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import axios from 'axios'
-import epochToDate from '../../helper/epochToDate'
 
 function GetBinds() {
   const [binds, setBinds] = useState([])
@@ -17,7 +16,6 @@ function GetBinds() {
       if (response) {
         setIsLoading(false)
         setBinds(response.data)
-        console.log('response.data', response)
       }
     } catch (error) {
       setIsLoading(false)
