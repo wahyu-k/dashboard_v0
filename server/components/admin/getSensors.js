@@ -13,7 +13,7 @@ const getSensors = async (req, res) => {
     const { device_id, time } = req.body
     if (time === 0) {
       const response = await pool.query(
-        'SELECT * FROM sensors ORDER BY created_at DESC',
+        'SELECT * FROM sensors WHERE binds.user_id =  ORDER BY created_at DESC',
       )
       res.json(response.rows)
     } else {

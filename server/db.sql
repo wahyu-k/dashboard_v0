@@ -51,7 +51,7 @@ CREATE TABLE calcs
 );
 
 CREATE TABLE binds(
-  user_id BIGINT REFERENCES logins(id) NOT NULL,
+  user_id BIGINT REFERENCES logins(id) PRIMARY KEY NOT NULL,
   device_id integer[]
 );
 
