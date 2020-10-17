@@ -4,6 +4,8 @@ import Devices from './admin/Devices'
 import Sensors from './admin/Sensors'
 import UpdatePassword from './settings/UpdatePassword'
 import UpdateCompApp from './admin/UpdateCompApp'
+import Bills from './admin/Bills'
+import Price from './admin/Price'
 
 function Admin() {
   const logoutHandler = () => {
@@ -18,6 +20,8 @@ function Admin() {
       <Users />
       <Devices />
       <Sensors />
+      <Bills />
+      <Price />
       <UpdateCompApp />
       <button onClick={() => logoutHandler()}>Logout</button>
     </div>

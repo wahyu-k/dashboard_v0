@@ -2,17 +2,15 @@
 
 const express = require('express')
 const cors = require('cors')
+const helmet = require('helmet')
 
 const app = express()
 app.use(express.json())
 app.use(cors())
+app.use(helmet())
 
-/**
- * @GET
- * Hello API
- *
- * @readonly
- */
+const tokenValidator = require('./components/helper/tokenValidation')
+
 app.get('/', (req, res) => {
   res.json({
     msg: 'Hello API 👋',
@@ -62,6 +60,16 @@ const calcApi = require('./components/calc/calcApi')
 app.post('/v1/calc', calcApi.calcPost)
 app.get('/v1/calc', calcApi.calcGet)
 app.put('/v1/calc', calcApi.calcPut)
+
+const billApi = require('./components/bill/billApi')
+
+app.get('/v1/bill', tokenValidator.start, billApi.getBill)
+app.post('/v1/bill', billApi.postBill)
+
+const priceApi = require('./components/prices/priceApi')
+
+app.get('/v1/price', tokenValidator.start, priceApi.getPrice)
+app.post('/v1/price', priceApi.postPrice)
 
 app.listen(5000, () => {
   console.log('Server started on 5000')

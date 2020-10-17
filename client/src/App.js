@@ -8,14 +8,14 @@ import axios from 'axios'
 import Home from './components/Home'
 import NoMatch from './components/NoMatch'
 import Admin from './components/Admin'
-import AksiBerbagi from './components/AksiBerbagi'
+// import AksiBerbagi from './components/AksiBerbagi'
 import loading_siab from './img/loading_siab.png'
 import css from './app.module.css'
 
 function App() {
   const [isLogin, setIsLogin] = useState(false)
   const [isAdmin, setIsAdmin] = useState(false)
-  const [isLoading, setIsLoading] = useState(true)
+  const [isLoading, setIsLoading] = useState(false)
 
   useEffect(() => {
     async function fetchData() {
@@ -69,12 +69,12 @@ function App() {
         <Route path="/reset_password/:token" exact>
           <ResetPass />
         </Route>
-        <Route path="/admin">
+        {/* <Route path="/admin">
           <Admin />
         </Route>
         <Route path="/aksiberbagi">
           <AksiBerbagi />
-        </Route>
+        </Route> */}
         <Route path="*">
           <NoMatch />
         </Route>
