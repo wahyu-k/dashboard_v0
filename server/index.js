@@ -35,9 +35,11 @@ const adminApi = require('./components/admin/adminApi')
 
 app.get('/v1/devices', adminApi.getDevices)
 app.post('/v1/devices', adminApi.addDevice)
-app.get('/v1/sensors', adminApi.getSensors)
+app.post('/v1/sensors', adminApi.getSensors)
 app.get('/v1/admin/logins', adminApi.getUsers)
 app.put('/v1/devices', adminApi.updateDevice)
+app.post('/v1/binds', adminApi.binds)
+app.get('/v1/binds', adminApi.getBinds)
 
 const deviceApi = require('./components/device/deviceApi')
 
@@ -52,6 +54,8 @@ const userApi = require('./components/user/userApi')
 app.post('/v1/users', userApi.getPersonalData)
 app.put('/v1/users', userApi.updatePersData)
 app.post('/v1/users/sensors', userApi.getSensors)
+app.get('/v1/users/binds', userApi.getBinds)
+app.get('/v1/users/getsensors', userApi.getBindSensor)
 
 const aksiBerbagiApi = require('./components/aksiBerbagi/aksiBerbagiApi')
 

@@ -4,6 +4,8 @@ import Devices from './admin/Devices'
 import Sensors from './admin/Sensors'
 import UpdatePassword from './settings/UpdatePassword'
 import UpdateCompApp from './admin/UpdateCompApp'
+import Binds from './admin/Binds'
+import GetBinds from './admin/GetBinds'
 
 function Admin() {
   const logoutHandler = () => {
@@ -19,6 +21,8 @@ function Admin() {
       <Devices />
       <Sensors />
       <UpdateCompApp />
+      <Binds />
+      <GetBinds />
       <button onClick={() => logoutHandler()}>Logout</button>
     </div>
   )
