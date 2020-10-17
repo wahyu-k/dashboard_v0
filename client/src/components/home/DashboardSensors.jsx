@@ -42,7 +42,7 @@ function DashboardSensors() {
       if (getSens.length <= rowsPerPage) {
         setPage(0)
       } else if (page >= getSens.length / rowsPerPage - 1) {
-        setPage(getSens.length / rowsPerPage - 1)
+        setPage(Math.ceil(getSens.length / rowsPerPage - 1))
       } else {
         setPage(page + 1)
       }
@@ -50,7 +50,7 @@ function DashboardSensors() {
       if (getSens.length <= rowsPerPage) {
         setPage(0)
       } else {
-        setPage(getSens.length / rowsPerPage - 1)
+        setPage(Math.ceil(getSens.length / rowsPerPage - 1))
       }
     }
   }
@@ -86,9 +86,13 @@ function DashboardSensors() {
 
   useEffect(() => {
     async function fetchData() {
-      const getSens = await axios.post(
+      const getSens = await axios.get(
         `${process.env.REACT_APP_BASE_URL}/v1/users/sensors`,
-        { device_id: 1, time: 0 },
+        {
+          params: {
+            user_id: 6,
+          },
+        },
       )
       setGetSens(getSens.data)
       setLatest(getSens.data[0])

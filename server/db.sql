@@ -59,6 +59,20 @@ CREATE TABLE prices
   modified_at BIGINT NOT NULL
 );
 
+CREATE TABLE binds(
+  user_id BIGINT REFERENCES logins(id) PRIMARY KEY NOT NULL,
+  device_id integer[]
+);
+
+CREATE TABLE bills(
+  id SERIAL PRIMARY KEY,
+  device_id BIGINT REFERENCES devices(id),
+  daily_flow REAL,
+  daily_bill REAL,
+  payment REAL,
+  created_at BIGINT NOT NULL
+);
+
 -- DUMMY DATA
 INSERT INTO devices(name, lat, lng, user_id, created_at, modified_at) VALUES('Pondok 1', 12.12, 13.13, 2, ROUND(EXTRACT(EPOCH FROM NOW()) * 1000), ROUND(EXTRACT(EPOCH FROM NOW())) * 1000);
 INSERT INTO devices(name, lat, lng, user_id, created_at, modified_at) VALUES('Pondok 2', 12.13, 13.14, 2, ROUND(EXTRACT(EPOCH FROM NOW()) * 1000), ROUND(EXTRACT(EPOCH FROM NOW())) * 1000);
