@@ -7,7 +7,6 @@ import UpdateCompApp from './admin/UpdateCompApp'
 import Bills from './admin/Bills'
 import Price from './admin/Price'
 import Binds from './admin/Binds'
-import GetBinds from './admin/GetBinds'
 
 function Admin() {
   const logoutHandler = () => {
@@ -26,7 +25,6 @@ function Admin() {
       <Price />
       <UpdateCompApp />
       <Binds />
-      <GetBinds />
       <button onClick={() => logoutHandler()}>Logout</button>
     </div>
   )

@@ -1,19 +1,23 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import css from './forgetPass.module.css'
 import { useHistory } from 'react-router-dom'
-import logo_siab from '../../img/register/logo_siab.png'
+import banner from '../../img/forgetPass/forget_pass.png'
 import { TextField, Collapse } from '@material-ui/core'
 import { Alert } from '@material-ui/lab'
 import loading from '../../img/loading.gif'
 
-function ForgetPass() {
+function ForgetPass(props) {
   const [email, setEmail] = useState('')
   const [isSuccess, setIsSuccess] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
   const [isError, setIsError] = useState(false)
   const [errorMsg, setErrorMsg] = useState('')
   const history = useHistory()
+
+  useEffect(() => {
+    props.onView()
+  }, [props])
 
   const submitHandler = (event) => {
     setIsLoading(true)
@@ -57,45 +61,38 @@ function ForgetPass() {
   }
 
   return (
-    <div className={css.backdrop}>
-      <div className={css.smalldrop}>
-        <div className={css.forget__container}>
-          <img alt="logo-siab" src={logo_siab} />
-          <div className={css.pass__container}>
-            <h1>Lupa Kata Sandi ?</h1>
-          </div>
-          <form onSubmit={(event) => submitHandler(event)}>
-            <Collapse in={isSuccess}>
-              <Alert severity="success">
-                Kami telah mengirim link reset kata sandi ke email anda,
-                silahkan cek email anda
-              </Alert>
-            </Collapse>
-            <Collapse in={isError}>
-              <Alert severity="error">{errorMsg}</Alert>
-            </Collapse>
-            <label>Email</label>
-            <TextField
-              placeholder="akun@gmail.com"
-              onChange={(event) => setEmail(event.target.value)}
-              required
-            />
-            {!isSuccess ? (
-              <button type="submit" disabled={isLoading}>
-                {isLoading ? <img alt="loading" src={loading} /> : 'Kirim'}
-              </button>
-            ) : (
-              <button type="submit" disabled={isLoading}>
-                Cek Email Anda
-              </button>
-            )}
-            <p>
-              SIAB Indonesia akan mengirim kode verifikasi ke email anda,
-              silahkan cek email anda
-            </p>
-          </form>
-        </div>
-      </div>
+    <div className={css.forget__container}>
+      <Collapse in={isSuccess}>
+        <Alert severity="success">
+          Kami telah mengirim link reset kata sandi ke email anda, silahkan cek
+          email anda
+        </Alert>
+      </Collapse>
+      <Collapse in={isError}>
+        <Alert severity="error">{errorMsg}</Alert>
+      </Collapse>
+      <form onSubmit={(event) => submitHandler(event)}>
+        <label>Email</label>
+        <TextField
+          placeholder="akun@gmail.com"
+          onChange={(event) => setEmail(event.target.value)}
+          required
+        />
+        {!isSuccess ? (
+          <button type="submit" disabled={isLoading}>
+            {isLoading ? <img alt="loading" src={loading} /> : 'Kirim'}
+          </button>
+        ) : (
+          <button type="submit" disabled={isLoading}>
+            Cek Email Anda
+          </button>
+        )}
+        <p>
+          SIAB Indonesia akan mengirim kode verifikasi ke email anda, silahkan
+          cek email anda
+        </p>
+      </form>
+      <img alt="forpass-img" src={banner} />
     </div>
   )
 }

@@ -12,7 +12,6 @@ CREATE TABLE devices(
   name VARCHAR(100) NOT NULL,
   lat DOUBLE PRECISION NOT NULL,
   lng DOUBLE PRECISION NOT NULL,
-  user_id BIGINT REFERENCES logins(id) NOT NULL,
   created_at BIGINT NOT NULL,
   modified_at BIGINT NOT NULL
 );
@@ -74,14 +73,40 @@ CREATE TABLE bills(
 );
 
 -- DUMMY DATA
-INSERT INTO devices(name, lat, lng, user_id, created_at, modified_at) VALUES('Pondok 1', 12.12, 13.13, 2, ROUND(EXTRACT(EPOCH FROM NOW()) * 1000), ROUND(EXTRACT(EPOCH FROM NOW())) * 1000);
-INSERT INTO devices(name, lat, lng, user_id, created_at, modified_at) VALUES('Pondok 2', 12.13, 13.14, 2, ROUND(EXTRACT(EPOCH FROM NOW()) * 1000), ROUND(EXTRACT(EPOCH FROM NOW())) * 1000);
-INSERT INTO devices(name, lat, lng, user_id, created_at, modified_at) VALUES('Pondok 3', 12.14, 13.15, 2, ROUND(EXTRACT(EPOCH FROM NOW()) * 1000), ROUND(EXTRACT(EPOCH FROM NOW())) * 1000);
 
-INSERT INTO sensors(ph, tds, turb, temp, flow, device_id, created_at) VALUES(7.12, 80.43, 23.12, 28.43, 52.4, 1, ROUND(EXTRACT(EPOCH FROM NOW()) * 1000));
-INSERT INTO sensors(ph, tds, turb, temp, flow, device_id, created_at) VALUES(7.15, 80.49, 23.13, 28.49, 42.4, 1, ROUND(EXTRACT(EPOCH FROM NOW()) * 1000));
-INSERT INTO sensors(ph, tds, turb, temp, flow, device_id, created_at) VALUES(6.15, 85.49, 23.11, 27.79, 66.4, 2, ROUND(EXTRACT(EPOCH FROM NOW()) * 1000));
+-- LOGINS TABLE
+INSERT INTO logins(username, email, password, created_at, modified_at) VALUES('admin', 'admin@siagaairbersih.com', '$2b$07$4IgftelgOEHon2Y5.GIsfuFqg2QFk/VZh/LNviN5.KmJSMM12W/jq', ROUND(EXTRACT(EPOCH FROM NOW()) * 1000), ROUND(EXTRACT(EPOCH FROM NOW())) * 1000);
+INSERT INTO logins(username, email, password, created_at, modified_at) VALUES('test', 'test@siagaairbersih.com', '$2b$07$B6mJq5YiCrEM4jCFmhpUYe4l4CRYiwbAC7zWlVM5lOskvu/lcuZ4a', ROUND(EXTRACT(EPOCH FROM NOW()) * 1000), ROUND(EXTRACT(EPOCH FROM NOW())) * 1000);
+INSERT INTO logins(username, email, password, created_at, modified_at) VALUES('premium', 'premium@siagaairbersih.com', '$2b$07$QXn.jXQxFA7e4Ru9pS3oWOlSgHiDQGNbCzTPiJ9tsKuWqf5SSUx82', ROUND(EXTRACT(EPOCH FROM NOW()) * 1000), ROUND(EXTRACT(EPOCH FROM NOW())) * 1000);
+INSERT INTO logins(username, email, password, created_at, modified_at) VALUES('pengelola', 'pengelola@siagaairbersih.com', '$2b$07$/TJeNoiUh5/UwD0rAz79QuuMqQtcEsxhRehW9mrX6RaJeEbTsTKX2', ROUND(EXTRACT(EPOCH FROM NOW()) * 1000), ROUND(EXTRACT(EPOCH FROM NOW())) * 1000);
 
+-- USERS TABLE
+INSERT INTO users(id, first_name, last_name, dob, prov, region, plan, created_at, modified_at) VALUES(1, 'Admin', 'SIAB', '', 'Jawa Tengah', 'Surakarta', 7, ROUND(EXTRACT(EPOCH FROM NOW()) * 1000), ROUND(EXTRACT(EPOCH FROM NOW())) * 1000);
+INSERT INTO users(id, first_name, last_name, dob, prov, region, plan, created_at, modified_at) VALUES(2, 'Free', 'User', '', 'Jawa Tengah', 'Klaten', 0, ROUND(EXTRACT(EPOCH FROM NOW()) * 1000), ROUND(EXTRACT(EPOCH FROM NOW())) * 1000);
+INSERT INTO users(id, first_name, last_name, dob, prov, region, plan, created_at, modified_at) VALUES(3, 'Premium', 'User', '', 'Jawa Tengah', 'Semarang', 1, ROUND(EXTRACT(EPOCH FROM NOW()) * 1000), ROUND(EXTRACT(EPOCH FROM NOW())) * 1000);
+INSERT INTO users(id, first_name, last_name, dob, prov, region, plan, created_at, modified_at) VALUES(4, 'Pengelola', 'User', '', 'Jawa Tengah', 'Semarang', 2, ROUND(EXTRACT(EPOCH FROM NOW()) * 1000), ROUND(EXTRACT(EPOCH FROM NOW())) * 1000);
+
+-- DEVICE TABLE
+INSERT INTO devices(name, lat, lng, created_at, modified_at) VALUES('Zeus I', -7.552973, 110.808103,  ROUND(EXTRACT(EPOCH FROM NOW()) * 1000), ROUND(EXTRACT(EPOCH FROM NOW())) * 1000);
+INSERT INTO devices(name, lat, lng, created_at, modified_at) VALUES('Zeus II', -7.562973, 110.809103,  ROUND(EXTRACT(EPOCH FROM NOW()) * 1000), ROUND(EXTRACT(EPOCH FROM NOW())) * 1000);
+INSERT INTO devices(name, lat, lng, created_at, modified_at) VALUES('Zeus III', -7.572973, 110.818103,  ROUND(EXTRACT(EPOCH FROM NOW()) * 1000), ROUND(EXTRACT(EPOCH FROM NOW())) * 1000);
+
+-- SENSORS TABLE
+INSERT INTO sensors(ph, tds, turb, temp, flow, device_id, created_at) VALUES(7.12, 80.43, 23.12, 28.43, 1.4, 1, ROUND(EXTRACT(EPOCH FROM NOW()) * 1000));
+INSERT INTO sensors(ph, tds, turb, temp, flow, device_id, created_at) VALUES(7.15, 80.49, 23.13, 28.49, 1.7, 1, ROUND(EXTRACT(EPOCH FROM NOW()) * 1000));
+INSERT INTO sensors(ph, tds, turb, temp, flow, device_id, created_at) VALUES(6.15, 85.49, 23.11, 27.79, 2.9, 2, ROUND(EXTRACT(EPOCH FROM NOW()) * 1000));
+INSERT INTO sensors(ph, tds, turb, temp, flow, device_id, created_at) VALUES(6.22, 82.39, 24.16, 28.51, 3.1, 2, ROUND(EXTRACT(EPOCH FROM NOW()) * 1000));
+INSERT INTO sensors(ph, tds, turb, temp, flow, device_id, created_at) VALUES(6.58, 85.56, 27.76, 27.45, 4.4, 3, ROUND(EXTRACT(EPOCH FROM NOW()) * 1000));
+INSERT INTO sensors(ph, tds, turb, temp, flow, device_id, created_at) VALUES(6.60, 83.67, 27.57, 28.40, 6.7, 3, ROUND(EXTRACT(EPOCH FROM NOW()) * 1000));
+
+-- COMPARISON TABLE
 INSERT INTO calcs(x, y, z, created_at, modified_at) VALUES(0.5, 0.6, 0.7, ROUND(EXTRACT(EPOCH FROM NOW()) * 1000), ROUND(EXTRACT(EPOCH FROM NOW())) * 1000);
 
-INSERT INTO prices(price, device_id_list, created_at, modified_at) VALUES(1100, ARRAY[1], ROUND(EXTRACT(EPOCH FROM NOW()) * 1000), ROUND(EXTRACT(EPOCH FROM NOW())) * 1000);
+-- PRICES TABLE
+INSERT INTO prices(price, device_id_list, created_at, modified_at) VALUES(1100, ARRAY[1, 2, 3], ROUND(EXTRACT(EPOCH FROM NOW()) * 1000), ROUND(EXTRACT(EPOCH FROM NOW())) * 1000);
+
+-- BILLS TABLE
+INSERT INTO bills(device_id, daily_flow, daily_bill, payment, created_at) VALUES(1, 2, 2200, 0, ROUND(EXTRACT(EPOCH FROM NOW()) * 1000));
+INSERT INTO bills(device_id, daily_flow, daily_bill, payment, created_at) VALUES(1, 1, 1100, 0, ROUND(EXTRACT(EPOCH FROM NOW()) * 1000));
+INSERT INTO bills(device_id, daily_flow, daily_bill, payment, created_at) VALUES(2, 2.5, 2750, 0, ROUND(EXTRACT(EPOCH FROM NOW()) * 1000));
+INSERT INTO bills(device_id, daily_flow, daily_bill, payment, created_at) VALUES(2, 1.5, 1650, 0, ROUND(EXTRACT(EPOCH FROM NOW()) * 1000));

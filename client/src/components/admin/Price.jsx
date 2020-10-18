@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import axios from 'axios'
 
 function Price() {
-  const [prices, setPrices] = useState(null)
+  const [prices, setPrices] = useState([])
 
   const fetchData = async () => {
     try {
@@ -16,7 +16,6 @@ function Price() {
       )
       if (response) {
         setPrices(response.data)
-        console.log(response.data)
       }
     } catch (error) {
       console.error(error.message)
@@ -26,6 +25,24 @@ function Price() {
   return (
     <div>
       <h2>Price</h2>
+      <table>
+        <tbody>
+          <tr>
+            <td>Id</td>
+            <td>Price</td>
+            <td>User Id</td>
+          </tr>
+          {prices.map((price, i) => (
+            <tr key={i}>
+              <td>{price.id}</td>
+              <td>{price.price}</td>
+              <td>
+                <p>{price.device_id_list.toString()}</p>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
       <button onClick={() => fetchData()}>Fetch Data</button>
     </div>
   )

@@ -5,7 +5,6 @@ const postPrice = async (req, res) => {
 
   try {
     const array = JSON.parse('[' + device_id_list + ']')
-    console.log(array)
     const response = await pool.query(
       'INSERT INTO prices (price, device_id_list, created_at, modified_at) VALUES($1, $2, $3, $4) RETURNING *',
       [price, array, Date.now(), Date.now()],

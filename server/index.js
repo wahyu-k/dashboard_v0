@@ -38,6 +38,8 @@ app.get('/v1/admin/logins', adminApi.getUsers)
 app.put('/v1/devices', adminApi.updateDevice)
 app.post('/v1/binds', adminApi.binds)
 app.get('/v1/binds', adminApi.getBinds)
+app.put('/v1/binds', adminApi.updateBinds)
+app.delete('/v1/binds', adminApi.deleteBinds)
 
 const deviceApi = require('./components/device/deviceApi')
 
@@ -53,7 +55,7 @@ app.post('/v1/users', userApi.getPersonalData)
 app.put('/v1/users', userApi.updatePersData)
 app.post('/v1/users/sensors', userApi.getSensors)
 app.get('/v1/users/binds', userApi.getBinds)
-app.get('/v1/users/sensors', userApi.getBindSensor)
+app.get('/v1/users/sensors', tokenValidator.start, userApi.getBindSensor)
 
 const aksiBerbagiApi = require('./components/aksiBerbagi/aksiBerbagiApi')
 

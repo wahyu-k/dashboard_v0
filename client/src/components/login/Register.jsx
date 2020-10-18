@@ -1,21 +1,24 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import { useHistory } from 'react-router-dom'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
 import css from './register.module.css'
-import banner from '../../img/register/banner.png'
-import logo_siab from '../../img/register/logo_siab.png'
+import banner from '../../img/register/register.png'
 import loading from '../../img/loading.gif'
 import { TextField, Collapse } from '@material-ui/core'
 import { Alert } from '@material-ui/lab'
 
-function Register() {
+function Register(props) {
   const [isLoading, setIsLoading] = useState(false)
   const [isSuccess, setIsSuccess] = useState(false)
   const [isError, setIsError] = useState(false)
   const [errorMsg, setErrorMsg] = useState('')
   const history = useHistory()
+
+  useEffect(() => {
+    props.onView()
+  }, [props])
 
   const registerHandler = async ({ username, email, password }) => {
     setIsLoading(true)
@@ -95,84 +98,63 @@ function Register() {
   })
 
   return (
-    <div className={css.backdrop}>
-      <div className={css.register__container}>
-        <div className={css.left__container}>
-          <div className={css.top__menu__container}>
-            <img alt="logo-siab" src={logo_siab} />
-            <div className={css.menu__container}>
-              <a className={css.menu__daftar} href="/register">
-                Daftar
-              </a>
-              <a className={css.menu__masuk} href="/">
-                Masuk
-              </a>
-            </div>
-          </div>
-          <form
-            className={css.form}
-            onSubmit={formik.handleSubmit}
-            onReset={formik.handleReset}
-            noValidate
-          >
-            <Collapse in={isError}>
-              <Alert severity="error">{errorMsg}</Alert>
-            </Collapse>
-            <Collapse in={isSuccess}>
-              <Alert severity="success">
-                Akun telah dibuat, silahkan masuk
-              </Alert>
-            </Collapse>
-            <h1>DAFTAR</h1>
-            <label>Nama Akun</label>
-            <TextField
-              id="username"
-              name="username"
-              placeholder="nama akun"
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              value={formik.values.username}
-              helperText={formik.errors.username}
-              error={formik.errors.username ? true : false}
-            />
-            <label>Email</label>
-            <TextField
-              id="email"
-              name="email"
-              placeholder="akun@gmail.com"
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              value={formik.values.email}
-              helperText={formik.errors.email}
-              error={formik.errors.email ? true : false}
-            />
-            <label>Kata Sandi</label>
-            <TextField
-              id="password"
-              name="password"
-              type="password"
-              placeholder="kata sandi"
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              value={formik.values.password}
-              helperText={formik.errors.password}
-              error={formik.errors.password ? true : false}
-            />
+    <div className={css.register__container}>
+      <Collapse in={isError}>
+        <Alert severity="error">{errorMsg}</Alert>
+      </Collapse>
+      <Collapse in={isSuccess}>
+        <Alert severity="success">Akun telah dibuat, silahkan masuk</Alert>
+      </Collapse>
+      <form
+        className={css.form}
+        onSubmit={formik.handleSubmit}
+        onReset={formik.handleReset}
+        noValidate
+      >
+        <label>Nama Akun</label>
+        <TextField
+          id="username"
+          name="username"
+          placeholder="nama akun"
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          value={formik.values.username}
+          helperText={formik.errors.username}
+          error={formik.errors.username ? true : false}
+        />
+        <label>Email</label>
+        <TextField
+          id="email"
+          name="email"
+          placeholder="akun@gmail.com"
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          value={formik.values.email}
+          helperText={formik.errors.email}
+          error={formik.errors.email ? true : false}
+        />
+        <label>Kata Sandi</label>
+        <TextField
+          id="password"
+          name="password"
+          type="password"
+          placeholder="kata sandi"
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          value={formik.values.password}
+          helperText={formik.errors.password}
+          error={formik.errors.password ? true : false}
+        />
 
-            <br />
-            <button type="submit" disabled={isLoading}>
-              {isLoading ? <img alt="loading" src={loading} /> : 'Daftar'}
-            </button>
-            <a className="cancel" href="/">
-              sudah punya akun?
-            </a>
-          </form>
-        </div>
-        <div className={css.right__container}>
-          <p>Your Digital Water Solution</p>
-          <img alt="banner" src={banner} />
-        </div>
-      </div>
+        <br />
+        <button type="submit" disabled={isLoading}>
+          {isLoading ? <img alt="loading" src={loading} /> : 'Daftar'}
+        </button>
+        <a className="cancel" href="/">
+          sudah punya akun?
+        </a>
+      </form>
+      <img alt="register-img" src={banner} />
     </div>
   )
 }
