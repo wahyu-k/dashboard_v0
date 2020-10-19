@@ -18,7 +18,7 @@ const checkToken = async (req, res) => {
     }
 
     const response = await pool.query(
-      'SELECT username FROM logins WHERE username = $1',
+      'SELECT logins.*, users.plan FROM logins INNER JOIN users ON logins.id = users.id WHERE logins.username = $1',
       [username],
     )
 

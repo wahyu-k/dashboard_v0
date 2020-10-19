@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import axios from 'axios'
 import epochToDate from '../../helper/epochToDate'
-import RegisterDevice from './RegisterDevice'
-import EditDevices from './EditDevices'
+import RegisterDevice from './devices/RegisterDevice'
+import EditDevices from './devices/EditDevices'
 
 function Devices() {
   const [devices, setDevices] = useState([])
