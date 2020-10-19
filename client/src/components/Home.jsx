@@ -4,6 +4,7 @@ import DashboardSensors from './home/DashboardSensors'
 import UpdatePassword from './settings/UpdatePassword'
 import UpdatePersonalData from './settings/UpdatePersonalData'
 import UpdateUsername from './settings/UpdateUsername'
+import LandingPageWidget from './home/LandingPageWidget'
 
 function Home() {
   const logoutHandler = () => {
@@ -20,6 +21,7 @@ function Home() {
       <UpdatePersonalData />
       <ComparationApp />
       <DashboardSensors />
+      <LandingPageWidget />
       <button onClick={() => logoutHandler()}>Logout</button>
     </div>
   )

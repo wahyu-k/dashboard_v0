@@ -64,6 +64,12 @@ CREATE TABLE bills(
   created_at BIGINT NOT NULL
 );
 
+CREATE TABLE dash(
+  id SERIAL PRIMARY KEY,
+  nominal REAL NOT NULL,
+  title VARCHAR (100) NOT NULL
+);
+
 -- DUMMY DATA
 INSERT INTO devices(name, lat, lng, user_id, created_at, modified_at) VALUES('Pondok 1', 12.12, 13.13, 2, ROUND(EXTRACT(EPOCH FROM NOW()) * 1000), ROUND(EXTRACT(EPOCH FROM NOW())) * 1000);
 INSERT INTO devices(name, lat, lng, user_id, created_at, modified_at) VALUES('Pondok 2', 12.13, 13.14, 2, ROUND(EXTRACT(EPOCH FROM NOW()) * 1000), ROUND(EXTRACT(EPOCH FROM NOW())) * 1000);
@@ -74,3 +80,9 @@ INSERT INTO sensors(ph, tds, turb, temp, flow, device_id, created_at) VALUES(7.1
 INSERT INTO sensors(ph, tds, turb, temp, flow, device_id, created_at) VALUES(6.15, 85.49, 23.11, 27.79, 66.4, 2, ROUND(EXTRACT(EPOCH FROM NOW()) * 1000));
 
 INSERT INTO calcs(x, y, z, created_at, modified_at) VALUES(0.5, 0.6, 0.7, ROUND(EXTRACT(EPOCH FROM NOW()) * 1000), ROUND(EXTRACT(EPOCH FROM NOW())) * 1000);
+
+INSERT INTO dash(nominal, title) VALUES(263, 'Water Supply Working');
+INSERT INTO dash(nominal, title) VALUES(29389, 'Total Litre Dispensed');
+INSERT INTO dash(nominal, title) VALUES(1816, 'Total People Served');
+INSERT INTO dash(nominal, title) VALUES(96, 'Dispensed Working');
+INSERT INTO dash(nominal, title) VALUES(1293, 'Dispensers In Service');
