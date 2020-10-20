@@ -72,6 +72,12 @@ CREATE TABLE bills(
   created_at BIGINT NOT NULL
 );
 
+CREATE TABLE dash(
+  id SERIAL PRIMARY KEY,
+  nominal REAL NOT NULL,
+  title VARCHAR (100) NOT NULL
+);
+
 -- DUMMY DATA
 
 -- LOGINS TABLE
@@ -105,8 +111,10 @@ INSERT INTO calcs(x, y, z, created_at, modified_at) VALUES(0.5, 0.6, 0.7, ROUND(
 -- PRICES TABLE
 INSERT INTO prices(price, device_id_list, created_at, modified_at) VALUES(1100, ARRAY[1, 2, 3], ROUND(EXTRACT(EPOCH FROM NOW()) * 1000), ROUND(EXTRACT(EPOCH FROM NOW())) * 1000);
 
--- BILLS TABLE
-INSERT INTO bills(device_id, daily_flow, daily_bill, payment, created_at) VALUES(1, 2, 2200, 0, ROUND(EXTRACT(EPOCH FROM NOW()) * 1000));
-INSERT INTO bills(device_id, daily_flow, daily_bill, payment, created_at) VALUES(1, 1, 1100, 0, ROUND(EXTRACT(EPOCH FROM NOW()) * 1000));
-INSERT INTO bills(device_id, daily_flow, daily_bill, payment, created_at) VALUES(2, 2.5, 2750, 0, ROUND(EXTRACT(EPOCH FROM NOW()) * 1000));
-INSERT INTO bills(device_id, daily_flow, daily_bill, payment, created_at) VALUES(2, 1.5, 1650, 0, ROUND(EXTRACT(EPOCH FROM NOW()) * 1000));
+INSERT INTO calcs(x, y, z, created_at, modified_at) VALUES(0.5, 0.6, 0.7, ROUND(EXTRACT(EPOCH FROM NOW()) * 1000), ROUND(EXTRACT(EPOCH FROM NOW())) * 1000);
+
+INSERT INTO dash(nominal, title) VALUES(263, 'Water Supply Working');
+INSERT INTO dash(nominal, title) VALUES(29389, 'Total Litre Dispensed');
+INSERT INTO dash(nominal, title) VALUES(1816, 'Total People Served');
+INSERT INTO dash(nominal, title) VALUES(96, 'Dispensed Working');
+INSERT INTO dash(nominal, title) VALUES(1293, 'Dispensers In Service');

@@ -56,6 +56,7 @@ app.put('/v1/users', userApi.updatePersData)
 app.post('/v1/users/sensors', userApi.getSensors)
 app.get('/v1/users/binds', userApi.getBinds)
 app.get('/v1/users/sensors', tokenValidator.start, userApi.getBindSensor)
+app.get('/v1/users/landing', userApi.getLandingPage)
 
 const aksiBerbagiApi = require('./components/aksiBerbagi/aksiBerbagiApi')
 

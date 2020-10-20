@@ -1,5 +1,5 @@
 import React from 'react'
-import ComparationApp from './home/ComparationApp'
+import ComparationApp from './landingpage/ComparationApp'
 import DashboardSensors from './home/DashboardSensors'
 import UpdatePassword from './settings/UpdatePassword'
 import UpdatePersonalData from './settings/UpdatePersonalData'
