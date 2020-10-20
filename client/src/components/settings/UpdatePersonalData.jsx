@@ -29,8 +29,6 @@ export class UpdatePersonalData extends Component {
         },
       )
 
-      console.log(response.data)
-
       if (response) {
         const { first_name, last_name, dob, region, prov } = response.data
 
@@ -78,7 +76,7 @@ export class UpdatePersonalData extends Component {
         <form onSubmit={(event) => this.submitHandler(event)}>
           <label>First Name</label>
           <input
-            value={this.state.first_name}
+            value={this.state.first_name || ''}
             onChange={(event) =>
               this.setState({
                 first_name: event.target.value,
@@ -88,7 +86,7 @@ export class UpdatePersonalData extends Component {
           <br />
           <label>Last Name</label>
           <input
-            value={this.state.last_name}
+            value={this.state.last_name || ''}
             onChange={(event) =>
               this.setState({
                 last_name: event.target.value,
@@ -98,7 +96,7 @@ export class UpdatePersonalData extends Component {
           <br />
           <label>Date of Birth</label>
           <input
-            value={this.state.dob}
+            value={this.state.dob || ''}
             type="date"
             onChange={(event) =>
               this.setState({
@@ -109,7 +107,7 @@ export class UpdatePersonalData extends Component {
           <br />
           <label>Region</label>
           <input
-            value={this.state.region}
+            value={this.state.region || ''}
             onChange={(event) =>
               this.setState({
                 region: event.target.value,
@@ -119,7 +117,7 @@ export class UpdatePersonalData extends Component {
           <br />
           <label>Province</label>
           <input
-            value={this.state.prov}
+            value={this.state.prov || ''}
             onChange={(event) =>
               this.setState({
                 prov: event.target.value,

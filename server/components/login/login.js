@@ -16,10 +16,16 @@ const login = async (req, res) => {
   let data = null
 
   try {
-    data = await pool.query('SELECT * FROM logins WHERE username = $1', [uoe])
+    data = await pool.query(
+      'SELECT logins.*, users.plan FROM logins INNER JOIN users ON logins.id = users.id WHERE logins.username = $1',
+      [uoe],
+    )
 
     if (data.rowCount === 0) {
-      data = await pool.query('SELECT * FROM logins WHERE email = $1', [uoe])
+      data = await pool.query(
+        'SELECT logins.*, users.plan FROM logins INNER JOIN users ON logins.id = users.id WHERE logins.email = $1',
+        [uoe],
+      )
 
       if (data.rowCount === 0) {
         throw new Error('Wrong Email')
@@ -36,6 +42,7 @@ const login = async (req, res) => {
       {
         id: data.rows[0].id,
         username: data.rows[0].username,
+        plan: data.rows[0].plan,
       },
       process.env.JWT_SECRET,
     )

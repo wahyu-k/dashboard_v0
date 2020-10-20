@@ -44,7 +44,6 @@ function UpdateCompApp() {
 
   return (
     <div>
-      <h1>UpdateCompApp</h1>
       <h2>Update Harga per Meter Kubik</h2>
       <form onSubmit={onSubmitForm}>
         <h3>Harga Air SIAB</h3>

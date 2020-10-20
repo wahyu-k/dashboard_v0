@@ -1,0 +1,23 @@
+.loading__container {
+  position: absolute;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+}
+
+.loading__container > img {
+  transform: scale(0.5);
+  margin: 0 auto;
+  animation: normal;
+  animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 50%;
+  }
+  100% {
+    opacity: 100%;
+  }
+}

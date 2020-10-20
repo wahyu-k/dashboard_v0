@@ -74,25 +74,37 @@ function DashboardSensors() {
         time = 0
         break
     }
-    const resp = await axios.post(
+    const resp = await axios.get(
       `${process.env.REACT_APP_BASE_URL}/v1/users/sensors`,
       {
-        device_id: 1,
-        time,
+        headers: {
+          Authorization: 'Bearer ' + localStorage.getItem('_s_t'),
+        },
+        params: {
+          time,
+        },
       },
     )
     setGetSens(resp.data)
   }
 
+  async function fetchData() {
+    const getSens = await axios.get(
+      `${process.env.REACT_APP_BASE_URL}/v1/users/sensors`,
+      {
+        headers: {
+          Authorization: 'Bearer ' + localStorage.getItem('_s_t'),
+        },
+        params: {
+          time: 0,
+        },
+      },
+    )
+    setGetSens(getSens.data)
+    setLatest(getSens.data[0])
+  }
+
   useEffect(() => {
-    async function fetchData() {
-      const getSens = await axios.post(
-        `${process.env.REACT_APP_BASE_URL}/v1/users/sensors`,
-        { device_id: 1, time: 0 },
-      )
-      setGetSens(getSens.data)
-      setLatest(getSens.data[0])
-    }
     fetchData()
   }, [])
 
