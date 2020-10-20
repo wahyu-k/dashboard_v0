@@ -5,13 +5,14 @@ function AddNewBinds(props) {
   const [isLoading, setIsLoading] = useState(false)
   const [userId, setUserId] = useState('')
   const [deviceId, setDeviceId] = useState('')
+  const [primDevId, setPrimDevId] = useState('')
 
   const saveData = async () => {
     setIsLoading(true)
     try {
       const response = await axios.post(
         `${process.env.REACT_APP_BASE_URL}/v1/binds`,
-        { user_id: userId, device_id: deviceId },
+        { user_id: userId, primary_dev_id: primDevId, device_id: deviceId },
       )
       if (response) {
         setIsLoading(false)
@@ -27,6 +28,12 @@ function AddNewBinds(props) {
     <tr>
       <th>
         <input value={userId} onChange={(e) => setUserId(e.target.value)} />
+      </th>
+      <th>
+        <input
+          value={primDevId}
+          onChange={(e) => setPrimDevId(e.target.value)}
+        />
       </th>
       <th>
         <input value={deviceId} onChange={(e) => setDeviceId(e.target.value)} />

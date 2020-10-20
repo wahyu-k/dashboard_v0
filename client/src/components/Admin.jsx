@@ -1,23 +1,24 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Users from './admin/Users'
 import Devices from './admin/Devices'
 import Sensors from './admin/Sensors'
-import UpdatePassword from './settings/UpdatePassword'
 import UpdateCompApp from './admin/UpdateCompApp'
 import Bills from './admin/Bills'
 import Price from './admin/Price'
 import Binds from './admin/Binds'
 
-function Admin() {
+function Admin(props) {
   const logoutHandler = () => {
     localStorage.clear()
     window.location.reload()
   }
 
+  useEffect(() => {
+    props.onView()
+  }, [props])
+
   return (
     <div>
-      <h1>Admin Page</h1>
-      <UpdatePassword />
       <Users />
       <Devices />
       <Sensors />

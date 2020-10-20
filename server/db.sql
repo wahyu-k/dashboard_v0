@@ -18,11 +18,11 @@ CREATE TABLE devices(
 
 CREATE TABLE sensors(
   id BIGSERIAL PRIMARY KEY,
-  ph REAL NOT NULL,
-  tds REAL NOT NULL,
-  turb REAL NOT NULL,
-  temp REAL NOT NULL,
-  flow REAL NOT NULL,
+  ph REAL,
+  tds REAL,
+  turb REAL,
+  temp REAL,
+  flow REAL,
   device_id BIGINT REFERENCES devices(id) NOT NULL,
   created_at BIGINT NOT NULL
 );
@@ -60,7 +60,8 @@ CREATE TABLE prices
 
 CREATE TABLE binds(
   user_id BIGINT REFERENCES logins(id) PRIMARY KEY NOT NULL,
-  device_id integer[]
+  primary_dev_id BIGINT,
+  device_id BIGINT[]
 );
 
 CREATE TABLE bills(
@@ -100,10 +101,10 @@ INSERT INTO devices(name, lat, lng, created_at, modified_at) VALUES('Zeus III', 
 -- SENSORS TABLE
 INSERT INTO sensors(ph, tds, turb, temp, flow, device_id, created_at) VALUES(7.12, 80.43, 23.12, 28.43, 1.4, 1, ROUND(EXTRACT(EPOCH FROM NOW()) * 1000));
 INSERT INTO sensors(ph, tds, turb, temp, flow, device_id, created_at) VALUES(7.15, 80.49, 23.13, 28.49, 1.7, 1, ROUND(EXTRACT(EPOCH FROM NOW()) * 1000));
-INSERT INTO sensors(ph, tds, turb, temp, flow, device_id, created_at) VALUES(6.15, 85.49, 23.11, 27.79, 2.9, 2, ROUND(EXTRACT(EPOCH FROM NOW()) * 1000));
-INSERT INTO sensors(ph, tds, turb, temp, flow, device_id, created_at) VALUES(6.22, 82.39, 24.16, 28.51, 3.1, 2, ROUND(EXTRACT(EPOCH FROM NOW()) * 1000));
-INSERT INTO sensors(ph, tds, turb, temp, flow, device_id, created_at) VALUES(6.58, 85.56, 27.76, 27.45, 4.4, 3, ROUND(EXTRACT(EPOCH FROM NOW()) * 1000));
-INSERT INTO sensors(ph, tds, turb, temp, flow, device_id, created_at) VALUES(6.60, 83.67, 27.57, 28.40, 6.7, 3, ROUND(EXTRACT(EPOCH FROM NOW()) * 1000));
+INSERT INTO sensors(flow, device_id, created_at) VALUES(2.9, 2, ROUND(EXTRACT(EPOCH FROM NOW()) * 1000));
+INSERT INTO sensors(flow, device_id, created_at) VALUES(3.1, 2, ROUND(EXTRACT(EPOCH FROM NOW()) * 1000));
+INSERT INTO sensors(flow, device_id, created_at) VALUES(4.4, 3, ROUND(EXTRACT(EPOCH FROM NOW()) * 1000));
+INSERT INTO sensors(flow, device_id, created_at) VALUES(6.7, 3, ROUND(EXTRACT(EPOCH FROM NOW()) * 1000));
 
 -- COMPARISON TABLE
 INSERT INTO calcs(x, y, z, created_at, modified_at) VALUES(0.5, 0.6, 0.7, ROUND(EXTRACT(EPOCH FROM NOW()) * 1000), ROUND(EXTRACT(EPOCH FROM NOW())) * 1000);
@@ -111,10 +112,10 @@ INSERT INTO calcs(x, y, z, created_at, modified_at) VALUES(0.5, 0.6, 0.7, ROUND(
 -- PRICES TABLE
 INSERT INTO prices(price, device_id_list, created_at, modified_at) VALUES(1100, ARRAY[1, 2, 3], ROUND(EXTRACT(EPOCH FROM NOW()) * 1000), ROUND(EXTRACT(EPOCH FROM NOW())) * 1000);
 
-INSERT INTO calcs(x, y, z, created_at, modified_at) VALUES(0.5, 0.6, 0.7, ROUND(EXTRACT(EPOCH FROM NOW()) * 1000), ROUND(EXTRACT(EPOCH FROM NOW())) * 1000);
-
-INSERT INTO dash(nominal, title) VALUES(263, 'Water Supply Working');
-INSERT INTO dash(nominal, title) VALUES(29389, 'Total Litre Dispensed');
-INSERT INTO dash(nominal, title) VALUES(1816, 'Total People Served');
-INSERT INTO dash(nominal, title) VALUES(96, 'Dispensed Working');
-INSERT INTO dash(nominal, title) VALUES(1293, 'Dispensers In Service');
+-- BILLS TABLE
+INSERT INTO bills(device_id, daily_flow, daily_bill, payment, created_at) VALUES(2, 2, 2200, 0, ROUND(EXTRACT(EPOCH FROM NOW()) * 1000));
+INSERT INTO bills(device_id, daily_flow, daily_bill, payment, created_at) VALUES(2, 1, 1100, 0, ROUND(EXTRACT(EPOCH FROM NOW()) * 1000));
+INSERT INTO bills(device_id, daily_flow, daily_bill, payment, created_at) VALUES(2, 0, 0, 1000, ROUND(EXTRACT(EPOCH FROM NOW()) * 1000));
+INSERT INTO bills(device_id, daily_flow, daily_bill, payment, created_at) VALUES(3, 2.5, 2750, 0, ROUND(EXTRACT(EPOCH FROM NOW()) * 1000));
+INSERT INTO bills(device_id, daily_flow, daily_bill, payment, created_at) VALUES(3, 1.5, 1650, 0, ROUND(EXTRACT(EPOCH FROM NOW()) * 1000));
+INSERT INTO bills(device_id, daily_flow, daily_bill, payment, created_at) VALUES(3, 0, 0, 1000, ROUND(EXTRACT(EPOCH FROM NOW()) * 1000));

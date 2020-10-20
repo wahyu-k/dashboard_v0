@@ -1,26 +1,26 @@
-import React from 'react'
-import ComparationApp from './landingpage/ComparationApp'
+import React, { useState, useEffect } from 'react'
+import Map from './aksiberbagi/Map'
 import DashboardSensors from './home/DashboardSensors'
-import UpdatePassword from './settings/UpdatePassword'
-import UpdatePersonalData from './settings/UpdatePersonalData'
-import UpdateUsername from './settings/UpdateUsername'
 
-function Home() {
-  const logoutHandler = () => {
-    localStorage.clear()
-    window.location.reload()
-  }
+function Home(props) {
+  //eslint-disable-next-line
+  const [data, setData] = useState([
+    {
+      name: 'Loading...',
+      lat: 0,
+      lng: 0,
+      total_flow: 0,
+    },
+  ])
+
+  useEffect(() => {
+    props.onView()
+  }, [props])
 
   return (
     <div>
-      <h1>Home</h1>
-      <h2>Siaga Air Bersih</h2>
-      <UpdateUsername />
-      <UpdatePassword />
-      <UpdatePersonalData />
-      <ComparationApp />
+      <Map data={data} />
       <DashboardSensors />
-      <button onClick={() => logoutHandler()}>Logout</button>
     </div>
   )
 }

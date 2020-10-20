@@ -4,7 +4,7 @@ import {
   Switch,
   Route,
   Link,
-  // Redirect,
+  Redirect,
 } from 'react-router-dom'
 import ForgetPass from './components/login/ForgetPass'
 import Login from './components/Login'
@@ -29,11 +29,14 @@ import {
   ListItem,
   ListItemText,
   makeStyles,
+  Menu,
+  MenuItem,
   Toolbar,
   Typography,
   useTheme,
 } from '@material-ui/core'
 import MenuIcon from '@material-ui/icons/Menu'
+import AccountCircle from '@material-ui/icons/AccountCircle'
 import HomeOutlinedIcon from '@material-ui/icons/HomeOutlined'
 import MeetingRoomOutlinedIcon from '@material-ui/icons/MeetingRoomOutlined'
 import CreateOutlinedIcon from '@material-ui/icons/CreateOutlined'
@@ -42,9 +45,12 @@ import MenuBookOutlinedIcon from '@material-ui/icons/MenuBookOutlined'
 import ListItemIcon from '@material-ui/core/ListItemIcon'
 import siab_logo from './img/login/logo_siab.png'
 import LandingPage from './components/LandingPage'
+import UserWidget from './components/user/UserWidget'
+import SettingAccount from './components/admin/SettingAccount'
+import CreditCardOutlinedIcon from '@material-ui/icons/CreditCardOutlined'
+import Logout from './components/Logout'
 
-const drawerWidth = 225
-
+const drawerWidth = 230
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
@@ -85,6 +91,9 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
     padding: theme.spacing(3),
   },
+  title: {
+    flexGrow: 1,
+  },
 }))
 
 const accountMenuList = [
@@ -117,6 +126,10 @@ function App(props) {
   const theme = useTheme()
   const [mobileOpen, setMobileOpen] = useState(false)
   const [menuPos, setMenuPos] = useState('')
+  const [theSession, setTheSession] = useState(null)
+
+  const [anchorEl, setAnchorEl] = useState(null)
+  const open = Boolean(anchorEl)
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen)
@@ -131,6 +144,8 @@ function App(props) {
           token,
           process.env.REACT_APP_JWT_SECRET,
         )
+
+        setTheSession(session)
 
         if (session) {
           switch (session.plan) {
@@ -185,7 +200,7 @@ function App(props) {
     )
   }
 
-  const drawer = (
+  const nonLoggedFreeUserDrawer = (
     <div>
       <div className={classes.toolbar}>
         <img className={classes.logoSiab} alt="siab-logo" src={siab_logo} />
@@ -224,8 +239,56 @@ function App(props) {
     </div>
   )
 
+  const loggedFreeUserDrawer = (
+    <div>
+      <div className={classes.toolbar}>
+        <img className={classes.logoSiab} alt="siab-logo" src={siab_logo} />
+      </div>
+      <Divider />
+      <UserWidget data={theSession} />
+      <Divider />
+      <List>
+        <Link to="/" style={{ color: '#000' }}>
+          <ListItem button>
+            <ListItemIcon>
+              <HomeOutlinedIcon />
+            </ListItemIcon>
+            <ListItemText primary="Dashboard" />
+          </ListItem>
+        </Link>
+        <Link to="/payment" style={{ color: '#000' }}>
+          <ListItem button>
+            <ListItemIcon>
+              <CreditCardOutlinedIcon />
+            </ListItemIcon>
+            <ListItemText primary="Keuangan" />
+          </ListItem>
+        </Link>
+      </List>
+      <Divider />
+      <List>
+        <Link to="/help" style={{ color: '#000' }}>
+          <ListItem button>
+            <ListItemIcon>
+              <MenuBookOutlinedIcon />
+            </ListItemIcon>
+            <ListItemText primary="Panduan" />
+          </ListItem>
+        </Link>
+      </List>
+    </div>
+  )
+
   const container =
     window !== undefined ? () => window().document.body : undefined
+
+  const handleMenu = (event) => {
+    setAnchorEl(event.currentTarget)
+  }
+
+  const handleClose = () => {
+    setAnchorEl(null)
+  }
 
   return (
     <div className={classes.root}>
@@ -241,7 +304,48 @@ function App(props) {
             >
               <MenuIcon />
             </IconButton>
-            <Typography variant="h6">{menuPos}</Typography>
+            <Typography variant="h6" className={classes.title}>
+              {menuPos}
+            </Typography>
+            <div style={{ marginLeft: 0, position: 'relative' }}>
+              <IconButton
+                aria-label="account of current user"
+                aria-controls="menu-appbar"
+                aria-haspopup="true"
+                onClick={handleMenu}
+                color="inherit"
+              >
+                <AccountCircle />
+              </IconButton>
+              <Menu
+                id="menu-appbar"
+                anchorEl={anchorEl}
+                anchorOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right',
+                }}
+                keepMounted
+                transformOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right',
+                }}
+                open={open}
+                onClose={handleClose}
+              >
+                <Link to="/account" style={{ color: '#000' }}>
+                  <MenuItem onClick={handleClose}>Akunku</MenuItem>
+                </Link>
+                <Link to="/logout" style={{ color: '#000' }}>
+                  <MenuItem
+                    onClick={() => {
+                      handleClose()
+                    }}
+                  >
+                    Keluar Akun
+                  </MenuItem>
+                </Link>
+              </Menu>
+            </div>
           </Toolbar>
         </AppBar>
         <nav className={classes.drawer} aria-label="mailbox folders">
@@ -260,7 +364,8 @@ function App(props) {
                 keepMounted: true, // Better open performance on mobile.
               }}
             >
-              {drawer}
+              {isLogin ? loggedFreeUserDrawer : nonLoggedFreeUserDrawer}
+              {/* {nonLoggedFreeUserDrawer} */}
             </Drawer>
           </Hidden>
           <Hidden xsDown implementation="css">
@@ -271,7 +376,7 @@ function App(props) {
               variant="permanent"
               open
             >
-              {drawer}
+              {isLogin ? loggedFreeUserDrawer : nonLoggedFreeUserDrawer}
             </Drawer>
           </Hidden>
         </nav>
@@ -292,13 +397,27 @@ function App(props) {
                   // return <Redirect to="/login" />
                 } else {
                   if (isAdmin) {
-                    return <Admin />
+                    return (
+                      <Admin
+                        onView={() => setMenuPos('Dashboard Admin SIAB')}
+                      />
+                    )
                   } else {
                     if (isAdminPIC) {
-                      return <AdminPIC />
+                      return (
+                        <AdminPIC
+                          onView={() => setMenuPos('Dashboard Pengelola')}
+                        />
+                      )
                     } else {
                       if (isPremiumUser) {
-                        return <Home />
+                        return (
+                          <Home
+                            onView={() =>
+                              setMenuPos('Dashboard Siaga Air Bersih')
+                            }
+                          />
+                        )
                       } else {
                         if (isFreeUser) {
                           return (
@@ -312,7 +431,18 @@ function App(props) {
               }}
             </Route>
             <Route path="/login" exact>
-              <Login onView={() => setMenuPos('Masuk Akun')} />
+              {isLogin ? (
+                <Redirect to="/" />
+              ) : (
+                <Login onView={() => setMenuPos('Masuk Akun')} />
+              )}
+            </Route>
+            <Route path="/account" exact>
+              {!isLogin ? (
+                <Redirect to="/" />
+              ) : (
+                <SettingAccount onView={() => setMenuPos('Masuk Akun')} />
+              )}
             </Route>
             <Route path="/register" exact>
               <Register onView={() => setMenuPos('Daftar Akun')} />
@@ -323,8 +453,11 @@ function App(props) {
             <Route path="/reset_password/:token" exact>
               <ResetPass />
             </Route>
+            <Route path="/logout" exact>
+              <Logout />
+            </Route>
             <Route path="*">
-              <NoMatch />
+              <NoMatch onView={() => setMenuPos('Halaman Tidak Ditemukan')} />
             </Route>
           </Switch>
         </main>

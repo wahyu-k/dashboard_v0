@@ -1,0 +1,12 @@
+.usersensor__container > h2 {
+  font-size: 24px;
+
+  color: #6599ae;
+}
+
+.line {
+  margin-top: 5px;
+  width: 62px;
+  height: 0px;
+  border: 2px solid #89c5cc;
+}
