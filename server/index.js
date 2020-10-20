@@ -77,6 +77,10 @@ const priceApi = require('./components/prices/priceApi')
 app.get('/v1/price', tokenValidator.start, priceApi.getPrice)
 app.post('/v1/price', priceApi.postPrice)
 
+const adminPicApi = require('./components/adminPic/adminPicApi')
+
+app.get('/v1/adminpic/payment', tokenValidator.start, adminPicApi.getBill)
+
 app.listen(5000, () => {
   console.log('Server started on 5000')
 })

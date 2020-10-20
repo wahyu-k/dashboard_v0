@@ -1,10 +1,15 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
-function NoMatch() {
+function NoMatch(props) {
+  useEffect(() => {
+    props.onView()
+  }, [props])
+
   return (
     <div>
       <h1>404</h1>
-      <h2>Not Found</h2>
+      <p>Maaf, halaman yang saat ini Anda tuju belum tersedia.</p>
+      <p>Cobalah beberapa saat lagi!</p>
     </div>
   )
 }

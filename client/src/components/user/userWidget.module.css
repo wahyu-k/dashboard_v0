@@ -1,0 +1,42 @@
+.widget__container {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: 10px 0 10px 0;
+}
+
+.widget__container > div {
+  margin: 0 auto;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.name__container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-left: 10px;
+}
+
+.name__container > p {
+  font-size: 10px;
+}
+
+.plan__container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-top: 4px;
+}
+
+.plan__container > img {
+  width: 25px;
+  height: 18px;
+  margin-right: 5px;
+}
+
+.plan__container > div {
+  font-size: 12px;
+}

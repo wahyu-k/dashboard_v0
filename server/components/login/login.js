@@ -17,13 +17,13 @@ const login = async (req, res) => {
 
   try {
     data = await pool.query(
-      'SELECT logins.*, users.plan FROM logins INNER JOIN users ON logins.id = users.id WHERE logins.username = $1',
+      'SELECT logins.id, logins.username, logins.email, logins.password, users.first_name, users.last_name, users.plan, logins.created_at FROM logins INNER JOIN users ON logins.id = users.id WHERE logins.username = $1',
       [uoe],
     )
 
     if (data.rowCount === 0) {
       data = await pool.query(
-        'SELECT logins.*, users.plan FROM logins INNER JOIN users ON logins.id = users.id WHERE logins.email = $1',
+        'SELECT logins.id, logins.username, logins.email, logins.password, users.first_name, users.last_name, users.plan, logins.created_at FROM logins INNER JOIN users ON logins.id = users.id WHERE logins.email = $1',
         [uoe],
       )
 
@@ -42,6 +42,9 @@ const login = async (req, res) => {
       {
         id: data.rows[0].id,
         username: data.rows[0].username,
+        email: data.rows[0].email,
+        first_name: data.rows[0].first_name,
+        last_name: data.rows[0].last_name,
         plan: data.rows[0].plan,
       },
       process.env.JWT_SECRET,

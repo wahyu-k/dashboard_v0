@@ -3,11 +3,13 @@ import axios from 'axios'
 
 function UpdateBinds(props) {
   const [userId, setUserId] = useState('')
+  const [primDevId, setPrimDevId] = useState('')
   const [deviceId, setDeviceId] = useState('')
 
   useEffect(() => {
-    const { user_id, device_id } = props.data
+    const { user_id, primary_dev_id, device_id } = props.data
     setUserId(user_id)
+    setPrimDevId(primary_dev_id)
     setDeviceId(device_id)
   }, [props.data])
 
@@ -15,7 +17,7 @@ function UpdateBinds(props) {
     try {
       const response = await axios.put(
         `${process.env.REACT_APP_BASE_URL}/v1/binds`,
-        { user_id: userId, device_id: deviceId },
+        { user_id: userId, primary_dev_id: primDevId, device_id: deviceId },
       )
 
       if (response) {
@@ -27,14 +29,13 @@ function UpdateBinds(props) {
   }
 
   const deleteData = async () => {
-    console.log(userId)
     try {
       //TODO: WAITING AXIOS TO FIX DELETE METHOD PASSING BODY
       const response = await axios.request({
         method: 'delete',
         url: `${process.env.REACT_APP_BASE_URL}/v1/binds`,
         data: {
-          user_id: 2,
+          user_id: userId,
         },
       })
 
@@ -50,6 +51,12 @@ function UpdateBinds(props) {
   return (
     <tr>
       <td>{userId}</td>
+      <td>
+        <input
+          value={primDevId}
+          onChange={(e) => setPrimDevId(e.target.value)}
+        />
+      </td>
       <td>
         <input value={deviceId} onChange={(e) => setDeviceId(e.target.value)} />
       </td>

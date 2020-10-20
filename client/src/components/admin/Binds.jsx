@@ -65,6 +65,7 @@ function Binds() {
         <tbody>
           <tr>
             <th>User Id</th>
+            <th>Primary Device Id</th>
             <th>Device Id</th>
             <th>Edit</th>
           </tr>
@@ -75,6 +76,7 @@ function Binds() {
                 return (
                   <tr key={i}>
                     <td>{theBinds.user_id}</td>
+                    <td>{theBinds.primary_dev_id}</td>
                     <td>
                       <ul>
                         {theBinds.device_id.map((dev, a) => (

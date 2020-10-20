@@ -23,7 +23,6 @@ const ComparationApp = () => {
 
   return (
     <Fragment>
-      <h1>SIAB INDONESIA</h1>
       <h2>Input Perhitungan Biaya Air</h2>
       <h3>Masukkan Volume Air (m3)</h3>
       <input

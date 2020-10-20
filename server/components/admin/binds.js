@@ -9,11 +9,11 @@ const pool = require('../../config/db')
  */
 const binds = async (req, res) => {
   try {
-    const { user_id, device_id } = req.body
+    const { user_id, primary_dev_id, device_id } = req.body
     const device_id_list = JSON.parse('[' + device_id + ']')
     const response = await pool.query(
-      'INSERT INTO binds (user_id, device_id) VALUES ($1, $2) RETURNING *',
-      [user_id, device_id_list],
+      'INSERT INTO binds (user_id, primary_dev_id, device_id) VALUES ($1, $2, $3) RETURNING *',
+      [user_id, primary_dev_id, device_id_list],
     )
     res.send(response.rows)
   } catch (error) {
