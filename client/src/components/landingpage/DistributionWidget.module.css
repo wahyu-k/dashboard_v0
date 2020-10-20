@@ -1,0 +1,15 @@
+.allboks {
+  display: flex;
+  flex-direction: row;
+}
+
+.boks {
+  margin-top: 7px;
+  margin-left: 20px;
+}
+
+@media only screen and (max-width: 800px) {
+  .allboks {
+    flex-direction: column;
+  }
+}

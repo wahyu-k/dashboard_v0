@@ -73,6 +73,12 @@ CREATE TABLE bills(
   created_at BIGINT NOT NULL
 );
 
+CREATE TABLE dash(
+  id SERIAL PRIMARY KEY,
+  nominal REAL NOT NULL,
+  title VARCHAR (100) NOT NULL
+);
+
 -- DUMMY DATA
 
 -- LOGINS TABLE
