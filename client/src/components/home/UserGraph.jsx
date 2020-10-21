@@ -5,6 +5,8 @@ import {
   Line,
   LineChart,
   Tooltip,
+  XAxis,
+  YAxis,
 } from 'recharts'
 import { TablePagination } from '@material-ui/core'
 import axios from 'axios'
@@ -78,6 +80,8 @@ function UserGraph(props) {
         <Tooltip />
         <CartesianGrid stroke="#f5f5f5" />
         <Legend verticalAlign="top" height={36} />
+        <YAxis />
+        <XAxis dataKey="created_at" />
         <Line
           name="Debit (Liter)"
           type="monotone"
@@ -87,26 +91,28 @@ function UserGraph(props) {
         />
       </LineChart>
 
-      <button onClick={() => filter('day')}>Filter 1 hari</button>
-      <button onClick={() => filter('week')}>Filter 7 hari</button>
-      <button onClick={() => filter('month')}>Filter 30 hari</button>
-      <button onClick={() => filter('year')}>Filter 1 tahun</button>
-      <button onClick={() => filter()}>All Data</button>
+      <button onClick={() => filter('day')}>Hari</button>
+      <button onClick={() => filter('week')}>Minggu</button>
+      <button onClick={() => filter('month')}>Bulan</button>
+      <button onClick={() => filter('year')}>Tahun</button>
+      <button onClick={() => filter()}>Semua Data</button>
       <table>
         <tbody>
           <tr>
-            <th>Id</th>
-            <th>Debit</th>
-            <th>Dibuat pada Tanggal</th>
+            <th className={css.table_id}>Id</th>
+            <th className={css.th}>Debit</th>
+            <th className={css.th}>Dibuat pada Tanggal</th>
           </tr>
           {data &&
             data.local
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               .map((theGetSens, i) => (
                 <tr key={i}>
-                  <td>{theGetSens.id}</td>
-                  <td>{theGetSens.daily_flow}</td>
-                  <td>{epochToDate(theGetSens.created_at)}</td>
+                  <td className={css.td}>{theGetSens.id}</td>
+                  <td className={css.td}>{theGetSens.daily_flow}</td>
+                  <td className={css.td}>
+                    {epochToDate(theGetSens.created_at)}
+                  </td>
                 </tr>
               ))}
         </tbody>

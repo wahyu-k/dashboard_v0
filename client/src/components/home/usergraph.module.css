@@ -1,5 +1,6 @@
 .usergraph__container > h2 {
   font-size: 24px;
+  margin-top: 20px;
 
   color: #6599ae;
 }
@@ -9,4 +10,49 @@
   width: 62px;
   height: 0px;
   border: 2px solid #89c5cc;
+}
+
+.usergraph__container > button {
+  border-style: none;
+  border-radius: 10px;
+  background-color: Transparent;
+  margin-bottom: 20px;
+  text-align: center;
+  font-size: 16px;
+  cursor: pointer;
+
+  outline: none;
+}
+
+.usergraph__container > button:hover {
+  color: #01b1f7;
+}
+
+.usergraph__container > table {
+  background: #ffffff;
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+
+.table_id {
+  background: #c1dee2;
+  border: 1px solid black;
+  border-collapse: collapse;
+  text-align: center;
+  padding: 10px;
+}
+
+.th {
+  background: #c1dee2;
+  border: 1px solid black;
+  border-collapse: collapse;
+  text-align: center;
+  padding: 10px;
+}
+
+.td {
+  border: 1px solid black;
+  border-collapse: collapse;
+  text-align: center;
+  padding: 10px;
 }
