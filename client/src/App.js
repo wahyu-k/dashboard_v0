@@ -9,6 +9,7 @@ import {
 import ForgetPass from './components/login/ForgetPass'
 import Login from './components/Login'
 import Register from './components/login/Register'
+import Help from './components/home/Help'
 import ResetPass from './components/login/ResetPass'
 import Home from './components/Home'
 import NoMatch from './components/NoMatch'
@@ -229,12 +230,14 @@ function App(props) {
       </List>
       <Divider />
       <List>
-        <ListItem button>
-          <ListItemIcon>
-            <MenuBookOutlinedIcon />
-          </ListItemIcon>
-          <ListItemText primary="Panduan" />
-        </ListItem>
+        <Link to="/help" style={{ color: '#000' }}>
+          <ListItem button>
+            <ListItemIcon>
+              <MenuBookOutlinedIcon />
+            </ListItemIcon>
+            <ListItemText primary="Panduan" />
+          </ListItem>
+        </Link>
       </List>
     </div>
   )
@@ -441,7 +444,7 @@ function App(props) {
               {!isLogin ? (
                 <Redirect to="/" />
               ) : (
-                <SettingAccount onView={() => setMenuPos('Masuk Akun')} />
+                <SettingAccount onView={() => setMenuPos('Pengaturan Akun')} />
               )}
             </Route>
             <Route path="/register" exact>
@@ -455,6 +458,9 @@ function App(props) {
             </Route>
             <Route path="/logout" exact>
               <Logout />
+            </Route>
+            <Route path="/help" exact>
+              <Help onView={() => setMenuPos('Video Panduan')} />
             </Route>
             <Route path="*">
               <NoMatch onView={() => setMenuPos('Halaman Tidak Ditemukan')} />
