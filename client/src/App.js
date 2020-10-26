@@ -415,11 +415,7 @@ function App(props) {
                     } else {
                       if (isPremiumUser) {
                         return (
-                          <Home
-                            onView={() =>
-                              setMenuPos('Dashboard Siaga Air Bersih')
-                            }
-                          />
+                          <Home onView={() => setMenuPos('Dashboard SIAB')} />
                         )
                       } else {
                         if (isFreeUser) {

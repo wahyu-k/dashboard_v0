@@ -41,8 +41,6 @@ function UserSensor(props) {
             <p className={css.nominal}>{data && data.flow}</p>
           </div>
         </div>
-      </div>
-      <div className={css.allboks}>
         <div className={css.boks}>
           <img alt="uji" src={uji} />
           <div className={css.blueboks}>
