@@ -93,18 +93,21 @@
 }
 
 @media only screen and (max-width: 436px) {
-  .right__container {
+  .login__container > img {
     display: none;
   }
-
-  .backdrop {
+  .form {
     width: 100%;
-    height: 100%;
+    margin: 0;
+  }
+  .form > button {
+    margin: 0 auto;
+    margin-top: 30px;
+    margin-bottom: 17px;
   }
 
-  .login__container {
-    width: 100%;
-    height: 100%;
-    border-radius: 0;
+  .form > a {
+    margin: 0 auto;
+    margin-bottom: 7px;
   }
 }

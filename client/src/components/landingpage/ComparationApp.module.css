@@ -5,6 +5,14 @@
   margin-top: 40px;
 }
 
+.line {
+  margin-top: 5px;
+  width: 62px;
+  height: 0px;
+  border: 2px solid #89c5cc;
+  margin-bottom: 10px;
+}
+
 .comparation__container > h1 {
   font-size: 24px;
 
@@ -26,7 +34,7 @@
 }
 
 .wolf__container {
-  margin-top: 125px;
+  margin-top: 65px;
 }
 
 .wolfram__container {
@@ -56,6 +64,7 @@
 .flex__row {
   display: flex;
   flex-direction: row;
+  margin-top: 15px;
 }
 
 .flex__row > div > h2 {
@@ -86,8 +95,10 @@
   font-family: Poppins;
   font-style: normal;
   font-weight: 300;
-  font-size: 20px;
+  font-size: 24px;
   line-height: 19px;
+  font-weight: bold;
+  margin-top: 5px;
 
   color: #000000;
 }
@@ -114,8 +125,8 @@
 
 .land__container {
   align-items: flex-end;
-  text-align: right;
-  margin-left: 50px;
+  /* text-align: right; */
+  /* margin-left: 50px; */
 }
 
 .compar__img {
@@ -123,20 +134,21 @@
   width: 40%;
   opacity: 40%;
   z-index: -1;
+  margin-top: -70px;
   margin-left: 38%;
 }
 
-.earth__img {
+.icon__wolf__img {
   width: 50px;
   height: 50px;
+  margin-right: 7px;
 }
 
-.land__img {
-  width: 50px;
-  height: 50px;
-}
-
-.sea__img {
-  width: 50px;
-  height: 50px;
+@media only screen and (max-width: 400px) {
+  .wolfram__container {
+    margin-left: 0;
+  }
+  .input__container {
+    margin-left: 0;
+  }
 }

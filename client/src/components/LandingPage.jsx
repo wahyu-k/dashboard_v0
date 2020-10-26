@@ -21,7 +21,11 @@ function LandingPage(props) {
 
   return (
     <div className={css.landing__container}>
-      <Map data={data} />
+      <div className={css.maps__container}>
+        <h3>Lokasi Implementasi SIAB</h3>
+        <div className={css.line}></div>
+        <Map data={data} />
+      </div>
       <DistributionWidget />
       <ComparationApp />
     </div>

@@ -307,45 +307,47 @@ function App(props) {
             <Typography variant="h6" className={classes.title}>
               {menuPos}
             </Typography>
-            <div style={{ marginLeft: 0, position: 'relative' }}>
-              <IconButton
-                aria-label="account of current user"
-                aria-controls="menu-appbar"
-                aria-haspopup="true"
-                onClick={handleMenu}
-                color="inherit"
-              >
-                <AccountCircle />
-              </IconButton>
-              <Menu
-                id="menu-appbar"
-                anchorEl={anchorEl}
-                anchorOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right',
-                }}
-                keepMounted
-                transformOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right',
-                }}
-                open={open}
-                onClose={handleClose}
-              >
-                <Link to="/account" style={{ color: '#000' }}>
-                  <MenuItem onClick={handleClose}>Akunku</MenuItem>
-                </Link>
-                <Link to="/logout" style={{ color: '#000' }}>
-                  <MenuItem
-                    onClick={() => {
-                      handleClose()
-                    }}
-                  >
-                    Keluar Akun
-                  </MenuItem>
-                </Link>
-              </Menu>
-            </div>
+            {isLogin && (
+              <div style={{ marginLeft: 0, position: 'relative' }}>
+                <IconButton
+                  aria-label="account of current user"
+                  aria-controls="menu-appbar"
+                  aria-haspopup="true"
+                  onClick={handleMenu}
+                  color="inherit"
+                >
+                  <AccountCircle />
+                </IconButton>
+                <Menu
+                  id="menu-appbar"
+                  anchorEl={anchorEl}
+                  anchorOrigin={{
+                    vertical: 'top',
+                    horizontal: 'right',
+                  }}
+                  keepMounted
+                  transformOrigin={{
+                    vertical: 'top',
+                    horizontal: 'right',
+                  }}
+                  open={open}
+                  onClose={handleClose}
+                >
+                  <Link to="/account" style={{ color: '#000' }}>
+                    <MenuItem onClick={handleClose}>Akunku</MenuItem>
+                  </Link>
+                  <Link to="/logout" style={{ color: '#000' }}>
+                    <MenuItem
+                      onClick={() => {
+                        handleClose()
+                      }}
+                    >
+                      Keluar Akun
+                    </MenuItem>
+                  </Link>
+                </Menu>
+              </div>
+            )}
           </Toolbar>
         </AppBar>
         <nav className={classes.drawer} aria-label="mailbox folders">
@@ -388,9 +390,7 @@ function App(props) {
                 if (!isLogin) {
                   return (
                     <LandingPage
-                      onView={() =>
-                        setMenuPos('Selamat Datang di SIAB Indonesia')
-                      }
+                      onView={() => setMenuPos('Siaga Air Bersih Indonesia')}
                     />
                   )
                   // return <FreeUser  />
