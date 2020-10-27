@@ -12,36 +12,36 @@ function DistributionWidget() {
     <div className={css.allboks}>
       <div className={css.boks}>
         <LandingPageWidget
-          text="Water Supply Working"
-          nominal="259"
+          text="Alat Terpasang"
+          nominal="4"
           srcImg={handwash}
         />
       </div>
       <div className={css.boks}>
         <LandingPageWidget
-          text="Total Litre Dispensed"
+          text="Total Liter Air SIAB"
           nominal="29389"
           srcImg={crude}
         />
       </div>
       <div className={css.boks}>
         <LandingPageWidget
-          text="Total People Served"
+          text="Total KK Pengguna SIAB"
           nominal="1816"
           srcImg={like}
         />
       </div>
       <div className={css.boks}>
         <LandingPageWidget
-          text="Dispensed Working"
-          nominal="96%"
+          text="Alat Beroperasi"
+          nominal="100%"
           srcImg={settings}
         />
       </div>
       <div className={css.boks}>
         <LandingPageWidget
-          text="Dispensers in Service"
-          nominal="1293"
+          text="Dalam Pemeliharaan"
+          nominal="0"
           srcImg={wrench}
         />
       </div>

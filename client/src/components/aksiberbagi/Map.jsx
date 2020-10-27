@@ -10,8 +10,10 @@ function Map({ data }) {
   const [selected, setSelected] = useState(null)
 
   const mapContainerStyle = {
-    width: '70%',
+    width: '100%',
     height: '50vh',
+    borderRadius: '25px',
+    overflow: 'hidden',
   }
 
   const center = {
