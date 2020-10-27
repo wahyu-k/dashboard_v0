@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import axios from 'axios'
+import css from './UpdateUsername.module.css'
 
 function UpdateUsername() {
   const [newUname, setNewUname] = useState('')
@@ -32,18 +33,22 @@ function UpdateUsername() {
   }
 
   return (
-    <div>
+    <div className={css.update_username_container}>
       <h2>Update Username</h2>
       <form onSubmit={(event) => submitHandler(event)}>
         <input
+          className={css.input}
           placeholder="New Username"
           onChange={(event) => setNewUname(event.target.value)}
         />
         <input
+          className={css.input}
           placeholder="Confirm Your Password"
           onChange={(event) => setPassword(event.target.value)}
         />
-        <button type="submit">Update Username</button>
+        <button className={css.button} type="submit">
+          Update Username
+        </button>
       </form>
     </div>
   )

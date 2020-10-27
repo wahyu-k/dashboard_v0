@@ -10,7 +10,6 @@ function SettingAccount(props) {
 
   return (
     <div>
-      Pengaturan Akun
       <UpdateUsername />
       <UpdatePassword />
       <UpdatePersonalData />

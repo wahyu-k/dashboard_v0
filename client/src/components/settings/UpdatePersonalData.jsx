@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios'
+import css from './UpdatePersonal.module.css'
 
 export class UpdatePersonalData extends Component {
   constructor(props) {
@@ -71,11 +72,12 @@ export class UpdatePersonalData extends Component {
 
   render() {
     return (
-      <div>
+      <div className={css.update_personal_container}>
         <h2>Update Personal Data</h2>
         <form onSubmit={(event) => this.submitHandler(event)}>
           <label>First Name</label>
           <input
+            className={css.input}
             value={this.state.first_name || ''}
             onChange={(event) =>
               this.setState({
@@ -86,6 +88,7 @@ export class UpdatePersonalData extends Component {
           <br />
           <label>Last Name</label>
           <input
+            className={css.input}
             value={this.state.last_name || ''}
             onChange={(event) =>
               this.setState({
@@ -96,6 +99,7 @@ export class UpdatePersonalData extends Component {
           <br />
           <label>Date of Birth</label>
           <input
+            className={css.input}
             value={this.state.dob || ''}
             type="date"
             onChange={(event) =>
@@ -107,6 +111,7 @@ export class UpdatePersonalData extends Component {
           <br />
           <label>Region</label>
           <input
+            className={css.input}
             value={this.state.region || ''}
             onChange={(event) =>
               this.setState({
@@ -117,6 +122,7 @@ export class UpdatePersonalData extends Component {
           <br />
           <label>Province</label>
           <input
+            className={css.input}
             value={this.state.prov || ''}
             onChange={(event) =>
               this.setState({
@@ -124,7 +130,9 @@ export class UpdatePersonalData extends Component {
               })
             }
           />
-          <button type="submit">Update</button>
+          <button className={css.button} type="submit">
+            Update
+          </button>
         </form>
       </div>
     )
