@@ -4,12 +4,16 @@ import {
   Legend,
   Line,
   LineChart,
+  ResponsiveContainer,
   Tooltip,
+  XAxis,
+  YAxis,
 } from 'recharts'
 import { TablePagination } from '@material-ui/core'
 import axios from 'axios'
 import css from './usergraph.module.css'
 import epochToDate from '../../helper/epochToDate'
+import { DataGrid } from '@material-ui/data-grid'
 
 function UserGraph(props) {
   const [data, setData] = useState(null)
@@ -60,57 +64,78 @@ function UserGraph(props) {
 
   useEffect(() => {
     setData(props.data)
+    console.log('data', props.data)
   }, [props.data])
+
+  const columns = [
+    { field: 'id', headerName: 'ID', width: 70 },
+    { field: 'daily_flow', headerName: 'Debit Harian', width: 130 },
+    { field: 'created_at', headerName: 'Waktu', width: 130 },
+  ]
 
   return (
     <div className={css.usergraph__container}>
       <h2>Grafik Penggunaan Air Anda</h2>
       <div className={css.line}></div>
-      <LineChart
-        width={1000}
-        height={400}
-        data={
-          data &&
-          data.local.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-        }
-        margin={{ top: 5, right: 20, left: 10, bottom: 5 }}
-      >
-        <Tooltip />
-        <CartesianGrid stroke="#f5f5f5" />
-        <Legend verticalAlign="top" height={36} />
-        <Line
-          name="Debit (Liter)"
-          type="monotone"
-          dataKey="daily_flow"
-          stroke="#382"
-          yAxisId={0}
-        />
-      </LineChart>
+      <ResponsiveContainer width="99%" height={300}>
+        <LineChart
+          data={
+            data &&
+            data.local.slice(
+              page * rowsPerPage,
+              page * rowsPerPage + rowsPerPage,
+            )
+          }
+          margin={{ top: 5, right: 20, left: 10, bottom: 5 }}
+        >
+          <Tooltip />
+          <CartesianGrid stroke="#f5f5f5" />
+          <Legend verticalAlign="top" height={36} />
+          <YAxis />
+          <XAxis dataKey="created_at" />
+          <Line
+            name="Debit (Liter)"
+            type="monotone"
+            dataKey="daily_flow"
+            stroke="#382"
+            yAxisId={0}
+          />
+        </LineChart>
+      </ResponsiveContainer>
 
-      <button onClick={() => filter('day')}>Filter 1 hari</button>
-      <button onClick={() => filter('week')}>Filter 7 hari</button>
-      <button onClick={() => filter('month')}>Filter 30 hari</button>
-      <button onClick={() => filter('year')}>Filter 1 tahun</button>
-      <button onClick={() => filter()}>All Data</button>
-      <table>
+      <button onClick={() => filter('day')}>Hari</button>
+      <button onClick={() => filter('week')}>Minggu</button>
+      <button onClick={() => filter('month')}>Bulan</button>
+      <button onClick={() => filter('year')}>Tahun</button>
+      <button onClick={() => filter()}>Semua Data</button>
+      {/* <table>
         <tbody>
           <tr>
-            <th>Id</th>
-            <th>Debit</th>
-            <th>Dibuat pada Tanggal</th>
+            <th className={css.table_id}>Id</th>
+            <th className={css.th}>Debit</th>
+            <th className={css.th}>Dibuat pada Tanggal</th>
           </tr>
           {data &&
             data.local
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               .map((theGetSens, i) => (
                 <tr key={i}>
-                  <td>{theGetSens.id}</td>
-                  <td>{theGetSens.daily_flow}</td>
-                  <td>{epochToDate(theGetSens.created_at)}</td>
+                  <td className={css.td}>{theGetSens.id}</td>
+                  <td className={css.td}>{theGetSens.daily_flow}</td>
+                  <td className={css.td}>
+                    {epochToDate(theGetSens.created_at)}
+                  </td>
                 </tr>
               ))}
         </tbody>
-      </table>
+      </table> */}
+
+      {data && (
+        <div style={{ height: 400, width: '100%' }}>
+          <DataGrid rows={data.local} columns={columns} pageSize={5} />
+        </div>
+      )}
+
       <TablePagination
         component="div"
         count={data === null ? 0 : data.local.length}
