@@ -4,7 +4,7 @@
 }
 
 .usersensor__container > h2 {
-  font-size: 24px;
+  font-size: 22px;
   margin-top: 20px;
 
   color: #6599ae;
@@ -28,22 +28,23 @@
 .allboks {
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
 }
 
 .boks {
   background: #ffffff;
   display: flex;
-  flex-direction: column;
   margin-left: 30px;
   margin-top: 10px;
 }
 
 .blueboks {
   margin: 15px 0 0 20px;
-  width: 100%;
-  height: 100%;
   background: rgba(236, 245, 245, 0.97);
   align-items: center;
+  padding-left: 10px;
+  padding-right: 10px;
+  width: auto;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 10px;
 }
@@ -52,10 +53,9 @@
   font-family: Poppins;
   font-style: normal;
   font-weight: bold;
-  font-size: 18px;
+  font-size: 16px;
   line-height: 27px;
   margin-top: 5px;
-  margin-left: 20px;
 
   color: #000000;
 }
@@ -64,9 +64,9 @@
   font-family: Poppins;
   font-style: normal;
   font-weight: bold;
-  font-size: 18px;
+  font-size: 16px;
   line-height: 27px;
-  margin: 5px 0 20px 10px;
+  margin: 5px 0 20px 0;
 
   color: #000000;
 }
@@ -75,7 +75,7 @@
   font-family: Poppins;
   font-style: normal;
   font-weight: 600;
-  font-size: 48px;
+  font-size: 40px;
   line-height: 72px;
   margin-top: -10px;
   text-align: center;
@@ -101,4 +101,30 @@
   margin-right: 10px;
 
   color: #000000;
+}
+
+@media (max-width: 1040px) {
+  .allboks {
+    display: flex;
+    width: 100%;
+    flex: 7;
+  }
+}
+
+@media (max-width: 875px) {
+  .allboks {
+    display: flex;
+    width: 100%;
+  }
+}
+
+@media (max-width: 440px) {
+  .allboks {
+    display: flex;
+    width: 90%;
+  }
+  .boks {
+    width: 100%;
+    margin-left: 0px;
+  }
 }
