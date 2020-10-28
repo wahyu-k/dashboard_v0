@@ -1,0 +1,21 @@
+.setting__container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.setting__container > div {
+  flex: 4;
+}
+
+@media (max-width: 1024px) {
+  .setting__container > div {
+    flex: 50%;
+  }
+}
+
+@media only screen and (max-width: 550px) {
+  .setting__container {
+    flex-direction: column;
+  }
+}

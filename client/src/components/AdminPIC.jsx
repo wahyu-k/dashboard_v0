@@ -16,6 +16,7 @@ import TextField from '@material-ui/core/TextField'
 import { TablePagination } from '@material-ui/core'
 import { DataGrid } from '@material-ui/data-grid'
 import css from './AdminPIC.module.css'
+import { ResponsiveContainer } from 'recharts'
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -267,14 +268,16 @@ function AdminPIC(props) {
 
         <TablePagination
           component="div"
-          count={filtered === null ? 0 : filtered.length}
+          count={
+            filtered && filtered === null ? 0 : filtered && filtered.length
+          }
           page={page}
           onChangePage={handleChangePage}
           rowsPerPage={rowsPerPage}
           onChangeRowsPerPage={handleChangeRowsPerPage}
         />
 
-        <table>
+        {/* <table>
           <tbody>
             <tr>
               <td>No</td>
@@ -301,7 +304,7 @@ function AdminPIC(props) {
                 )
               })}
           </tbody>
-        </table>
+        </table> */}
       </div>
     </div>
   )

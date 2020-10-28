@@ -39,9 +39,11 @@
   flex-direction: row;
   flex-wrap: wrap;
 }
+
 .tagihan__widget > div {
   flex: 3;
   margin-left: 10px;
+  margin-top: 20px;
 }
 
 .tagihan__widget > div > h4 {
@@ -60,5 +62,10 @@
   width: 62px;
   height: 0px;
   border: 2px solid #eeeeee;
-  margin-bottom: 10px;
+}
+
+@media (max-width: 420px) {
+  .tagihan__widget > div {
+    flex: 40%;
+  }
 }

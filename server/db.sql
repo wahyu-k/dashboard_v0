@@ -113,7 +113,6 @@ INSERT INTO calcs(x, y, z, created_at, modified_at) VALUES(0.5, 0.6, 0.7, ROUND(
 INSERT INTO prices(price, device_id_list, created_at, modified_at) VALUES(1100, ARRAY[1, 2, 3], ROUND(EXTRACT(EPOCH FROM NOW()) * 1000), ROUND(EXTRACT(EPOCH FROM NOW())) * 1000);
 
 -- BILLS TABLE
-INSERT INTO bills(device_id, daily_flow, daily_bill, payment, created_at) VALUES(2, 2, 2200, 0, ROUND(EXTRACT(EPOCH FROM NOW()) * 1000));
 INSERT INTO bills(device_id, daily_flow, daily_bill, payment, created_at) VALUES(2, 1, 1100, 0, ROUND(EXTRACT(EPOCH FROM NOW()) * 1000));
 INSERT INTO bills(device_id, daily_flow, daily_bill, payment, created_at) VALUES(2, 0, 0, 1000, ROUND(EXTRACT(EPOCH FROM NOW()) * 1000));
 INSERT INTO bills(device_id, daily_flow, daily_bill, payment, created_at) VALUES(3, 2.5, 2750, 0, ROUND(EXTRACT(EPOCH FROM NOW()) * 1000));

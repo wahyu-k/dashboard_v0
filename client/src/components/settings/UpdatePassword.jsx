@@ -4,6 +4,9 @@ import { useState } from 'react'
 import css from './UpdatePassword.module.css'
 import TextField from '@material-ui/core/TextField'
 import * as Yup from 'yup'
+import { makeStyles } from '@material-ui/core/styles'
+import Button from '@material-ui/core/Button'
+import VpnKeyIcon from '@material-ui/icons/VpnKey'
 import { useFormik } from 'formik'
 
 function UpdatePassword() {
@@ -32,6 +35,14 @@ function UpdatePassword() {
       // console.error(error.response.data)
     }
   }
+
+  const useStyles = makeStyles((theme) => ({
+    button: {
+      margin: theme.spacing(1),
+    },
+  }))
+
+  const classes = useStyles()
 
   const formik = useFormik({
     initialValues: {
@@ -67,7 +78,7 @@ function UpdatePassword() {
         <div className={css.current__pass__container}>
           <TextField
             style={{
-              width: '100%',
+              width: '95%',
             }}
             id="currentPass"
             type="password"
@@ -83,10 +94,10 @@ function UpdatePassword() {
         <div className={css.current__pass__container}>
           <TextField
             style={{
-              width: '100%',
+              width: '95%',
             }}
             id="newPass"
-            label="Masukan Password Lama"
+            label="Masukan Password Baru"
             helperText={formik.errors.newPass}
             error={formik.errors.newPass ? true : false}
             onChange={formik.handleChange}
@@ -94,9 +105,19 @@ function UpdatePassword() {
             value={formik.values.newPass}
           />
         </div>
-        <button className={css.button} type="submit" disabled={isLoading}>
-          Update Password
-        </button>
+        <div align="center">
+          <Button
+            variant="contained"
+            color="primary"
+            className={classes.button}
+            startIcon={<VpnKeyIcon />}
+          >
+            Update Password
+          </Button>
+          {/* <button className={css.button} type="submit" disabled={isLoading}>
+            Update Password
+          </button> */}
+        </div>
       </form>
     </div>
   )

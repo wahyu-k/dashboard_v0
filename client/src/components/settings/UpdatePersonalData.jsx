@@ -1,5 +1,9 @@
 import React, { Component } from 'react'
 import axios from 'axios'
+import TextField from '@material-ui/core/TextField'
+import { makeStyles } from '@material-ui/core/styles'
+import Button from '@material-ui/core/Button'
+import AccountCircleIcon from '@material-ui/icons/AccountCircle'
 import css from './UpdatePersonal.module.css'
 
 export class UpdatePersonalData extends Component {
@@ -21,6 +25,13 @@ export class UpdatePersonalData extends Component {
 
   fetchData = async () => {
     const token = await localStorage.getItem('_s_t')
+
+    // const useStyles = makeStyles((theme) => ({
+    //   button: {
+    //     margin: theme.spacing(1),
+    //   },
+    // }))
+    // const classes = useStyles()
 
     try {
       const response = await axios.post(
@@ -62,6 +73,28 @@ export class UpdatePersonalData extends Component {
       }
       const response = await axios.put('http://localhost:5000/v1/users', data)
 
+      // const formik = useFormik({
+      //   initialValues: {
+      //     currentPass: '',
+      //     newPass: '',
+      //   },
+      //   validationSchema: Yup.object({
+      //     currentPass: Yup.string()
+      //       .min(8, 'kata sandi lebih dari atau sama dengan 8 karakter')
+      //       .required('kata sandi harus diisi'),
+      //     newPass: Yup.string()
+      //       .min(8, 'kata sandi lebih dari atau sama dengan 8 karakter')
+      //       .required('kata sandi harus diisi'),
+      //   }),
+      //   validateOnChange: false,
+      //   validateOnBlur: false,
+      //   validateOnMount: false,
+      //   enableReinitialize: true,
+      //   onSubmit: async (values) => {
+      //     updatePasswordHandler(values)
+      //   },
+      // })
+
       if (response) {
         console.log(response.data)
       }
@@ -73,66 +106,93 @@ export class UpdatePersonalData extends Component {
   render() {
     return (
       <div className={css.update_personal_container}>
-        <h2>Update Personal Data</h2>
+        <h3>Update Personal Data</h3>
+        <div className={css.line}></div>
         <form onSubmit={(event) => this.submitHandler(event)}>
-          <label>First Name</label>
-          <input
-            className={css.input}
-            value={this.state.first_name || ''}
-            onChange={(event) =>
-              this.setState({
-                first_name: event.target.value,
-              })
-            }
-          />
-          <br />
-          <label>Last Name</label>
-          <input
-            className={css.input}
-            value={this.state.last_name || ''}
-            onChange={(event) =>
-              this.setState({
-                last_name: event.target.value,
-              })
-            }
-          />
-          <br />
-          <label>Date of Birth</label>
-          <input
-            className={css.input}
-            value={this.state.dob || ''}
-            type="date"
-            onChange={(event) =>
-              this.setState({
-                dob: event.target.value,
-              })
-            }
-          />
-          <br />
-          <label>Region</label>
-          <input
-            className={css.input}
-            value={this.state.region || ''}
-            onChange={(event) =>
-              this.setState({
-                region: event.target.value,
-              })
-            }
-          />
-          <br />
-          <label>Province</label>
-          <input
-            className={css.input}
-            value={this.state.prov || ''}
-            onChange={(event) =>
-              this.setState({
-                prov: event.target.value,
-              })
-            }
-          />
-          <button className={css.button} type="submit">
-            Update
-          </button>
+          <div className={css.form__container}>
+            <TextField
+              style={{
+                width: '95%',
+              }}
+              label="First Name"
+              value={this.state.first_name || ''}
+              onChange={(event) =>
+                this.setState({
+                  first_name: event.target.value,
+                })
+              }
+            />
+          </div>
+          <div className={css.form__container}>
+            <TextField
+              style={{
+                width: '95%',
+              }}
+              label="Last Name"
+              value={this.state.last_name || ''}
+              onChange={(event) =>
+                this.setState({
+                  last_name: event.target.value,
+                })
+              }
+            />
+          </div>
+          <div className={css.form__container}>
+            <TextField
+              style={{
+                width: '95%',
+              }}
+              label="Tanggal Lahir"
+              value={this.state.dob || ''}
+              type="date"
+              InputLabelProps={{
+                shrink: true,
+              }}
+              onChange={(event) =>
+                this.setState({
+                  dob: event.target.value,
+                })
+              }
+            />
+          </div>
+          <div className={css.form__container}>
+            <TextField
+              style={{
+                width: '95%',
+              }}
+              label="Region"
+              value={this.state.region || ''}
+              onChange={(event) =>
+                this.setState({
+                  region: event.target.value,
+                })
+              }
+            />
+          </div>
+          <div className={css.form__container}>
+            <TextField
+              style={{
+                width: '95%',
+              }}
+              label="Province"
+              value={this.state.prov || ''}
+              onChange={(event) =>
+                this.setState({
+                  prov: event.target.value,
+                })
+              }
+            />
+          </div>
+          <div align="center">
+            <Button
+              variant="contained"
+              color="primary"
+              // className={classes.button}
+              startIcon={<AccountCircleIcon />}
+            >
+              Update Personal Data
+            </Button>
+          </div>
         </form>
       </div>
     )
