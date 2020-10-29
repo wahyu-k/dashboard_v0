@@ -26,8 +26,8 @@ app.post('/v1/reset_password', loginApi.resetPass)
 
 const settingApi = require('./components/settings/settingApi')
 
-app.post('/v1/update_password', settingApi.updatePass)
-app.post('/v1/update_username', settingApi.updateUname)
+app.post('/v1/update_password',tokenValidator.start, settingApi.updatePass)
+app.post('/v1/update_username', tokenValidator.start, settingApi.updateUname)
 
 const adminApi = require('./components/admin/adminApi')
 
@@ -51,8 +51,8 @@ app.post('/v1/check_token', helperApi.checkToken)
 
 const userApi = require('./components/user/userApi')
 
-app.post('/v1/users', userApi.getPersonalData)
-app.put('/v1/users', userApi.updatePersData)
+app.get('/v1/users', tokenValidator.start, userApi.getPersonalData)
+app.put('/v1/users', tokenValidator.start, userApi.updatePersData)
 app.post('/v1/users/sensors', userApi.getSensors)
 app.get('/v1/users/binds', userApi.getBinds)
 app.get('/v1/users/sensors', tokenValidator.start, userApi.getBindSensor)

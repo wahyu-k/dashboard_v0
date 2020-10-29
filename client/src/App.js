@@ -19,7 +19,8 @@ import loading_siab from './img/loading_siab.png'
 import css from './app.module.css'
 import jwt from 'jsonwebtoken'
 import AdminPIC from './components/AdminPIC'
-import FreeUser from './components/FreeUser'
+import ExitToAppIcon from '@material-ui/icons/ExitToApp'
+// import FreeUser from './components/FreeUser'
 import {
   AppBar,
   Divider,
@@ -48,7 +49,7 @@ import siab_logo from './img/login/logo_siab.png'
 import LandingPage from './components/LandingPage'
 import UserWidget from './components/user/UserWidget'
 import SettingAccount from './components/admin/SettingAccount'
-import CreditCardOutlinedIcon from '@material-ui/icons/CreditCardOutlined'
+// import CreditCardOutlinedIcon from '@material-ui/icons/CreditCardOutlined'
 import Logout from './components/Logout'
 
 const drawerWidth = 230
@@ -259,14 +260,14 @@ function App(props) {
             <ListItemText primary="Dashboard" />
           </ListItem>
         </Link>
-        <Link to="/payment" style={{ color: '#000' }}>
+        {/* <Link to="/payment" style={{ color: '#000' }}>
           <ListItem button>
             <ListItemIcon>
               <CreditCardOutlinedIcon />
             </ListItemIcon>
             <ListItemText primary="Keuangan" />
           </ListItem>
-        </Link>
+        </Link> */}
       </List>
       <Divider />
       <List>
@@ -337,7 +338,10 @@ function App(props) {
                   onClose={handleClose}
                 >
                   <Link to="/account" style={{ color: '#000' }}>
-                    <MenuItem onClick={handleClose}>Akunku</MenuItem>
+                    <MenuItem onClick={handleClose}>
+                      <AccountCircle style={{ marginRight: '7px' }} />
+                      Akunku
+                    </MenuItem>
                   </Link>
                   <Link to="/logout" style={{ color: '#000' }}>
                     <MenuItem
@@ -345,6 +349,7 @@ function App(props) {
                         handleClose()
                       }}
                     >
+                      <ExitToAppIcon style={{ marginRight: '7px' }} />
                       Keluar Akun
                     </MenuItem>
                   </Link>
@@ -393,7 +398,7 @@ function App(props) {
                 if (!isLogin) {
                   return (
                     <LandingPage
-                      onView={() => setMenuPos('Siaga Air Bersih Indonesia')}
+                      onView={() => setMenuPos('Siaga Air Bersih')}
                     />
                   )
                   // return <FreeUser  />
@@ -420,7 +425,9 @@ function App(props) {
                       } else {
                         if (isFreeUser) {
                           return (
-                            <FreeUser onView={() => setMenuPos('Dashboard')} />
+                            <LandingPage
+                              onView={() => setMenuPos('Siaga Air Bersih')}
+                            />
                           )
                         }
                       }

@@ -28,7 +28,7 @@ const ComparationApp = () => {
 
   return (
     <div className={css.comparation__container}>
-      <h3>Input Perhitungan Biaya Air</h3>
+      <h3>Hitung Biaya Airmu</h3>
       <div className={css.line}></div>
       <div className={css.input__container}>
         <div className={css.flex__row}>

@@ -6,6 +6,8 @@ import {
   useLoadScript,
 } from '@react-google-maps/api'
 
+const libraries = ['places']
+
 function Map({ data }) {
   const [selected, setSelected] = useState(null)
 
@@ -17,19 +19,17 @@ function Map({ data }) {
   }
 
   const center = {
-    lat: 12.12,
-    lng: 13.13,
+    lat: -7.560618,
+    lng: 110.788655,
   }
-
-  const libraries = ['places']
 
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: process.env.REACT_APP_MAP_API,
     libraries,
   })
 
-  if (loadError) return 'Error'
-  if (!isLoaded) return 'Loading...'
+  if (loadError) return 'Terjadi kesalahan saat mengunduh peta!'
+  if (!isLoaded) return 'Peta sedang dimuat...'
 
   return (
     <GoogleMap mapContainerStyle={mapContainerStyle} zoom={10} center={center}>
