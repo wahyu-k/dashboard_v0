@@ -1,5 +1,9 @@
 import React, { Component } from 'react'
 import axios from 'axios'
+import TextField from '@material-ui/core/TextField'
+import Button from '@material-ui/core/Button'
+import AccountCircleIcon from '@material-ui/icons/AccountCircle'
+import css from './UpdatePersonal.module.css'
 
 export class UpdatePersonalData extends Component {
   constructor(props) {
@@ -71,60 +75,94 @@ export class UpdatePersonalData extends Component {
 
   render() {
     return (
-      <div>
-        <h2>Update Personal Data</h2>
+      <div className={css.update_personal_container}>
+        <h3>Update Personal Data</h3>
+        <div className={css.line}></div>
         <form onSubmit={(event) => this.submitHandler(event)}>
-          <label>First Name</label>
-          <input
-            value={this.state.first_name || ''}
-            onChange={(event) =>
-              this.setState({
-                first_name: event.target.value,
-              })
-            }
-          />
-          <br />
-          <label>Last Name</label>
-          <input
-            value={this.state.last_name || ''}
-            onChange={(event) =>
-              this.setState({
-                last_name: event.target.value,
-              })
-            }
-          />
-          <br />
-          <label>Date of Birth</label>
-          <input
-            value={this.state.dob || ''}
-            type="date"
-            onChange={(event) =>
-              this.setState({
-                dob: event.target.value,
-              })
-            }
-          />
-          <br />
-          <label>Region</label>
-          <input
-            value={this.state.region || ''}
-            onChange={(event) =>
-              this.setState({
-                region: event.target.value,
-              })
-            }
-          />
-          <br />
-          <label>Province</label>
-          <input
-            value={this.state.prov || ''}
-            onChange={(event) =>
-              this.setState({
-                prov: event.target.value,
-              })
-            }
-          />
-          <button type="submit">Update</button>
+          <div className={css.form__container}>
+            <TextField
+              style={{
+                width: '95%',
+              }}
+              label="First Name"
+              value={this.state.first_name || ''}
+              onChange={(event) =>
+                this.setState({
+                  first_name: event.target.value,
+                })
+              }
+            />
+          </div>
+          <div className={css.form__container}>
+            <TextField
+              style={{
+                width: '95%',
+              }}
+              label="Last Name"
+              value={this.state.last_name || ''}
+              onChange={(event) =>
+                this.setState({
+                  last_name: event.target.value,
+                })
+              }
+            />
+          </div>
+          <div className={css.form__container}>
+            <TextField
+              style={{
+                width: '95%',
+              }}
+              label="Tanggal Lahir"
+              value={this.state.dob || ''}
+              type="date"
+              InputLabelProps={{
+                shrink: true,
+              }}
+              onChange={(event) =>
+                this.setState({
+                  dob: event.target.value,
+                })
+              }
+            />
+          </div>
+          <div className={css.form__container}>
+            <TextField
+              style={{
+                width: '95%',
+              }}
+              label="Region"
+              value={this.state.region || ''}
+              onChange={(event) =>
+                this.setState({
+                  region: event.target.value,
+                })
+              }
+            />
+          </div>
+          <div className={css.form__container}>
+            <TextField
+              style={{
+                width: '95%',
+              }}
+              label="Province"
+              value={this.state.prov || ''}
+              onChange={(event) =>
+                this.setState({
+                  prov: event.target.value,
+                })
+              }
+            />
+          </div>
+          <div align="center">
+            <Button
+              variant="contained"
+              color="primary"
+              type="submit"
+              startIcon={<AccountCircleIcon />}
+            >
+              Update Personal Data
+            </Button>
+          </div>
         </form>
       </div>
     )

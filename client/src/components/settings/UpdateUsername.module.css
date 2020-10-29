@@ -1,0 +1,32 @@
+.update__username__container {
+  display: flex;
+  flex-direction: column;
+}
+
+.update__username__container > h3 {
+  font-size: 22px;
+}
+
+.form__container {
+  display: flex;
+  flex-direction: column;
+}
+
+.input {
+  margin-bottom: 10px;
+}
+
+.line {
+  margin-top: 5px;
+  margin-bottom: 10px;
+  width: 62px;
+  height: 0px;
+  border: 2px solid #89c5cc;
+}
+
+@media (max-width: 1024px) {
+  .form__container {
+    display: flex;
+    width: 100%;
+  }
+}

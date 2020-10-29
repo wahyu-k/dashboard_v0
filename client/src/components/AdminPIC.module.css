@@ -1,0 +1,71 @@
+.pic__container {
+  display: flex;
+  flex-direction: column;
+}
+
+.pic__container > h2 {
+  font-size: 22px;
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: bold;
+  line-height: 36px;
+
+  color: #6599ae;
+}
+
+.line {
+  margin-top: 5px;
+  width: 62px;
+  height: 0px;
+  border: 2px solid #89c5cc;
+  margin-bottom: 10px;
+}
+
+.pembayaran__container {
+  display: flex;
+  flex-direction: row;
+}
+
+.button__container {
+  margin: 14px 0 0 20px;
+}
+
+.tagihan__container {
+  margin-top: 10px;
+}
+
+.tagihan__widget {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.tagihan__widget > div {
+  flex: 3;
+  margin-left: 10px;
+  margin-top: 20px;
+}
+
+.tagihan__widget > div > h4 {
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 40px;
+  line-height: 108px;
+  margin: 0 auto;
+
+  color: #2fdf84;
+}
+
+.grey__line {
+  margin-top: 5px;
+  width: 62px;
+  height: 0px;
+  border: 2px solid #eeeeee;
+}
+
+@media (max-width: 420px) {
+  .tagihan__widget > div {
+    flex: 40%;
+  }
+}
