@@ -12,7 +12,6 @@ import {
 import { TablePagination } from '@material-ui/core'
 import axios from 'axios'
 import css from './usergraph.module.css'
-import epochToDate from '../../helper/epochToDate'
 import { DataGrid } from '@material-ui/data-grid'
 
 function UserGraph(props) {

@@ -32,7 +32,6 @@ function UpdatePassword() {
       }
     } catch (error) {
       setIsLoading(false)
-      // console.error(error.response.data)
     }
   }
 
@@ -111,6 +110,8 @@ function UpdatePassword() {
             color="primary"
             className={classes.button}
             startIcon={<VpnKeyIcon />}
+            type="submit"
+            disabled={isLoading}
           >
             Update Password
           </Button>

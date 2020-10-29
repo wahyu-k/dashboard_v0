@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import TextField from '@material-ui/core/TextField'
-import { makeStyles } from '@material-ui/core/styles'
 import Button from '@material-ui/core/Button'
 import AccountCircleIcon from '@material-ui/icons/AccountCircle'
 import css from './UpdatePersonal.module.css'
@@ -25,13 +24,6 @@ export class UpdatePersonalData extends Component {
 
   fetchData = async () => {
     const token = await localStorage.getItem('_s_t')
-
-    // const useStyles = makeStyles((theme) => ({
-    //   button: {
-    //     margin: theme.spacing(1),
-    //   },
-    // }))
-    // const classes = useStyles()
 
     try {
       const response = await axios.post(
@@ -72,28 +64,6 @@ export class UpdatePersonalData extends Component {
         region,
       }
       const response = await axios.put('http://localhost:5000/v1/users', data)
-
-      // const formik = useFormik({
-      //   initialValues: {
-      //     currentPass: '',
-      //     newPass: '',
-      //   },
-      //   validationSchema: Yup.object({
-      //     currentPass: Yup.string()
-      //       .min(8, 'kata sandi lebih dari atau sama dengan 8 karakter')
-      //       .required('kata sandi harus diisi'),
-      //     newPass: Yup.string()
-      //       .min(8, 'kata sandi lebih dari atau sama dengan 8 karakter')
-      //       .required('kata sandi harus diisi'),
-      //   }),
-      //   validateOnChange: false,
-      //   validateOnBlur: false,
-      //   validateOnMount: false,
-      //   enableReinitialize: true,
-      //   onSubmit: async (values) => {
-      //     updatePasswordHandler(values)
-      //   },
-      // })
 
       if (response) {
         console.log(response.data)
@@ -187,7 +157,7 @@ export class UpdatePersonalData extends Component {
             <Button
               variant="contained"
               color="primary"
-              // className={classes.button}
+              type="submit"
               startIcon={<AccountCircleIcon />}
             >
               Update Personal Data
