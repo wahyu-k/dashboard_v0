@@ -20,14 +20,14 @@ function DistributionWidget() {
       <div className={css.boks}>
         <LandingPageWidget
           text="Total Liter Air SIAB"
-          nominal="29389"
+          nominal="1,007"
           srcImg={crude}
         />
       </div>
       <div className={css.boks}>
         <LandingPageWidget
           text="Total KK Pengguna SIAB"
-          nominal="1816"
+          nominal="24"
           srcImg={like}
         />
       </div>

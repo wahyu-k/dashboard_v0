@@ -1,0 +1,103 @@
+.reset__pass__container {
+  display: flex;
+  flex-direction: column;
+}
+
+.reset__pass__container > img {
+  position: fixed;
+  opacity: 20%;
+  width: 40%;
+  height: auto;
+  align-items: flex-end;
+  margin-top: 10%;
+  margin-left: 40%;
+  z-index: -1;
+}
+
+.reset__pass__container > form {
+  display: flex;
+  width: 50%;
+  margin: 0 0 0 30px;
+  flex-direction: column;
+}
+
+.reset__pass__container > form > button > img {
+  width: 25px;
+  height: 25px;
+  display: flex;
+  margin: 0 auto;
+}
+
+.reset__pass__container > form > button {
+  background: linear-gradient(
+    180deg,
+    #6599ae 0%,
+    rgba(163, 213, 217, 0.97) 100%
+  );
+  mix-blend-mode: normal;
+  border-radius: 10px;
+  border: none;
+  margin: 40px auto 20px 0;
+  padding: 8px 49px 8px 49px;
+
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 18px;
+  line-height: 27px;
+
+  text-align: center;
+  cursor: pointer;
+
+  color: #ffffff;
+}
+
+.reset__pass__container > form > button:hover {
+  background: #6599ae;
+}
+
+.reset__pass__container > form > button:disabled {
+  background: #dddddd;
+  cursor: default;
+}
+
+.reset__pass__container > form > * {
+  margin-bottom: 17px;
+}
+
+@media only screen and (max-width: 966px) {
+  .reset__pass__container {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+  }
+}
+
+@media only screen and (max-width: 436px) {
+  .reset__pass__container > img {
+    display: none;
+  }
+
+  .reset__pass__container > form {
+    width: 100%;
+    margin: 0;
+  }
+
+  .reset__pass__container > form > button {
+    margin: 0 auto;
+    margin-top: 30px;
+    margin-bottom: 17px;
+  }
+
+  .reset__pass__container > form > p {
+    margin-top: 20px;
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 21px;
+    text-align: center;
+
+    color: rgba(0, 0, 0, 0.5);
+  }
+}

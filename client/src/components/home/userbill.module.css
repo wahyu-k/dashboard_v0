@@ -3,9 +3,7 @@
   flex-direction: column;
 }
 
-.userbill__container > h2 {
-  font-size: 22px;
-
+.userbill__container > h3 {
   color: #6599ae;
 }
 
@@ -21,7 +19,7 @@
   font-style: normal;
   font-weight: bold;
   font-size: 40px;
-  line-height: 108px;
+  padding-top: 10px;
   margin-left: 30px;
 
   color: #2fdf84;
@@ -66,7 +64,8 @@
   font-family: Poppins;
   font-style: normal;
   font-weight: 600;
-  font-size: 40px;
+  font-size: 35px;
+  text-align: center;
   line-height: 72px;
   margin-left: 20px;
   margin-top: -10px;
@@ -96,6 +95,14 @@
   color: #000000;
 }
 
+.userbill__container > img {
+  position: absolute;
+  width: 34%;
+  opacity: 100%;
+  z-index: -1;
+  margin-left: 44%;
+}
+
 .boks > img {
   position: absolute;
   width: 30px;
@@ -110,6 +117,9 @@
     width: 40%;
     flex: 6;
   }
+  .userbill__container > img {
+    display: none;
+  }
 }
 
 @media (max-width: 440px) {
@@ -120,5 +130,9 @@
   .boks {
     width: 100%;
     margin-left: 0px;
+  }
+  .userbill__container > h1 {
+    margin: 0;
+    text-align: center;
   }
 }

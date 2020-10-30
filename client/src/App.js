@@ -457,7 +457,7 @@ function App(props) {
               <ForgetPass onView={() => setMenuPos('Reset Kata Sandi')} />
             </Route>
             <Route path="/reset_password/:token" exact>
-              <ResetPass />
+              <ResetPass onView={() => setMenuPos('Reset Kata Sandi')} />
             </Route>
             <Route path="/logout" exact>
               <Logout />

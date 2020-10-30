@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { useState, useEffect } from 'react'
 import {
   CartesianGrid,
@@ -13,10 +14,12 @@ import { TablePagination } from '@material-ui/core'
 import axios from 'axios'
 import css from './usergraph.module.css'
 import { DataGrid } from '@material-ui/data-grid'
+import epochToDate from '../../helper/epochToDate'
 
 function UserGraph(props) {
   const [data, setData] = useState(null)
   const [page, setPage] = useState(0)
+  const [modData, setModData] = useState(null)
   const [rowsPerPage, setRowsPerPage] = useState(10)
 
   const handleChangePage = (event, newPage) => {
@@ -63,7 +66,6 @@ function UserGraph(props) {
 
   useEffect(() => {
     setData(props.data)
-    console.log('data', props.data)
   }, [props.data])
 
   const columns = [
@@ -74,9 +76,9 @@ function UserGraph(props) {
 
   return (
     <div className={css.usergraph__container}>
-      <h2>Grafik Penggunaan Air Anda</h2>
+      <h3>Grafik Penggunaan Air</h3>
       <div className={css.line}></div>
-      <ResponsiveContainer width="99%" height={300}>
+      <ResponsiveContainer width="100%" height={300}>
         <LineChart
           data={
             data &&
@@ -85,13 +87,13 @@ function UserGraph(props) {
               page * rowsPerPage + rowsPerPage,
             )
           }
-          margin={{ top: 5, right: 20, left: 10, bottom: 5 }}
+          margin={{ top: 5, right: 10, left: -20, bottom: 5 }}
         >
           <Tooltip />
           <CartesianGrid stroke="#f5f5f5" />
           <Legend verticalAlign="top" height={36} />
           <YAxis />
-          <XAxis dataKey="created_at" />
+          {/* <XAxis dataKey="created_at" /> */}
           <Line
             name="Debit (Liter)"
             type="monotone"
@@ -102,47 +104,17 @@ function UserGraph(props) {
         </LineChart>
       </ResponsiveContainer>
 
-      <button onClick={() => filter('day')}>Hari</button>
+      <br />
+      {/* <button onClick={() => filter('day')}>Hari</button>
       <button onClick={() => filter('week')}>Minggu</button>
       <button onClick={() => filter('month')}>Bulan</button>
       <button onClick={() => filter('year')}>Tahun</button>
-      <button onClick={() => filter()}>Semua Data</button>
-      {/* <table>
-        <tbody>
-          <tr>
-            <th className={css.table_id}>Id</th>
-            <th className={css.th}>Debit</th>
-            <th className={css.th}>Dibuat pada Tanggal</th>
-          </tr>
-          {data &&
-            data.local
-              .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-              .map((theGetSens, i) => (
-                <tr key={i}>
-                  <td className={css.td}>{theGetSens.id}</td>
-                  <td className={css.td}>{theGetSens.daily_flow}</td>
-                  <td className={css.td}>
-                    {epochToDate(theGetSens.created_at)}
-                  </td>
-                </tr>
-              ))}
-        </tbody>
-      </table> */}
-
+      <button onClick={() => filter()}>Semua Data</button> */}
       {data && (
         <div style={{ height: 400, width: '100%' }}>
           <DataGrid rows={data.local} columns={columns} pageSize={5} />
         </div>
       )}
-
-      <TablePagination
-        component="div"
-        count={data === null ? 0 : data.local.length}
-        page={page}
-        onChangePage={handleChangePage}
-        rowsPerPage={rowsPerPage}
-        onChangeRowsPerPage={handleChangeRowsPerPage}
-      />
     </div>
   )
 }

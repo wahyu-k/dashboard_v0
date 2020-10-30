@@ -3,7 +3,6 @@ import labu from '../../img/labu.png'
 import specimen from './../../img/specimen.png'
 import suhu from './../../img/suhu.png'
 import uji from './../../img/uji.png'
-import databack from './../../img/databack.png'
 import css from './usersensor.module.css'
 
 function UserSensor(props) {
@@ -15,7 +14,7 @@ function UserSensor(props) {
 
   return (
     <div className={css.usersensor__container}>
-      <h2>Nilai Sensor</h2>
+      <h3>Nilai Sensor</h3>
       <div className={css.line}></div>
       <div className={css.allboks}>
         <div className={css.boks}>
@@ -60,7 +59,6 @@ function UserSensor(props) {
           </div>
         </div>
       </div>
-      <img alt="databack" src={databack} />
     </div>
   )
 }

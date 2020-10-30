@@ -3,19 +3,10 @@
   flex-direction: column;
 }
 
-.usersensor__container > h2 {
-  font-size: 22px;
+.usersensor__container > h3 {
   margin-top: 20px;
 
   color: #6599ae;
-}
-
-.usersensor__container > img {
-  position: absolute;
-  width: 40%;
-  opacity: 100%;
-  z-index: -1;
-  margin-left: 38%;
 }
 
 .line {
@@ -44,7 +35,8 @@
   align-items: center;
   padding-left: 10px;
   padding-right: 10px;
-  width: auto;
+  width: 100%;
+
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 10px;
 }
