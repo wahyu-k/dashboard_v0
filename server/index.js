@@ -4,7 +4,13 @@ const express = require('express')
 const cors = require('cors')
 const helmet = require('helmet')
 
+const path = require('path')
+
 const app = express()
+
+// console.log(path.join(__dirname, '../client/build'))
+app.use(express.static(path.join(__dirname, '../client/build')))
+
 app.use(express.json())
 app.use(cors())
 app.use(helmet())
@@ -12,9 +18,10 @@ app.use(helmet())
 const tokenValidator = require('./components/helper/tokenValidation')
 
 app.get('/', (req, res) => {
-  res.json({
-    msg: 'Hello API 👋',
-  })
+  res.sendFile(path.join(__dirname, '../client/build', 'index.html'))
+  // res.json({
+  //   msg: 'Hello API 👋',
+  // })
 })
 
 const loginApi = require('./components/login/loginApi')
@@ -26,7 +33,7 @@ app.post('/v1/reset_password', loginApi.resetPass)
 
 const settingApi = require('./components/settings/settingApi')
 
-app.post('/v1/update_password',tokenValidator.start, settingApi.updatePass)
+app.post('/v1/update_password', tokenValidator.start, settingApi.updatePass)
 app.post('/v1/update_username', tokenValidator.start, settingApi.updateUname)
 
 const adminApi = require('./components/admin/adminApi')
@@ -83,6 +90,8 @@ const adminPicApi = require('./components/adminPic/adminPicApi')
 app.get('/v1/adminpic/bill', tokenValidator.start, adminPicApi.getBill)
 app.post('/v1/adminpic/bill', tokenValidator.start, adminPicApi.postBill)
 
-app.listen(5000, () => {
-  console.log('Server started on 5000')
+const port = process.env.PORT || 5000
+
+app.listen(port, () => {
+  console.log(`Server started on ${port}`)
 })
