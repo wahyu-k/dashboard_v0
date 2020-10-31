@@ -19,10 +19,5 @@
   "bugs": {
     "url": "https://github.com/siagaairbersih/dashboard_v0/issues"
   },
-  "homepage": "https://github.com/siagaairbersih/dashboard_v0#readme",
-  "dependencies": {
-    "equation-resolver": "^0.3.2",
-    "react-equation": "^0.2.1",
-    "recharts": "^1.8.5"
-  }
+  "homepage": "https://github.com/siagaairbersih/dashboard_v0#readme"
 }
