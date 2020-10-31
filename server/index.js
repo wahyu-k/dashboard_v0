@@ -1,6 +1,6 @@
 ﻿const path = require('path')
-require('dotenv').config({ path: path.join(__dirname, '../.env') })
-// require('dotenv').config()
+// require('dotenv').config({ path: path.join(__dirname, '../.env') })
+require('dotenv').config()
 
 const express = require('express')
 const cors = require('cors')
@@ -9,7 +9,7 @@ const helmet = require('helmet')
 const app = express()
 
 // console.log(path.join(__dirname, '../client/build'))
-app.use(express.static(path.join(__dirname, '../client/build')))
+// app.use(express.static(path.join(__dirname, '../client/build')))
 
 app.use(express.json())
 app.use(cors())
@@ -18,10 +18,10 @@ app.use(helmet())
 const tokenValidator = require('./components/helper/tokenValidation')
 
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, '../client/build', 'index.html'))
-  // res.json({
-  //   msg: 'Hello API 👋',
-  // })
+  // res.sendFile(path.join(__dirname, '../client/build', 'index.html'))
+  res.json({
+    msg: 'Hello API 👋',
+  })
 })
 
 const loginApi = require('./components/login/loginApi')
