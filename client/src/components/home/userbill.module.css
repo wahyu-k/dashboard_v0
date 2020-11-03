@@ -98,7 +98,7 @@
 .userbill__container > img {
   position: absolute;
   width: 34%;
-  opacity: 100%;
+  opacity: 0.5;
   z-index: -1;
   margin-left: 44%;
 }

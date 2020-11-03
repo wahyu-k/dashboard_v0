@@ -209,7 +209,13 @@ function App(props) {
       </div>
       <Divider />
       <List>
-        <Link to="/" style={{ color: '#000' }}>
+        <Link
+          to="/"
+          style={{ color: '#000' }}
+          onClick={() => {
+            mobileOpen && handleDrawerToggle()
+          }}
+        >
           <ListItem button>
             <ListItemIcon>
               <HomeOutlinedIcon />
@@ -221,7 +227,14 @@ function App(props) {
       <Divider />
       <List>
         {accountMenuList.map((menu, index) => (
-          <Link to={menu.link} style={{ color: '#000' }} key={index}>
+          <Link
+            to={menu.link}
+            style={{ color: '#000' }}
+            key={index}
+            onClick={() => {
+              mobileOpen && handleDrawerToggle()
+            }}
+          >
             <ListItem button key={index}>
               <ListItemIcon>{menu.icon}</ListItemIcon>
               <ListItemText primary={menu.name} />
@@ -231,7 +244,13 @@ function App(props) {
       </List>
       <Divider />
       <List>
-        <Link to="/help" style={{ color: '#000' }}>
+        <Link
+          to="/help"
+          style={{ color: '#000' }}
+          onClick={() => {
+            mobileOpen && handleDrawerToggle()
+          }}
+        >
           <ListItem button>
             <ListItemIcon>
               <MenuBookOutlinedIcon />
@@ -252,7 +271,13 @@ function App(props) {
       <UserWidget data={theSession} />
       <Divider />
       <List>
-        <Link to="/" style={{ color: '#000' }}>
+        <Link
+          to="/"
+          style={{ color: '#000' }}
+          onClick={() => {
+            mobileOpen && handleDrawerToggle()
+          }}
+        >
           <ListItem button>
             <ListItemIcon>
               <HomeOutlinedIcon />
@@ -271,7 +296,13 @@ function App(props) {
       </List>
       <Divider />
       <List>
-        <Link to="/help" style={{ color: '#000' }}>
+        <Link
+          to="/help"
+          style={{ color: '#000' }}
+          onClick={() => {
+            mobileOpen && handleDrawerToggle()
+          }}
+        >
           <ListItem button>
             <ListItemIcon>
               <MenuBookOutlinedIcon />

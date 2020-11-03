@@ -132,7 +132,7 @@
 .compar__img {
   position: absolute;
   width: 40%;
-  opacity: 40%;
+  opacity: 0.5;
   z-index: -1;
   margin-top: -70px;
   margin-left: 38%;

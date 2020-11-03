@@ -40,7 +40,7 @@ const adminApi = require('./components/admin/adminApi')
 
 app.get('/v1/devices', adminApi.getDevices)
 app.post('/v1/devices', adminApi.addDevice)
-app.post('/v1/sensors', adminApi.getSensors)
+app.get('/v1/sensors', adminApi.getSensors)
 app.get('/v1/admin/logins', adminApi.getUsers)
 app.put('/v1/devices', adminApi.updateDevice)
 app.post('/v1/binds', adminApi.binds)

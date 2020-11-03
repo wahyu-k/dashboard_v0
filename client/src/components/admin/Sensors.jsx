@@ -11,9 +11,9 @@ function Sensors() {
   const getSensorsHandler = async () => {
     setIsLoading(true)
     try {
-      const response = await axios.post(
+      const response = await axios.get(
         `${process.env.REACT_APP_BASE_URL}/v1/sensors`,
-        {time:0},
+        { params: { time: 0 } },
       )
       if (response) {
         setIsLoading(false)
@@ -72,10 +72,12 @@ function Sensors() {
         time = 0
         break
     }
-    const resp = await axios.post(
+    const resp = await axios.get(
       `${process.env.REACT_APP_BASE_URL}/v1/sensors`,
       {
-        time,
+        params: {
+          time,
+        },
       },
     )
     setSensors(resp.data)
@@ -102,30 +104,34 @@ function Sensors() {
             <th>Created At</th>
           </tr>
           {sensors
-          .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-          .map((theSensor, i) => (
-            <tr key={i}>
-              <td>{theSensor.id}</td>
-              <td>{theSensor.device_id}</td>
-              <td>{theSensor.ph}</td>
-              <td>{theSensor.tds}</td>
-              <td>{theSensor.turb}</td>
-              <td>{theSensor.temp}</td>
-              <td>{theSensor.flow}</td>
-              <td>{epochToDate(theSensor.created_at)}</td>
-            </tr>
-          ))}
+            .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+            .map((theSensor, i) => (
+              <tr key={i}>
+                <td>{theSensor.id}</td>
+                <td>{theSensor.device_id}</td>
+                <td>{theSensor.ph}</td>
+                <td>{theSensor.tds}</td>
+                <td>{theSensor.turb}</td>
+                <td>{theSensor.temp}</td>
+                <td>{theSensor.flow}</td>
+                <td>{epochToDate(theSensor.created_at)}</td>
+              </tr>
+            ))}
         </tbody>
       </table>
-      {sensors.length===0? null : <div>
-        
-        <button onClick={() => pagination('home')}>Halaman Awal</button>
-        <button onClick={() => pagination('before')}>Halaman Sebelumnya</button>
-        <button onClick={() => pagination('after')}>Halaman Setelahnya</button>
-        <button onClick={() => pagination('last')}>Halaman Terakhir</button>
-        
-        </div>}
-      
+      {sensors.length === 0 ? null : (
+        <div>
+          <button onClick={() => pagination('home')}>Halaman Awal</button>
+          <button onClick={() => pagination('before')}>
+            Halaman Sebelumnya
+          </button>
+          <button onClick={() => pagination('after')}>
+            Halaman Setelahnya
+          </button>
+          <button onClick={() => pagination('last')}>Halaman Terakhir</button>
+        </div>
+      )}
+
       <button onClick={() => getSensorsHandler()} disabled={isLoading}>
         Get Sensors Data
       </button>

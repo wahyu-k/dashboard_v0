@@ -5,7 +5,7 @@
 
 .reset__pass__container > img {
   position: fixed;
-  opacity: 20%;
+  opacity: 0.5;
   width: 40%;
   height: auto;
   align-items: flex-end;
