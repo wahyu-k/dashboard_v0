@@ -130,7 +130,7 @@ function UserGraph(props) {
       </table> */}
 
       {data && (
-        <div style={{ height: 400, width: '100%' }}>
+        <div style={{ height: 700, width: '100%' }}>
           <DataGrid rows={data.local} columns={columns} pageSize={5} />
         </div>
       )}

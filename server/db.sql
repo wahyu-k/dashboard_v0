@@ -87,6 +87,7 @@ INSERT INTO logins(username, email, password, created_at, modified_at) VALUES('t
 INSERT INTO logins(username, email, password, created_at, modified_at) VALUES('premium', 'premium@siagaairbersih.com', '$2b$07$QXn.jXQxFA7e4Ru9pS3oWOlSgHiDQGNbCzTPiJ9tsKuWqf5SSUx82', ROUND(EXTRACT(EPOCH FROM NOW()) * 1000), ROUND(EXTRACT(EPOCH FROM NOW())) * 1000);
 INSERT INTO logins(username, email, password, created_at, modified_at) VALUES('pengelola', 'pengelola@siagaairbersih.com', '$2b$07$/TJeNoiUh5/UwD0rAz79QuuMqQtcEsxhRehW9mrX6RaJeEbTsTKX2', ROUND(EXTRACT(EPOCH FROM NOW()) * 1000), ROUND(EXTRACT(EPOCH FROM NOW())) * 1000);
 
+
 -- USERS TABLE
 INSERT INTO users(id, first_name, last_name, dob, prov, region, plan, created_at, modified_at) VALUES(1, 'Admin', 'SIAB', '', 'Jawa Tengah', 'Surakarta', 7, ROUND(EXTRACT(EPOCH FROM NOW()) * 1000), ROUND(EXTRACT(EPOCH FROM NOW())) * 1000);
 INSERT INTO users(id, first_name, last_name, dob, prov, region, plan, created_at, modified_at) VALUES(2, 'Free', 'User', '', 'Jawa Tengah', 'Klaten', 0, ROUND(EXTRACT(EPOCH FROM NOW()) * 1000), ROUND(EXTRACT(EPOCH FROM NOW())) * 1000);
@@ -118,3 +119,9 @@ INSERT INTO bills(device_id, daily_flow, daily_bill, payment, created_at) VALUES
 INSERT INTO bills(device_id, daily_flow, daily_bill, payment, created_at) VALUES(3, 2.5, 2750, 0, ROUND(EXTRACT(EPOCH FROM NOW()) * 1000));
 INSERT INTO bills(device_id, daily_flow, daily_bill, payment, created_at) VALUES(3, 1.5, 1650, 0, ROUND(EXTRACT(EPOCH FROM NOW()) * 1000));
 INSERT INTO bills(device_id, daily_flow, daily_bill, payment, created_at) VALUES(3, 0, 0, 1000, ROUND(EXTRACT(EPOCH FROM NOW()) * 1000));
+INSERT INTO bills(device_id, daily_flow, daily_bill, payment, created_at) VALUES(3, 5.5, 2750, 0, ROUND(EXTRACT(EPOCH FROM NOW()) * 1000));
+INSERT INTO bills(device_id, daily_flow, daily_bill, payment, created_at) VALUES(3, 7.5, 1650, 0, ROUND(EXTRACT(EPOCH FROM NOW()) * 1000));
+INSERT INTO bills(device_id, daily_flow, daily_bill, payment, created_at) VALUES(3, 3, 0, 1000, ROUND(EXTRACT(EPOCH FROM NOW()) * 1000));
+INSERT INTO bills(device_id, daily_flow, daily_bill, payment, created_at) VALUES(3, 5, 2750, 0, ROUND(EXTRACT(EPOCH FROM NOW()) * 1000));
+INSERT INTO bills(device_id, daily_flow, daily_bill, payment, created_at) VALUES(3, 7, 1650, 0, ROUND(EXTRACT(EPOCH FROM NOW()) * 1000));
+INSERT INTO bills(device_id, daily_flow, daily_bill, payment, created_at) VALUES(3, 3.12, 0, 1000, ROUND(EXTRACT(EPOCH FROM NOW()) * 1000));

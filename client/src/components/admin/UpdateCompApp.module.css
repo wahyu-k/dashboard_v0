@@ -1,0 +1,14 @@
+.comp__app {
+  display: flex;
+  flex-direction: column;
+}
+
+.update__comp__container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.update__comp__container > div {
+  flex: 1;
+}

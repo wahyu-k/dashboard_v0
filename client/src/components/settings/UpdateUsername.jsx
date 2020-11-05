@@ -53,7 +53,7 @@ function UpdateUsername() {
     validateOnMount: false,
     enableReinitialize: true,
     onSubmit: async (values) => {
-      updateHandler(values)
+      submitHandler(values)
     },
   })
 

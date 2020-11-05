@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import epochToDate from '../../helper/epochToDate'
+import { DataGrid } from '@material-ui/data-grid'
+import Button from '@material-ui/core/Button'
 
 function Users() {
   const [users, setUsers] = useState([])
@@ -26,31 +28,37 @@ function Users() {
     }
   }
 
-  // const columns = [
-  //   { field: 'id', headerName: 'ID', width: 70 },
-  //   { field: 'username', headerName: 'Username', width: 130 },
-  //   { field: 'email', headerName: 'Email', width: 230 },
-  //   {
-  //     field: 'plan',
-  //     headerName: 'Plan',
-  //     width: 80,
-  //   },
-  //   {
-  //     field: 'created_at',
-  //     headerName: 'Created At',
-  //     width: 250,
-  //     valueGetter: (params) => `${epochToDate(params.getValue('created_at'))}`,
-  //   },
-  //   {
-  //     headerName: 'Edit',
-  //     width: 100,
-  //   },
-  // ]
+  const columns = [
+    { field: 'id', headerName: 'ID', width: 60 },
+    { field: 'username', headerName: 'Username', width: 130 },
+    { field: 'email', headerName: 'Email', width: 250 },
+    {
+      field: 'plan',
+      headerName: 'Plan',
+      width: 70,
+    },
+    {
+      field: 'created_at',
+      headerName: 'Created At',
+      width: 250,
+      valueGetter: (params) => `${epochToDate(params.getValue('created_at'))}`,
+    },
+    {
+      field: 'edit',
+      headerName: 'Edit',
+      width: 80,
+      renderCell: (params) => (
+        <Button variant="contained" color="primary" size="small">
+          Edit
+        </Button>
+      ),
+    },
+  ]
 
   return (
     <div>
       <h2>User Data</h2>
-      <table>
+      {/* <table>
         <tbody>
           <tr>
             <th>Id</th>
@@ -73,10 +81,17 @@ function Users() {
             </tr>
           ))}
         </tbody>
-      </table>
-      <button onClick={() => getUsersHandler()} disabled={isLoading}>
-        Get All User Data
-      </button>
+      </table> */}
+      {
+        <div style={{ height: 400, width: '100%' }}>
+          <DataGrid
+            rows={users}
+            columns={columns}
+            pageSize={10}
+            disabled={isLoading}
+          />
+        </div>
+      }
     </div>
   )
 }

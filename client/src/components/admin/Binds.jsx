@@ -1,7 +1,10 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import UpdateBinds from './binds/UpdateBinds'
 import AddNewBinds from './binds/AddNewBinds'
+// import epochToDate from '../../helper/epochToDate'
+// import { DataGrid } from '@material-ui/data-grid'
+import Button from '@material-ui/core/Button'
 
 function Binds() {
   const [binds, setBinds] = useState([])
@@ -58,6 +61,26 @@ function Binds() {
     }
   }
 
+  // const columns = [
+  //   { field: 'user_id', headerName: 'User_ID', width: 70 },
+  //   { field: 'primary_dev_id', headerName: 'primary_dev_id', width: 230 },
+  //   { field: 'device_id', headerName: 'Device_id', width: 130 },
+  //   {
+  //     field: 'edit',
+  //     headerName: 'Edit',
+  //     width: 90,
+  //     renderCell: (params) => (
+  //       <Button variant="contained" color="primary" size="small">
+  //         Edit
+  //       </Button>
+  //     ),
+  //   },
+  // ]
+
+  useEffect(() => {
+    getBindsHandler()
+  }, [])
+
   return (
     <div>
       <h2>User and Device Binds</h2>
@@ -110,19 +133,77 @@ function Binds() {
           ) : null}
         </tbody>
       </table>
+      {/* {
+        <div style={{ height: 400, width: '100%' }}>
+          <DataGrid rows={binds} columns={columns} pageSize={10} />
+        </div>
+      } */}
       {binds.length === 0 ? null : (
         <div>
-          <button onClick={() => pagination('home')}>Halaman Awal</button>
+          <Button
+            onClick={() => pagination('home')}
+            variant="contained"
+            color="primary"
+            type="submit"
+          >
+            Halaman Awal
+          </Button>
+          <Button
+            onClick={() => pagination('before')}
+            variant="contained"
+            color="primary"
+            type="submit"
+          >
+            Halaman Sebelumnya
+          </Button>
+          <Button
+            onClick={() => pagination('after')}
+            variant="contained"
+            color="primary"
+            type="submit"
+          >
+            Halaman Setelahnya
+          </Button>
+          <Button
+            onClick={() => pagination('last')}
+            variant="contained"
+            color="primary"
+            type="submit"
+          >
+            Halaman Terakhir
+          </Button>
+          {/* <button onClick={() => pagination('home')}>Halaman Awal</button>
           <button onClick={() => pagination('before')}>
             Halaman Sebelumnya
           </button>
           <button onClick={() => pagination('after')}>
             Halaman Setelahnya
           </button>
-          <button onClick={() => pagination('last')}>Halaman Terakhir</button>
+          <button onClick={() => pagination('last')}>Halaman Terakhir</button> */}
         </div>
       )}
-      <button
+      <Button
+        onClick={() => {
+          getBindsHandler()
+          setIsAddingNew(true)
+        }}
+        disabled={isLoading}
+        variant="contained"
+        color="primary"
+        type="submit"
+      >
+        Add New Binding
+      </Button>
+      <Button
+        onClick={() => getBindsHandler()}
+        disabled={isLoading}
+        variant="contained"
+        color="primary"
+        type="submit"
+      >
+        Get User Binds
+      </Button>
+      {/* <button
         onClick={() => {
           getBindsHandler()
           setIsAddingNew(true)
@@ -130,10 +211,10 @@ function Binds() {
         disabled={isLoading}
       >
         Add New Binding
-      </button>
-      <button onClick={() => getBindsHandler()} disabled={isLoading}>
+      </button> */}
+      {/* <button onClick={() => getBindsHandler()} disabled={isLoading}>
         Get User Binds
-      </button>
+      </button> */}
     </div>
   )
 }

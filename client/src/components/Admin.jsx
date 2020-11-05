@@ -6,6 +6,7 @@ import UpdateCompApp from './admin/UpdateCompApp'
 import Bills from './admin/Bills'
 import Price from './admin/Price'
 import Binds from './admin/Binds'
+import Button from '@material-ui/core/Button'
 
 function Admin(props) {
   const logoutHandler = () => {
@@ -26,7 +27,15 @@ function Admin(props) {
       <Price />
       <UpdateCompApp />
       <Binds />
-      <button onClick={() => logoutHandler()}>Logout</button>
+      <Button
+        onClick={() => logoutHandler()}
+        variant="contained"
+        color="primary"
+        type="submit"
+      >
+        Logout
+      </Button>
+      {/* <button onClick={() => logoutHandler()}>Logout</button> */}
     </div>
   )
 }

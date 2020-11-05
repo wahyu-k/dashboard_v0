@@ -23,7 +23,7 @@ const ComparationApp = () => {
 
   return (
     <Fragment>
-      <h2>Input Perhitungan Biaya Air</h2>
+      <h2>Biaya yang dapat anda hemat jika me</h2>
       <h3>Masukkan Volume Air (m3)</h3>
       <input
         type="text"

@@ -12,7 +12,6 @@ import DialogContentText from '@material-ui/core/DialogContentText'
 import DialogTitle from '@material-ui/core/DialogTitle'
 import Button from '@material-ui/core/Button'
 import TextField from '@material-ui/core/TextField'
-import { TablePagination } from '@material-ui/core'
 import { DataGrid } from '@material-ui/data-grid'
 import css from './AdminPIC.module.css'
 
@@ -32,17 +31,17 @@ function AdminPIC(props) {
   const [payment, setPayment] = useState(0)
   const [open, setOpen] = useState(false)
   const [userPayment, setUserPayment] = useState(0)
-  const [page, setPage] = useState(0)
-  const [rowsPerPage, setRowsPerPage] = useState(10)
+  // const [page, setPage] = useState(0)
+  // const [rowsPerPage, setRowsPerPage] = useState(5)
 
-  const handleChangePage = (event, newPage) => {
-    setPage(newPage)
-  }
+  // const handleChangePage = (event, newPage) => {
+  //   setPage(newPage)
+  // }
 
-  const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(parseInt(event.target.value, 10))
-    setPage(0)
-  }
+  // const handleChangeRowsPerPage = (event) => {
+  //   setRowsPerPage(parseInt(event.target.value, 10))
+  //   setPage(0)
+  // }
 
   const handleClickOpen = () => {
     setOpen(true)
@@ -258,13 +257,7 @@ function AdminPIC(props) {
           </div>
         </div>
 
-        {filtered && (
-          <div style={{ height: 400, width: '100%' }}>
-            <DataGrid rows={filtered} columns={columns} pageSize={5} />
-          </div>
-        )}
-
-        <TablePagination
+        {/* <TablePagination
           component="div"
           count={
             filtered && filtered === null ? 0 : filtered && filtered.length
@@ -273,7 +266,24 @@ function AdminPIC(props) {
           onChangePage={handleChangePage}
           rowsPerPage={rowsPerPage}
           onChangeRowsPerPage={handleChangeRowsPerPage}
-        />
+        /> */}
+
+        {filtered && (
+          <div style={{ height: 600, width: '100%' }}>
+            <DataGrid rows={filtered} columns={columns} pageSize={10} />
+          </div>
+        )}
+
+        {/* <TablePagination
+          component="div"
+          count={
+            filtered && filtered === null ? 0 : filtered && filtered.length
+          }
+          page={page}
+          onChangePage={handleChangePage}
+          rowsPerPage={rowsPerPage}
+          onChangeRowsPerPage={handleChangeRowsPerPage}
+        /> */}
 
         {/* <table>
           <tbody>
