@@ -63,6 +63,13 @@
   border: 2px solid #eeeeee;
 }
 
+.footer {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  text-align: center;
+  color: #6599ae;
+}
+
 @media (max-width: 420px) {
   .tagihan__widget {
     width: 100%;

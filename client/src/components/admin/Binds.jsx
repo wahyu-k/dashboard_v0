@@ -9,7 +9,7 @@ import Button from '@material-ui/core/Button'
 function Binds() {
   const [binds, setBinds] = useState([])
   const [isLoading, setIsLoading] = useState(false)
-  const [page, setPage] = useState(0)
+  const [page] = useState(0)
   const rowsPerPage = 10
 
   const [isEdit, setIsEdit] = useState(false)
@@ -33,33 +33,33 @@ function Binds() {
     }
   }
 
-  const pagination = async (p) => {
-    if (p === 'home') {
-      setPage(0)
-    } else if (p === 'before') {
-      if (page === 0) {
-        setPage(0)
-      } else if (binds.length <= rowsPerPage) {
-        setPage(0)
-      } else {
-        setPage(page - 1)
-      }
-    } else if (p === 'after') {
-      if (binds.length <= rowsPerPage) {
-        setPage(0)
-      } else if (page >= binds.length / rowsPerPage - 1) {
-        setPage(Math.ceil(binds.length / rowsPerPage - 1))
-      } else {
-        setPage(page + 1)
-      }
-    } else if (p === 'last') {
-      if (binds.length <= rowsPerPage) {
-        setPage(0)
-      } else {
-        setPage(Math.ceil(binds.length / rowsPerPage - 1))
-      }
-    }
-  }
+  // const pagination = async (p) => {
+  //   if (p === 'home') {
+  //     setPage(0)
+  //   } else if (p === 'before') {
+  //     if (page === 0) {
+  //       setPage(0)
+  //     } else if (binds.length <= rowsPerPage) {
+  //       setPage(0)
+  //     } else {
+  //       setPage(page - 1)
+  //     }
+  //   } else if (p === 'after') {
+  //     if (binds.length <= rowsPerPage) {
+  //       setPage(0)
+  //     } else if (page >= binds.length / rowsPerPage - 1) {
+  //       setPage(Math.ceil(binds.length / rowsPerPage - 1))
+  //     } else {
+  //       setPage(page + 1)
+  //     }
+  //   } else if (p === 'last') {
+  //     if (binds.length <= rowsPerPage) {
+  //       setPage(0)
+  //     } else {
+  //       setPage(Math.ceil(binds.length / rowsPerPage - 1))
+  //     }
+  //   }
+  // }
 
   // const columns = [
   //   { field: 'user_id', headerName: 'User_ID', width: 70 },
@@ -138,7 +138,7 @@ function Binds() {
           <DataGrid rows={binds} columns={columns} pageSize={10} />
         </div>
       } */}
-      {binds.length === 0 ? null : (
+      {/* {binds.length === 0 ? null : (
         <div>
           <Button
             onClick={() => pagination('home')}
@@ -172,16 +172,16 @@ function Binds() {
           >
             Halaman Terakhir
           </Button>
-          {/* <button onClick={() => pagination('home')}>Halaman Awal</button>
+          <button onClick={() => pagination('home')}>Halaman Awal</button>
           <button onClick={() => pagination('before')}>
             Halaman Sebelumnya
           </button>
           <button onClick={() => pagination('after')}>
             Halaman Setelahnya
           </button>
-          <button onClick={() => pagination('last')}>Halaman Terakhir</button> */}
+          <button onClick={() => pagination('last')}>Halaman Terakhir</button>
         </div>
-      )}
+      )} */}
       <Button
         onClick={() => {
           getBindsHandler()
@@ -194,7 +194,7 @@ function Binds() {
       >
         Add New Binding
       </Button>
-      <Button
+      {/* <Button
         onClick={() => getBindsHandler()}
         disabled={isLoading}
         variant="contained"
@@ -202,7 +202,7 @@ function Binds() {
         type="submit"
       >
         Get User Binds
-      </Button>
+      </Button> */}
       {/* <button
         onClick={() => {
           getBindsHandler()

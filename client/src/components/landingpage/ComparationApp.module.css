@@ -169,13 +169,6 @@
   margin-right: 7px;
 }
 
-.footer {
-  margin-top: 20px;
-  margin-bottom: 20px;
-  text-align: center;
-  color: #6599ae;
-}
-
 @media only screen and (max-width: 400px) {
   .wolfram__container {
     margin-left: 0;

@@ -3,6 +3,7 @@ import axios from 'axios'
 import epochToDate from '../../helper/epochToDate'
 import { DataGrid } from '@material-ui/data-grid'
 import Button from '@material-ui/core/Button'
+import css from './Sensors.module.css'
 
 function Sensors() {
   const [sensors, setSensors] = useState([])
@@ -125,48 +126,60 @@ function Sensors() {
   }, [])
 
   return (
-    <div>
+    <div className={css.sensor__container}>
       <h2>Sensors Data</h2>
-      <Button
-        onClick={() => filter('day')}
-        variant="contained"
-        color="primary"
-        type="submit"
-      >
-        Filter 1 hari
-      </Button>
-      <Button
-        onClick={() => filter('week')}
-        variant="contained"
-        color="primary"
-        type="submit"
-      >
-        Filter 7 hari
-      </Button>
-      <Button
-        onClick={() => filter('month')}
-        variant="contained"
-        color="primary"
-        type="submit"
-      >
-        Filter 1 bulan
-      </Button>
-      <Button
-        onClick={() => filter('year')}
-        variant="contained"
-        color="primary"
-        type="submit"
-      >
-        Filter 1 tahun
-      </Button>
-      <Button
-        onClick={() => filter()}
-        variant="contained"
-        color="primary"
-        type="submit"
-      >
-        All Data
-      </Button>
+      <div className={css.filter__container}>
+        <div>
+          <Button
+            onClick={() => filter('day')}
+            variant="contained"
+            color="primary"
+            type="submit"
+          >
+            Filter 1 hari
+          </Button>
+        </div>
+        <div>
+          <Button
+            onClick={() => filter('week')}
+            variant="contained"
+            color="primary"
+            type="submit"
+          >
+            Filter 7 hari
+          </Button>
+        </div>
+        <div>
+          <Button
+            onClick={() => filter('month')}
+            variant="contained"
+            color="primary"
+            type="submit"
+          >
+            Filter 1 bulan
+          </Button>
+        </div>
+        <div>
+          <Button
+            onClick={() => filter('year')}
+            variant="contained"
+            color="primary"
+            type="submit"
+          >
+            Filter 1 tahun
+          </Button>
+        </div>
+        <div>
+          <Button
+            onClick={() => filter()}
+            variant="contained"
+            color="primary"
+            type="submit"
+          >
+            All Data
+          </Button>
+        </div>
+      </div>
       {/*       
       <button onClick={() => filter('day')}>Filter 1 hari</button>
       <button onClick={() => filter('week')}>Filter 7 hari</button>

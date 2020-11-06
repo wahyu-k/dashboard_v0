@@ -4,6 +4,7 @@ import axios from 'axios'
 import UserBill from './UserBill'
 import UserSensor from './UserSensor'
 import UserGraph from './UserGraph'
+// import Lapor from './Lapor'
 
 function DashboardSensors() {
   const [latest, setLatest] = useState({
@@ -42,6 +43,7 @@ function DashboardSensors() {
       <UserBill data={data} />
       <UserSensor data={latest} />
       <UserGraph data={data} />
+      {/* <Lapor /> */}
     </div>
   )
 }

@@ -101,8 +101,10 @@ function UpdateCompApp() {
         label="Dimodifikasi pada tanggal"
         value={epochToDate(date)}
       /> */}
-      <h3>Dimodifikasi pada tanggal</h3>
-      <p>{epochToDate(date)}</p>
+      <div align="center">
+        <h3>Dimodifikasi pada tanggal</h3>
+        <p>{epochToDate(date)}</p>
+      </div>
     </div>
   )
 }

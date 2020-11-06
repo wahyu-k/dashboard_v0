@@ -6,6 +6,8 @@
 .update__comp__container {
   display: flex;
   flex-direction: row;
+  margin-top: 10px;
+  margin-bottom: 10px;
   flex-wrap: wrap;
 }
 

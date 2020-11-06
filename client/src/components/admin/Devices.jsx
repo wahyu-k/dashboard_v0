@@ -60,7 +60,12 @@ function Devices() {
   //     headerName: 'Edit',
   //     width: 90,
   //     renderCell: (params) => (
-  //       <Button variant="contained" color="primary" size="small">
+  //       <Button
+  //         variant="contained"
+  //         color="primary"
+  //         size="small"
+  //         onClick={() => setEditedData()}
+  //       >
   //         Edit
   //       </Button>
   //     ),
@@ -74,7 +79,6 @@ function Devices() {
   return (
     <div>
       <h2>Device Data</h2>
-
       <table>
         <tbody>
           <tr>
@@ -131,12 +135,13 @@ function Devices() {
         variant="contained"
         color="primary"
         type="submit"
+        disabled={isLoading}
       >
         Add Device
       </Button>
-      <button onClick={() => setAddDevice(true)} disabled={isLoading}>
+      {/* <button onClick={() => setAddDevice(true)} disabled={isLoading}>
         Add Device
-      </button>
+      </button> */}
     </div>
   )
 }

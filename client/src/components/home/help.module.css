@@ -1,1 +1,10 @@
+.help {
+  display: flex;
+  flex-direction: column;
+}
 
+.footer {
+  margin-top: 40px;
+  text-align: center;
+  color: #6599ae;
+}

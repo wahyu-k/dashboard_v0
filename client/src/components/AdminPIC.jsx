@@ -14,6 +14,7 @@ import Button from '@material-ui/core/Button'
 import TextField from '@material-ui/core/TextField'
 import { DataGrid } from '@material-ui/data-grid'
 import css from './AdminPIC.module.css'
+import epochToDate from './../helper/epochToDate'
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -163,7 +164,12 @@ function AdminPIC(props) {
     { field: 'daily_flow', headerName: 'Pengunaan Harian', width: 130 },
     { field: 'daily_bill', headerName: 'Biaya Harian', width: 130 },
     { field: 'payment', headerName: 'Pembayaran', width: 130 },
-    { field: 'created_at', headerName: 'Waktu', width: 130 },
+    {
+      field: 'created_at',
+      headerName: 'Waktu',
+      width: 250,
+      valueGetter: (params) => `${epochToDate(params.getValue('created_at'))}`,
+    },
   ]
 
   return (
@@ -269,7 +275,7 @@ function AdminPIC(props) {
         /> */}
 
         {filtered && (
-          <div style={{ height: 600, width: '100%' }}>
+          <div style={{ height: 400, width: '100%' }}>
             <DataGrid rows={filtered} columns={columns} pageSize={10} />
           </div>
         )}
@@ -313,6 +319,10 @@ function AdminPIC(props) {
               })}
           </tbody>
         </table> */}
+      </div>
+      <div className={css.footer}>
+        <p>Copyright © 2020 SIAB Indonesia</p>
+        <p>Powered by SIAB Indonesia</p>
       </div>
     </div>
   )

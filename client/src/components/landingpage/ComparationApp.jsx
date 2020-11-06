@@ -6,10 +6,10 @@ import sea from './../../img/sea.png'
 import compar from './../../img/compar.png'
 import css from './ComparationApp.module.css'
 import { TextField } from '@material-ui/core'
-import Checkbox from '@material-ui/core/Checkbox'
-import FormControlLabel from '@material-ui/core/FormControlLabel'
-import Button from '@material-ui/core/Button'
-import Login from './../../components/Login'
+// import Checkbox from '@material-ui/core/Checkbox'
+// import FormControlLabel from '@material-ui/core/FormControlLabel'
+// import Button from '@material-ui/core/Button'
+// import Login from './../../components/Login'
 
 const ComparationApp = () => {
   const [input, setInput] = useState(0)
@@ -19,29 +19,29 @@ const ComparationApp = () => {
     z: 0,
   })
   // const [checked, setChecked] = useState(true)
-  const [solution, setSolution] = useState('')
+  // const [solution, setSolution] = useState('')
 
   // const handleChange = (event) => {
   //   setChecked(event.target.checked)
   // }
-  const [qual, setQual] = useState('')
+  // const [qual, setQual] = useState('')
 
-  const [state, setState] = useState({
-    checkedA: false,
-    checkedB: false,
-    checkedC: false,
-    checkedD: false,
-    checkedE: false,
-    checkedF: false,
-  })
+  // const [state, setState] = useState({
+  //   checkedA: false,
+  //   checkedB: false,
+  //   checkedC: false,
+  //   checkedD: false,
+  //   checkedE: false,
+  //   checkedF: false,
+  // })
 
-  const handleChange = (event) => {
-    setState({ ...state, [event.target.name]: event.target.checked })
-  }
+  // const handleChange = (event) => {
+  //   setState({ ...state, [event.target.name]: event.target.checked })
+  // }
 
-  const handleSubmit = (event) => {
-    setSolution('abc')
-  }
+  // const handleSubmit = (event) => {
+  //   setSolution('abc')
+  // }
 
   const a = input * resp.x
   const b = input * resp.y
@@ -91,7 +91,6 @@ const ComparationApp = () => {
           <img alt="compar" src={compar} className={css.compar__img} />
         </div>
       </div>
-
       <div className={css.wolf__container}>
         <h3>Perbandingan Area Air dan Darat di Bumi</h3>
         <div className={css.line}></div>
@@ -132,8 +131,7 @@ const ComparationApp = () => {
           <p>Source: Wolfram Alpha Water World</p>
         </div>
       </div>
-
-      <div className={css.wolf__container}>
+      {/* <div className={css.wolf__container}>
         <h3>Ingin tahu kualitas air yang anda konsumsi ?</h3>
         <div className={css.line}></div>
         <div className={css.input__container}>
@@ -145,66 +143,66 @@ const ComparationApp = () => {
           onChange={handleChange}
           inputProps={{ 'aria-label': 'secondary checkbox' }}
         /> */}
-          <div className={css.quality__container}>
-            <div className={css.quality__column__container}>
-              <FormControlLabel
-                control={
-                  <Checkbox
-                    checked={state.checkedA}
-                    onChange={handleChange}
-                    name="checkedA"
-                    color="primary"
-                  />
-                }
-                label="Berwarna kuning"
+      {/* <div className={css.quality__container}>
+        <div className={css.quality__column__container}>
+          <FormControlLabel
+            control={
+              <Checkbox
+                checked={state.checkedA}
+                onChange={handleChange}
+                name="checkedA"
+                color="primary"
               />
-              <FormControlLabel
-                control={
-                  <Checkbox
-                    checked={state.checkedB}
-                    onChange={handleChange}
-                    name="checkedB"
-                    color="primary"
-                  />
-                }
-                label="Berkerak ketika direbus"
+            }
+            label="Berwarna kuning"
+          />
+          <FormControlLabel
+            control={
+              <Checkbox
+                checked={state.checkedB}
+                onChange={handleChange}
+                name="checkedB"
+                color="primary"
               />
-              <FormControlLabel
-                control={
-                  <Checkbox
-                    checked={state.checkedC}
-                    onChange={handleChange}
-                    name="checkedC"
-                    color="primary"
-                  />
-                }
-                label="Memiliki rasa"
+            }
+            label="Berkerak ketika direbus"
+          />
+          <FormControlLabel
+            control={
+              <Checkbox
+                checked={state.checkedC}
+                onChange={handleChange}
+                name="checkedC"
+                color="primary"
               />
-            </div>
-            <div className={css.quality__column__container}>
-              <FormControlLabel
-                control={
-                  <Checkbox
-                    checked={state.checkedD}
-                    onChange={handleChange}
-                    name="checkedD"
-                    color="primary"
-                  />
-                }
-                label="Memiliki bau"
+            }
+            label="Memiliki rasa"
+          />
+        </div>
+        <div className={css.quality__column__container}>
+          <FormControlLabel
+            control={
+              <Checkbox
+                checked={state.checkedD}
+                onChange={handleChange}
+                name="checkedD"
+                color="primary"
               />
-              <FormControlLabel
-                control={
-                  <Checkbox
-                    checked={state.checkedE}
-                    onChange={handleChange}
-                    name="checkedE"
-                    color="primary"
-                  />
-                }
-                label="Keruh"
+            }
+            label="Memiliki bau"
+          />
+          <FormControlLabel
+            control={
+              <Checkbox
+                checked={state.checkedE}
+                onChange={handleChange}
+                name="checkedE"
+                color="primary"
               />
-              {/* <FormControlLabel
+            }
+            label="Keruh"
+          />
+          {/* <FormControlLabel
                 control={
                   <Checkbox
                     checked={state.checkedF}
@@ -215,9 +213,8 @@ const ComparationApp = () => {
                 }
                 label="Lain-lain"
               /> */}
-            </div>
-          </div>
-          {/* <div className={css.quality__container}>
+
+      {/* <div className={css.quality__container}>
           <div className={css.grey__box}></div>
           <p>Berwarna kuning</p>
         </div>
@@ -241,7 +238,7 @@ const ComparationApp = () => {
           <div className={css.grey__box}></div>
           <p>Lain-lain</p>
         </div> */}
-          {/* <div className={css.keterangan__quality}>
+      {/* <div className={css.keterangan__quality}>
             <TextField
               style={{
                 width: '100%',
@@ -251,7 +248,7 @@ const ComparationApp = () => {
               onChange={(e) => setQual(e.target.value)}
             />
           </div> */}
-          <p className={css.login__link__container}>
+      {/* <p className={css.login__link__container}>
             Jika ingin melakukan konsultasi lebih lanjut terkait kualitas air
             dan solusinya silahkan klik INGIN MENYERTAKAN FOTO/LOKASI? (INGIN
             KONSULTASI LEBIH LANJUT?)
@@ -274,21 +271,6 @@ const ComparationApp = () => {
         <h3>Solusi kualitas air anda :</h3>
         <div className={css.line}></div>
         <div className={css.input__container}>
-          {/* <TextField
-            id="full-width-text-field"
-            placeholder="Placeholder"
-            style={{ width: '100%' }}
-            inputStyle={{ width: '100%' }}
-            fullWidth="true"
-            margin="normal"
-            InputLabelProps={{
-              shrink: true,
-            }}
-            variant="outlined"
-          />
-          <Box width="100%">
-            <TextField label="width: 350px" fullWidth />
-          </Box> */}
           <p className={css.grey__container}>
             {solution}
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea unde et
@@ -303,11 +285,7 @@ const ComparationApp = () => {
             culpa molestiae reiciendis consequuntur sequi quasi dignissimos.
           </p>
         </div>
-      </div>
-      <div className={css.footer}>
-        <p>Copyright © 2020 SIAB Indonesia</p>
-        <p>Powered by SIAB Indonesia</p>
-      </div>
+      </div> */}
     </div>
   )
 }

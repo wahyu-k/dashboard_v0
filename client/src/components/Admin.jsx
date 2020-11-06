@@ -6,36 +6,54 @@ import UpdateCompApp from './admin/UpdateCompApp'
 import Bills from './admin/Bills'
 import Price from './admin/Price'
 import Binds from './admin/Binds'
-import Button from '@material-ui/core/Button'
+import css from './Admin.module.css'
+// import Button from '@material-ui/core/Button'
 
 function Admin(props) {
-  const logoutHandler = () => {
-    localStorage.clear()
-    window.location.reload()
-  }
+  // const logoutHandler = () => {
+  //   localStorage.clear()
+  //   window.location.reload()
+  // }
 
   useEffect(() => {
     props.onView()
   }, [props])
 
   return (
-    <div>
-      <Users />
-      <Devices />
-      <Sensors />
-      <Bills />
-      <Price />
-      <UpdateCompApp />
-      <Binds />
-      <Button
+    <div className={css.admin__container}>
+      <div>
+        <Users />
+      </div>
+      <div>
+        <Devices />
+      </div>
+      <div>
+        <Sensors />
+      </div>
+      <div>
+        <Bills />
+      </div>
+      <div>
+        <Price />
+      </div>
+      <div>
+        <UpdateCompApp />
+      </div>
+      <div>
+        <Binds />
+      </div>
+      <div className={css.footer}>
+        <p>Copyright © 2020 SIAB Indonesia</p>
+        <p>Powered by SIAB Indonesia</p>
+      </div>
+      {/* <Button
         onClick={() => logoutHandler()}
         variant="contained"
         color="primary"
         type="submit"
       >
         Logout
-      </Button>
-      {/* <button onClick={() => logoutHandler()}>Logout</button> */}
+      </Button> */}
     </div>
   )
 }
