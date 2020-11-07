@@ -10,41 +10,27 @@ import css from './DistributionWidget.module.css'
 function DistributionWidget() {
   return (
     <div className={css.allboks}>
-      <div className={css.boks}>
-        <LandingPageWidget
-          text="Alat Terpasang"
-          nominal="4"
-          srcImg={handwash}
-        />
-      </div>
-      <div className={css.boks}>
-        <LandingPageWidget
-          text="Total Liter Air SIAB"
-          nominal="1,007"
-          srcImg={crude}
-        />
-      </div>
-      <div className={css.boks}>
-        <LandingPageWidget
-          text="Total KK Pengguna SIAB"
-          nominal="24"
-          srcImg={like}
-        />
-      </div>
-      <div className={css.boks}>
-        <LandingPageWidget
-          text="Alat Beroperasi"
-          nominal="100%"
-          srcImg={settings}
-        />
-      </div>
-      <div className={css.boks}>
-        <LandingPageWidget
-          text="Dalam Pemeliharaan"
-          nominal="0"
-          srcImg={wrench}
-        />
-      </div>
+      <LandingPageWidget text="Alat Terpasang" nominal="51" srcImg={handwash} />
+      <LandingPageWidget
+        text="Total Liter Air SIAB"
+        nominal="26,823"
+        srcImg={crude}
+      />
+      <LandingPageWidget
+        text="Total KK Pengguna SIAB"
+        nominal="50"
+        srcImg={like}
+      />
+      <LandingPageWidget
+        text="Alat Beroperasi"
+        nominal="100%"
+        srcImg={settings}
+      />
+      <LandingPageWidget
+        text="Dalam Pemeliharaan"
+        nominal="0"
+        srcImg={wrench}
+      />
     </div>
   )
 }

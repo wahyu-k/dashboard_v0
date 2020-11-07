@@ -21,27 +21,13 @@ function Admin(props) {
 
   return (
     <div className={css.admin__container}>
-      <div>
-        <Users />
-      </div>
-      <div>
-        <Devices />
-      </div>
-      <div>
-        <Sensors />
-      </div>
-      <div>
-        <Bills />
-      </div>
-      <div>
-        <Price />
-      </div>
-      <div>
-        <UpdateCompApp />
-      </div>
-      <div>
-        <Binds />
-      </div>
+      <Users />
+      <Devices />
+      <Sensors />
+      <Bills />
+      <Price />
+      <UpdateCompApp />
+      <Binds />
       <div className={css.footer}>
         <p>Copyright © 2020 SIAB Indonesia</p>
         <p>Powered by SIAB Indonesia</p>

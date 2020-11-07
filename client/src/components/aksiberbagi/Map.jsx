@@ -15,10 +15,30 @@ function Map() {
   const [isError, setIsError] = useState(false)
   const [errorMsg, setErrorMsg] = useState('')
   const [data, setData] = useState(null)
+  const [center, setCenter] = useState({ lat: -7.560618, lng: 110.808655 })
 
   useEffect(() => {
     fetchData()
   }, [])
+
+  const procCenter = (x) => {
+    let lat = 0
+    let lng = 0
+
+    x &&
+      x.forEach((element) => {
+        lat += parseFloat(element.lat)
+        lng += parseFloat(element.lng)
+      })
+
+    lat = lat / x.length
+    lng = lng / x.length
+
+    setCenter({
+      lat,
+      lng,
+    })
+  }
 
   async function fetchData() {
     setIsLoading(true)
@@ -37,6 +57,7 @@ function Map() {
       if (response) {
         setIsLoading(false)
         setData(response.data)
+        procCenter(response.data)
       }
     } catch (error) {
       setIsLoading(false)
@@ -55,11 +76,6 @@ function Map() {
     overflow: 'hidden',
   }
 
-  const center = {
-    lat: -7.560618,
-    lng: 110.808655,
-  }
-
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: process.env.REACT_APP_MAP_API,
     libraries,
@@ -69,7 +85,7 @@ function Map() {
   if (!isLoaded) return 'Peta sedang dimuat...'
 
   return (
-    <GoogleMap mapContainerStyle={mapContainerStyle} zoom={12} center={center}>
+    <GoogleMap mapContainerStyle={mapContainerStyle} zoom={13} center={center}>
       {data &&
         data.map((theData, i) => {
           return (
@@ -87,7 +103,7 @@ function Map() {
         >
           <div>
             <h2>{selected.name}</h2>
-            <p>Total Flow: {selected.total_flow} liter</p>
+            {/* <p>Total Flow: {selected.total_flow} liter</p> */}
           </div>
         </InfoWindow>
       )}

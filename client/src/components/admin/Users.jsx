@@ -8,6 +8,8 @@ import DialogTitle from '@material-ui/core/DialogTitle'
 import Button from '@material-ui/core/Button'
 import TextField from '@material-ui/core/TextField'
 import { DataGrid } from '@material-ui/data-grid'
+import css from './users.module.css'
+import LandingPageWidget from '../landingpage/LandingPageWidget'
 
 function Users() {
   const [users, setUsers] = useState([])
@@ -28,6 +30,23 @@ function Users() {
 
   useEffect(() => {
     getUsersHandler()
+    // function getRandomInRange(from, to, fixed) {
+    //   return (Math.random() * (to - from) + from).toFixed(fixed) * 1
+    // .toFixed() returns string, so ' * 1' is a trick to convert to number
+    // }
+    // for (let i = 1; i <= 50; i++) {
+    //   console.log(
+    //     `INSERT INTO devices(name, lat, lng, created_at, modified_at) VALUES('Cawengkal ${i}', ${getRandomInRange(
+    //       -7.307182,
+    //       -7.311182,
+    //       6,
+    //     )}, ${getRandomInRange(
+    //       110.621523,
+    //       110.624523,
+    //       6,
+    //     )}, ROUND(EXTRACT(EPOCH FROM NOW()) * 1000), ROUND(EXTRACT(EPOCH FROM NOW()) * 1000));`,
+    //   )
+    // }
   }, [])
 
   const uploadEditData = async () => {
@@ -38,6 +57,7 @@ function Users() {
       )
       if (response) {
         console.log(response.data)
+        handleClose()
       }
     } catch (error) {
       console.error(error.message)
@@ -61,7 +81,7 @@ function Users() {
   }
 
   const columns = [
-    { field: 'id', headerName: 'ID', width: 60 },
+    { field: 'id', headerName: 'Id', width: 60 },
     { field: 'username', headerName: 'Username', width: 130 },
     { field: 'email', headerName: 'Email', width: 250 },
     {
@@ -71,14 +91,14 @@ function Users() {
     },
     {
       field: 'created_at',
-      headerName: 'Created At',
+      headerName: 'Waktu Pendaftaran',
       width: 250,
       valueGetter: (params) => `${epochToDate(params.getValue('created_at'))}`,
     },
     {
       field: 'edit',
-      headerName: 'Edit',
-      width: 80,
+      headerName: 'Atur',
+      width: 140,
       renderCell: (params) => (
         <Button
           variant="contained"
@@ -89,15 +109,16 @@ function Users() {
             handleClickOpen(params.data)
           }}
         >
-          Edit
+          Atur Plan
         </Button>
       ),
     },
   ]
 
   return (
-    <div>
-      <h2>User Data</h2>
+    <div className={css.user__container}>
+      <h3>User Data</h3>
+      <div className={css.line}></div>
       {/* <table>
         <tbody>
           <tr>
@@ -128,6 +149,38 @@ function Users() {
       </button>
       </table> */}
 
+      <div>
+        <h3>Recap:</h3>
+
+        <div className={css.user__widget}>
+          <LandingPageWidget
+            text="Akun Free"
+            nominal={
+              users.filter((data) => {
+                return data.plan === 0
+              }).length
+            }
+          />
+          <LandingPageWidget
+            text="Akun Premium"
+            nominal={
+              users.filter((data) => {
+                return data.plan === 1
+              }).length
+            }
+          />
+          <LandingPageWidget
+            text="Akun Pengelola"
+            nominal={
+              users.filter((data) => {
+                return data.plan === 2
+              }).length
+            }
+          />
+          <LandingPageWidget text="Jumlah Akun" nominal={users.length} />
+        </div>
+      </div>
+
       <div style={{ height: 400, width: '100%' }}>
         <DataGrid
           rows={users}
@@ -150,7 +203,7 @@ function Users() {
             autoFocus
             margin="dense"
             id="nominal"
-            label="Nominal"
+            label="Plan"
             type="number"
             fullWidth
             value={plan}
@@ -161,7 +214,7 @@ function Users() {
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} color="primary">
-            Cancel
+            Batal
           </Button>
           <Button
             onClick={() => {
@@ -169,7 +222,7 @@ function Users() {
             }}
             color="primary"
           >
-            Bayar
+            Ubah
           </Button>
         </DialogActions>
       </Dialog>

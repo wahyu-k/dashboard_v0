@@ -104,9 +104,9 @@ INSERT INTO users(id, first_name, last_name, dob, prov, region, plan, created_at
 INSERT INTO users(id, first_name, last_name, dob, prov, region, plan, created_at, modified_at) VALUES(4, 'Pengelola', 'User', '', 'Jawa Tengah', 'Semarang', 2, ROUND(EXTRACT(EPOCH FROM NOW()) * 1000), ROUND(EXTRACT(EPOCH FROM NOW())) * 1000);
 
 -- DEVICE TABLE
-INSERT INTO devices(name, lat, lng, created_at, modified_at) VALUES('Zeus I', -7.552973, 110.808103,  ROUND(EXTRACT(EPOCH FROM NOW()) * 1000), ROUND(EXTRACT(EPOCH FROM NOW())) * 1000);
-INSERT INTO devices(name, lat, lng, created_at, modified_at) VALUES('Zeus II', -7.562973, 110.809103,  ROUND(EXTRACT(EPOCH FROM NOW()) * 1000), ROUND(EXTRACT(EPOCH FROM NOW())) * 1000);
-INSERT INTO devices(name, lat, lng, created_at, modified_at) VALUES('Zeus III', -7.572973, 110.818103,  ROUND(EXTRACT(EPOCH FROM NOW()) * 1000), ROUND(EXTRACT(EPOCH FROM NOW())) * 1000);
+INSERT INTO devices(name, lat, lng, created_at, modified_at) VALUES('Cawengkal 1', -7.307236, 110.622135,  ROUND(EXTRACT(EPOCH FROM NOW()) * 1000), ROUND(EXTRACT(EPOCH FROM NOW())) * 1000);
+INSERT INTO devices(name, lat, lng, created_at, modified_at) VALUES('Cawengkal 2', -7.3073592, 110.622243,  ROUND(EXTRACT(EPOCH FROM NOW()) * 1000), ROUND(EXTRACT(EPOCH FROM NOW())) * 1000);
+INSERT INTO devices(name, lat, lng, created_at, modified_at) VALUES('Cawengkal 3', -7.307134, 110.6224333,  ROUND(EXTRACT(EPOCH FROM NOW()) * 1000), ROUND(EXTRACT(EPOCH FROM NOW())) * 1000);
 
 -- SENSORS TABLE
 INSERT INTO sensors(ph, tds, turb, temp, flow, device_id, created_at) VALUES(7.12, 80.43, 23.12, 28.43, 1.4, 1, ROUND(EXTRACT(EPOCH FROM NOW()) * 1000));
