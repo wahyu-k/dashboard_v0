@@ -4,6 +4,8 @@ import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
 import AccountCircleIcon from '@material-ui/icons/AccountCircle'
 import css from './UpdatePersonal.module.css'
+import { Collapse, CircularProgress } from '@material-ui/core'
+import { Alert } from '@material-ui/lab'
 
 export class UpdatePersonalData extends Component {
   constructor(props) {
@@ -15,6 +17,10 @@ export class UpdatePersonalData extends Component {
       region: '',
       prov: '',
       data: [],
+      isError: false,
+      isLoading: false,
+      errorMsg: '',
+      isSuccess: false,
     }
   }
 
@@ -23,13 +29,23 @@ export class UpdatePersonalData extends Component {
   }
 
   fetchData = async () => {
-    const token = await localStorage.getItem('_s_t')
-
     try {
-      const response = await axios.post(
+      this.setState({
+        isLoading: true,
+        isError: false,
+        errorMsg: '',
+      })
+
+      const response = await axios.get(
         `${process.env.REACT_APP_BASE_URL}/v1/users`,
         {
-          token,
+          headers: {
+            Authorization: 'Bearer ' + localStorage.getItem('_s_t'),
+          },
+        },
+        {
+          timeout: 5000,
+          timeoutErrorMessage: 'Koneksi timeout, periksa kembali koneksi anda!',
         },
       )
 
@@ -42,49 +58,100 @@ export class UpdatePersonalData extends Component {
           dob,
           region,
           prov,
+          isLoading: false,
         })
       }
     } catch (error) {
-      console.error(error.response.data)
+      if (error.code === 'ECONNABORTED') {
+        this.setState({
+          errorMsg: error.message,
+        })
+      } else {
+        this.setState({
+          errorMsg: 'Ada yang salah, coba beberapa saat lagi!',
+        })
+      }
+      this.setState({
+        isLoading: false,
+        isError: true,
+      })
     }
   }
 
   submitHandler = async (event) => {
+    this.setState({
+      isLoading: true,
+      isError: false,
+      errorMsg: '',
+      isSuccess: false,
+    })
+
     event.preventDefault()
-    console.log(this.state)
     const { first_name, last_name, dob, prov, region } = this.state
     try {
-      const token = await localStorage.getItem('_s_t')
-      const data = {
-        token,
-        first_name,
-        last_name,
-        dob,
-        prov,
-        region,
-      }
-      const response = await axios.put('http://localhost:5000/v1/users', data)
+      const response = await axios.put(
+        `${process.env.REACT_APP_BASE_URL}/v1/users`,
+        {
+          first_name,
+          last_name,
+          dob,
+          prov,
+          region,
+        },
+        {
+          headers: {
+            Authorization: 'Bearer ' + localStorage.getItem('_s_t'),
+          },
+          timeout: 5000,
+          timeoutErrorMessage: 'Koneksi timeout, periksa kembali koneksi anda!',
+        },
+      )
 
       if (response) {
-        console.log(response.data)
+        this.setState({
+          isLoading: false,
+          isSuccess: true,
+        })
       }
     } catch (error) {
-      console.error(error.response.data)
+      if (error.code === 'ECONNABORTED') {
+        this.setState({
+          errorMsg: error.message,
+        })
+      } else {
+        this.setState({
+          errorMsg: 'Ada yang salah, coba beberapa saat lagi!',
+        })
+      }
+      this.setState({
+        isLoading: false,
+        isError: true,
+        isSuccess: false,
+      })
     }
   }
 
   render() {
     return (
-      <div className={css.update_personal_container}>
-        <h3>Update Personal Data</h3>
+      <div className={css.update__personal__container}>
+        <h3>Perbarui Datamu</h3>
         <div className={css.line}></div>
+        <Collapse in={this.state.isError}>
+          <Alert severity="error">{this.state.errorMsg}</Alert>
+        </Collapse>
+        <Collapse in={this.state.isSuccess}>
+          <Alert severity="success">
+            Datamu berhasil diperbaharui!
+            <p /> Login kembali untuk memperbarui page!
+          </Alert>
+        </Collapse>
         <form onSubmit={(event) => this.submitHandler(event)}>
           <div className={css.form__container}>
             <TextField
               style={{
-                width: '95%',
+                width: '100%',
               }}
-              label="First Name"
+              label="Nama Depan"
               value={this.state.first_name || ''}
               onChange={(event) =>
                 this.setState({
@@ -96,9 +163,9 @@ export class UpdatePersonalData extends Component {
           <div className={css.form__container}>
             <TextField
               style={{
-                width: '95%',
+                width: '100%',
               }}
-              label="Last Name"
+              label="Nama Belakang"
               value={this.state.last_name || ''}
               onChange={(event) =>
                 this.setState({
@@ -110,7 +177,7 @@ export class UpdatePersonalData extends Component {
           <div className={css.form__container}>
             <TextField
               style={{
-                width: '95%',
+                width: '100%',
               }}
               label="Tanggal Lahir"
               value={this.state.dob || ''}
@@ -128,9 +195,9 @@ export class UpdatePersonalData extends Component {
           <div className={css.form__container}>
             <TextField
               style={{
-                width: '95%',
+                width: '100%',
               }}
-              label="Region"
+              label="Kabupaten/Kota"
               value={this.state.region || ''}
               onChange={(event) =>
                 this.setState({
@@ -142,9 +209,9 @@ export class UpdatePersonalData extends Component {
           <div className={css.form__container}>
             <TextField
               style={{
-                width: '95%',
+                width: '100%',
               }}
-              label="Province"
+              label="Provinsi"
               value={this.state.prov || ''}
               onChange={(event) =>
                 this.setState({
@@ -158,9 +225,16 @@ export class UpdatePersonalData extends Component {
               variant="contained"
               color="primary"
               type="submit"
-              startIcon={<AccountCircleIcon />}
+              startIcon={
+                this.state.isLoading ? (
+                  <CircularProgress size="24px" />
+                ) : (
+                  <AccountCircleIcon />
+                )
+              }
+              disabled={this.props.isLoading}
             >
-              Update Personal Data
+              Perbarui Data
             </Button>
           </div>
         </form>

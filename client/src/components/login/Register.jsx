@@ -8,6 +8,7 @@ import banner from '../../img/register/register.png'
 import loading from '../../img/loading.gif'
 import { TextField, Collapse } from '@material-ui/core'
 import { Alert } from '@material-ui/lab'
+import { Link } from 'react-router-dom'
 
 function Register(props) {
   const [isLoading, setIsLoading] = useState(false)
@@ -150,9 +151,7 @@ function Register(props) {
         <button type="submit" disabled={isLoading}>
           {isLoading ? <img alt="loading" src={loading} /> : 'Daftar'}
         </button>
-        <a className="cancel" href="/">
-          sudah punya akun?
-        </a>
+        <Link to="/login">sudah punya akun?</Link>
       </form>
       <img alt="register-img" src={banner} />
     </div>

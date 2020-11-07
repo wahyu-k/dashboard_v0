@@ -1,10 +1,7 @@
 .update__username__container {
   display: flex;
   flex-direction: column;
-}
-
-.update__username__container > h3 {
-  font-size: 22px;
+  margin-right: 30px;
 }
 
 .form__container {
@@ -24,9 +21,13 @@
   border: 2px solid #89c5cc;
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 450px) {
   .form__container {
     display: flex;
     width: 100%;
+  }
+  .update__username__container {
+    margin-right: 0;
+    margin-bottom: 30px;
   }
 }

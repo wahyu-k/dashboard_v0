@@ -1,20 +1,58 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useHistory, useParams } from 'react-router-dom'
 import axios from 'axios'
+import css from './resetPass.module.css'
+import banner from '../../img/login/laptop.png'
+import { TextField, Collapse } from '@material-ui/core'
+import { Alert } from '@material-ui/lab'
+import { useFormik } from 'formik'
+import * as Yup from 'yup'
+import loading from '../../img/loading.gif'
 
-function ResetPass() {
-  const [password, setPassword] = useState('')
+function ResetPass(props) {
   const [isLoading, setIsLoading] = useState(false)
+  const [isSuccess, setIsSuccess] = useState(false)
+  const [isError, setIsError] = useState(false)
+  const [errorMsg, setErrorMsg] = useState('')
   const { token } = useParams()
   const history = useHistory()
 
-  const submitHandler = (event) => {
-    setIsLoading(true)
-    event.preventDefault()
-    resetHandler()
-  }
+  useEffect(() => {
+    props.onView()
+  }, [props])
 
-  const resetHandler = async () => {
+  const formik = useFormik({
+    initialValues: {
+      password: '',
+      repeatPassword: '',
+    },
+    validationSchema: Yup.object({
+      password: Yup.string()
+        .min(8, 'kata sandi minimal 8 karakter')
+        .max(100, 'kata sandi maksimal 100 karakter')
+        .required('kata sandi harus diisi'),
+      repeatPassword: Yup.string()
+        .min(8, 'kata sandi minimal 8 karakter')
+        .max(100, 'kata sandi maksimal 100 karakter')
+        .required('kata sandi harus diisi'),
+    }),
+    validateOnChange: false,
+    validateOnBlur: false,
+    validateOnMount: false,
+    enableReinitialize: true,
+    onSubmit: async (values) => {
+      resetHandler(values)
+    },
+  })
+
+  const resetHandler = async ({ password, repeatPassword }) => {
+    if (password !== repeatPassword) {
+      setIsError(true)
+      setErrorMsg('Kata sandi tidak sama, cek kembali!')
+      return
+    }
+    setIsLoading(true)
+    setIsError(false)
     try {
       const response = await axios.post(
         `${process.env.REACT_APP_BASE_URL}/v1/reset_password/`,
@@ -22,30 +60,67 @@ function ResetPass() {
           token,
           newPassword: password,
         },
+        {
+          timeout: 5000,
+          timeoutErrorMessage: 'Koneksi timeout, periksa kembali koneksi anda!',
+        },
       )
 
       if (response) {
-        history.push('/')
+        setIsSuccess(true)
+        setTimeout(() => {
+          history.push('/')
+        }, 3000)
       }
     } catch (error) {
       setIsLoading(false)
-      console.error(error.response.data)
+      setIsError(true)
+      setErrorMsg(error.message)
     }
   }
 
   return (
-    <div>
-      <h1>Reset Password</h1>
-      <form onSubmit={(event) => submitHandler(event)}>
-        <input
-          placeholder="New Password"
-          onChange={(event) => setPassword(event.target.value)}
-          required
+    <div className={css.reset__pass__container}>
+      <Collapse in={isSuccess}>
+        <Alert severity="success">
+          Kata sandi Anda berhasil diperbarui, silahkan login kembali!
+        </Alert>
+        <br />
+      </Collapse>
+      <Collapse in={isError}>
+        <Alert severity="error">{errorMsg}</Alert>
+        <br />
+      </Collapse>
+      <form
+        onSubmit={formik.handleSubmit}
+        onReset={formik.handleReset}
+        noValidate
+      >
+        <TextField
+          id="password"
+          label="Kata Sandi Baru"
+          type="password"
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          value={formik.values.password}
+          helperText={formik.errors.password}
+          error={formik.errors.password ? true : false}
+        />
+        <TextField
+          id="repeatPassword"
+          label="Ulang Kata Sandi Baru"
+          type="password"
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          value={formik.values.repeatPassword}
+          helperText={formik.errors.repeatPassword}
+          error={formik.errors.repeatPassword ? true : false}
         />
         <button type="submit" disabled={isLoading}>
-          Reset Password
+          {isLoading ? <img alt="loading" src={loading} /> : 'Reset Kata Sandi'}
         </button>
       </form>
+      <img alt="forpass-img" src={banner} />
     </div>
   )
 }

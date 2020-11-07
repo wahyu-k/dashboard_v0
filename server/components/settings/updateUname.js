@@ -1,13 +1,11 @@
 const pool = require('../../config/db')
-const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt')
 const Joi = require('joi')
 
 const updateUname = async (req, res) => {
-  const { token, newUsername, password } = req.body
+  const { id } = req.session
+  const { newUsername, password } = req.body
   try {
-    const { id } = jwt.decode(token, process.env.JWT_SECRET)
-
     const response = await pool.query('SELECT * FROM logins WHERE id = $1', [
       id,
     ])

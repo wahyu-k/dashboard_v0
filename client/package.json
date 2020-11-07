@@ -13,6 +13,7 @@
     "@testing-library/user-event": "^7.2.1",
     "axios": "^0.20.0",
     "clsx": "^1.1.1",
+    "dotenv": "^8.2.0",
     "equation-resolver": "^0.3.2",
     "formik": "^2.1.7",
     "jsonwebtoken": "^8.5.1",

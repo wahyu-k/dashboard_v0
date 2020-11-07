@@ -26,6 +26,8 @@ function AdminPIC(props) {
   const classes = useStyles()
   const [data, setData] = useState(null)
   const [filtered, setFiltered] = useState(null)
+  const [dataNotif, setDataNotif] = useState(null)
+  const [filteredNotif, setFilteredNotif] = useState(null)
   const [filter, setFilter] = useState('')
   const [dropdown, setDropdown] = useState(null)
   const [total, setTotal] = useState(0)
@@ -58,6 +60,7 @@ function AdminPIC(props) {
 
   useEffect(() => {
     fetchData()
+    fetchDataNotif()
   }, [])
 
   const fetchData = async () => {
@@ -74,6 +77,26 @@ function AdminPIC(props) {
       if (response) {
         setData(response.data)
         setFiltered(response.data)
+      }
+    } catch (error) {
+      console.error(error.message)
+    }
+  }
+
+  const fetchDataNotif = async () => {
+    try {
+      const response = await axios.get(
+        `${process.env.REACT_APP_BASE_URL}/v1/notif`,
+        {
+          headers: {
+            Authorization: 'Bearer ' + localStorage.getItem('_s_t'),
+          },
+        },
+      )
+
+      if (response) {
+        setDataNotif(response.data)
+        setFilteredNotif(response.data)
       }
     } catch (error) {
       console.error(error.message)
@@ -132,6 +155,16 @@ function AdminPIC(props) {
     }
   }, [filter, data])
 
+  useEffect(() => {
+    if (dataNotif) {
+      setFilteredNotif(
+        dataNotif.filter((value) => {
+          return value.first_name + ' ' + value.last_name === filter
+        }),
+      )
+    }
+  }, [filter, dataNotif])
+
   const uploadPayment = async () => {
     try {
       const response = await axios.post(
@@ -170,6 +203,16 @@ function AdminPIC(props) {
       width: 250,
       valueGetter: (params) => `${epochToDate(params.getValue('created_at'))}`,
     },
+  ]
+
+  const notifColumns = [
+    { field: 'id', headerName: 'ID', width: 70 },
+    { field: 'first_name', headerName: 'Nama Pengguna', width: 130 },
+    { field: 'dev_id', headerName: 'Nomor Alat', width: 130 },
+    { field: 'msg', headerName: 'Pesan', width: 130 },
+    { field: 'prevent', headerName: 'Abaikan', width: 130 },
+    { field: 'prevent_msg', headerName: 'Pesan Tambahan', width: 130 },
+    { field: 'created_at', headerName: 'Waktu', width: 130 },
   ]
 
   return (
@@ -214,7 +257,7 @@ function AdminPIC(props) {
           <DialogContent>
             <DialogContentText>
               Pembayaran untuk pengguna: <b>{filter}</b>{' '}
-              {filtered && filtered.length > 0 && filtered[0].dev_id}
+              {/* {filtered && filtered.length > 0 && filtered[0].dev_id} */}
             </DialogContentText>
             <TextField
               autoFocus
@@ -277,6 +320,18 @@ function AdminPIC(props) {
         {filtered && (
           <div style={{ height: 400, width: '100%' }}>
             <DataGrid rows={filtered} columns={columns} pageSize={10} />
+          </div>
+        )}
+
+        <br />
+
+        {filteredNotif && (
+          <div style={{ height: 400, width: '100%' }}>
+            <DataGrid
+              rows={filteredNotif}
+              columns={notifColumns}
+              pageSize={5}
+            />
           </div>
         )}
 

@@ -56,7 +56,7 @@ const ComparationApp = () => {
 
   return (
     <div className={css.comparation__container}>
-      <h3>Input Perhitungan Biaya Air</h3>
+      <h3>Hitung Biaya Airmu</h3>
       <div className={css.line}></div>
       <div className={css.input__container}>
         <div className={css.flex__row}>
@@ -69,22 +69,29 @@ const ComparationApp = () => {
               label="Masukkan Volume Airmu (m³)"
               type="number"
               value={input}
+              onFocus={() => input === 0 && setInput('')}
               onChange={(e) => setInput(e.target.value)}
             />
             <div className={css.flex__row}>
               <div>
                 <h2>Harga Air SIAB</h2>
-                <p className={css.comparation__form}>Rp. {a}</p>
+                <p className={css.comparation__form}>
+                  Rp. {a.toLocaleString()}
+                </p>
               </div>
               <div className={css.pdam__container}>
                 <h2>Harga Air PDAM</h2>
-                <p className={css.comparation__form}>Rp. {b} </p>
+                <p className={css.comparation__form}>
+                  Rp. {b.toLocaleString()}
+                </p>
               </div>
             </div>
             <div className={css.flex__row}>
               <div>
                 <h2>Anda dapat menghemat</h2>
-                <p className={css.comparation__form}>Rp. {b - a}</p>
+                <p className={css.comparation__form}>
+                  Rp. {(b - a).toLocaleString()}
+                </p>
               </div>
             </div>
           </div>

@@ -1,0 +1,18 @@
+.line {
+  margin-top: 5px;
+  width: 62px;
+  height: 0px;
+  border: 2px solid #89c5cc;
+  margin-bottom: 10px;
+}
+
+.user__container > h3 {
+  color: #6599ae;
+}
+
+.user__widget {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin-bottom: 15px;
+}

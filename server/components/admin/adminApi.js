@@ -7,6 +7,7 @@ const binds = require('./binds')
 const getBinds = require('./getBinds')
 const updateBinds = require('./updateBinds')
 const deleteBinds = require('./deleteBinds')
+const editPlan = require('./editPlan')
 
 const adminApi = {
   getDevices,
@@ -18,6 +19,7 @@ const adminApi = {
   getBinds,
   updateBinds,
   deleteBinds,
+  editPlan,
 }
 
 module.exports = adminApi

@@ -4,9 +4,14 @@ import axios from 'axios'
 import UserBill from './UserBill'
 import UserSensor from './UserSensor'
 import UserGraph from './UserGraph'
-// import Lapor from './Lapor'
+import LinearProgress from '@material-ui/core/LinearProgress'
+import { Collapse, Button } from '@material-ui/core'
+import { Alert } from '@material-ui/lab'
 
 function DashboardSensors() {
+  const [isLoading, setIsLoading] = useState(false)
+  const [isError, setIsError] = useState(false)
+  const [errorMsg, setErrorMsg] = useState('')
   const [latest, setLatest] = useState({
     ph: 0,
     tds: 0,
@@ -19,27 +24,69 @@ function DashboardSensors() {
   const [data, setData] = useState(null)
 
   async function fetchData() {
-    const getSens = await axios.get(
-      `${process.env.REACT_APP_BASE_URL}/v1/users/sensors`,
-      {
-        headers: {
-          Authorization: 'Bearer ' + localStorage.getItem('_s_t'),
+    setIsLoading(true)
+    setIsError(false)
+    try {
+      const getSens = await axios.get(
+        `${process.env.REACT_APP_BASE_URL}/v1/users/sensors`,
+        {
+          headers: {
+            Authorization: 'Bearer ' + localStorage.getItem('_s_t'),
+          },
+          params: {
+            time: 0,
+          },
+          timeout: 5000,
+          timeoutErrorMessage: 'Koneksi timeout, periksa kembali koneksi anda!',
         },
-        params: {
-          time: 0,
-        },
-      },
-    )
-    setLatest(getSens.data.primary[0])
-    setData(getSens.data)
+      )
+      if (getSens) {
+        setIsLoading(false)
+        setLatest(getSens.data.primary[0])
+        setData(getSens.data)
+      }
+    } catch (error) {
+      setIsLoading(false)
+      setIsError(true)
+      setErrorMsg(error.message)
+    }
   }
 
   useEffect(() => {
     fetchData()
   }, [])
 
+  const action = (
+    <Button
+      color="secondary"
+      size="small"
+      onClick={() => window.location.reload()}
+    >
+      Muat Ulang
+    </Button>
+  )
+
   return (
     <div>
+      {isLoading && (
+        <LinearProgress
+          style={{
+            marginRight: '-24px',
+            marginLeft: '-24px',
+            marginTop: '-20px',
+            marginBottom: '16px',
+          }}
+        />
+      )}
+
+      <Collapse in={isError}>
+        <div style={{ maxWidth: '100%', marginBottom: '17px' }}>
+          <Alert severity="warning" action={action}>
+            {errorMsg}
+          </Alert>
+        </div>
+      </Collapse>
+
       <UserBill data={data} />
       <UserSensor data={latest} />
       <UserGraph data={data} />

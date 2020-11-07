@@ -6,7 +6,7 @@ const pool = require('../../config/db')
  *
  * @readonly
  */
-const getUsers = async (req, res) => {
+const getUsers = async (_req, res) => {
   try {
     const response = await pool.query(
       'SELECT logins.id, logins.username, logins.email, users.plan, users.created_at FROM logins INNER JOIN users ON users.id = logins.id',

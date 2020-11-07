@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import present from '../../img/present.png'
 import linegraph from './../../img/linegraph.png'
 import css from './userbill.module.css'
+import databack from './../../img/databack.png'
 
 function UserBill(props) {
   const [data, setData] = useState(null)
@@ -12,15 +13,15 @@ function UserBill(props) {
 
   return (
     <div className={css.userbill__container}>
-      <h2>Tagihan dan Pembayaran</h2>
+      <h3>Tagihan dan Pembayaran</h3>
       <div className={css.line}></div>
-      <h1>{data && 'Rp. ' + data.bill + ',-'}</h1>
+      <h1>{data && 'Rp. ' + data.bill.toLocaleString() + ',-'}</h1>
       <div className={css.allboks}>
         <div className={css.boks}>
           <img alt="present" src={present} />
           <div className={css.blueboks}>
             <h5>Harga per Liter</h5>
-            <h4>{data && data.price}</h4>
+            <h4>{data && 'Rp. ' + data.price.toLocaleString() + ',-'}</h4>
           </div>
         </div>
         <div className={css.boks}>
@@ -32,6 +33,7 @@ function UserBill(props) {
           </div>
         </div>
       </div>
+      <img alt="databack" src={databack} />
     </div>
   )
 }
