@@ -12,9 +12,9 @@ import DialogContentText from '@material-ui/core/DialogContentText'
 import DialogTitle from '@material-ui/core/DialogTitle'
 import Button from '@material-ui/core/Button'
 import TextField from '@material-ui/core/TextField'
-import { TablePagination } from '@material-ui/core'
 import { DataGrid } from '@material-ui/data-grid'
 import css from './AdminPIC.module.css'
+import epochToDate from './../helper/epochToDate'
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -32,17 +32,17 @@ function AdminPIC(props) {
   const [payment, setPayment] = useState(0)
   const [open, setOpen] = useState(false)
   const [userPayment, setUserPayment] = useState(0)
-  const [page, setPage] = useState(0)
-  const [rowsPerPage, setRowsPerPage] = useState(10)
+  // const [page, setPage] = useState(0)
+  // const [rowsPerPage, setRowsPerPage] = useState(5)
 
-  const handleChangePage = (event, newPage) => {
-    setPage(newPage)
-  }
+  // const handleChangePage = (event, newPage) => {
+  //   setPage(newPage)
+  // }
 
-  const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(parseInt(event.target.value, 10))
-    setPage(0)
-  }
+  // const handleChangeRowsPerPage = (event) => {
+  //   setRowsPerPage(parseInt(event.target.value, 10))
+  //   setPage(0)
+  // }
 
   const handleClickOpen = () => {
     setOpen(true)
@@ -164,7 +164,12 @@ function AdminPIC(props) {
     { field: 'daily_flow', headerName: 'Pengunaan Harian', width: 130 },
     { field: 'daily_bill', headerName: 'Biaya Harian', width: 130 },
     { field: 'payment', headerName: 'Pembayaran', width: 130 },
-    { field: 'created_at', headerName: 'Waktu', width: 130 },
+    {
+      field: 'created_at',
+      headerName: 'Waktu',
+      width: 250,
+      valueGetter: (params) => `${epochToDate(params.getValue('created_at'))}`,
+    },
   ]
 
   return (
@@ -258,13 +263,7 @@ function AdminPIC(props) {
           </div>
         </div>
 
-        {filtered && (
-          <div style={{ height: 400, width: '100%' }}>
-            <DataGrid rows={filtered} columns={columns} pageSize={5} />
-          </div>
-        )}
-
-        <TablePagination
+        {/* <TablePagination
           component="div"
           count={
             filtered && filtered === null ? 0 : filtered && filtered.length
@@ -273,7 +272,24 @@ function AdminPIC(props) {
           onChangePage={handleChangePage}
           rowsPerPage={rowsPerPage}
           onChangeRowsPerPage={handleChangeRowsPerPage}
-        />
+        /> */}
+
+        {filtered && (
+          <div style={{ height: 400, width: '100%' }}>
+            <DataGrid rows={filtered} columns={columns} pageSize={10} />
+          </div>
+        )}
+
+        {/* <TablePagination
+          component="div"
+          count={
+            filtered && filtered === null ? 0 : filtered && filtered.length
+          }
+          page={page}
+          onChangePage={handleChangePage}
+          rowsPerPage={rowsPerPage}
+          onChangeRowsPerPage={handleChangeRowsPerPage}
+        /> */}
 
         {/* <table>
           <tbody>
@@ -303,6 +319,10 @@ function AdminPIC(props) {
               })}
           </tbody>
         </table> */}
+      </div>
+      <div className={css.footer}>
+        <p>Copyright © 2020 SIAB Indonesia</p>
+        <p>Powered by SIAB Indonesia</p>
       </div>
     </div>
   )

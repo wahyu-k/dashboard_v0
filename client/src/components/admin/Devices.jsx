@@ -1,8 +1,10 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import epochToDate from '../../helper/epochToDate'
 import RegisterDevice from './devices/RegisterDevice'
 import EditDevices from './devices/EditDevices'
+// import { DataGrid } from '@material-ui/data-grid'
+import Button from '@material-ui/core/Button'
 
 function Devices() {
   const [devices, setDevices] = useState([])
@@ -27,6 +29,52 @@ function Devices() {
       console.error(error.response.data)
     }
   }
+
+  // const columns = [
+  //   { field: 'id', headerName: 'ID', width: 70 },
+  //   { field: 'name', headerName: 'Username', width: 100 },
+  //   { field: 'email', headerName: 'Email', width: 230 },
+  //   {
+  //     field: 'lat',
+  //     headerName: 'Lat',
+  //     width: 80,
+  //   },
+  //   {
+  //     field: 'lng',
+  //     headerName: 'Lng',
+  //     width: 80,
+  //   },
+  //   {
+  //     field: 'user_id',
+  //     headerName: 'Plan',
+  //     width: 80,
+  //   },
+  //   {
+  //     field: 'created_at',
+  //     headerName: 'Created At',
+  //     width: 250,
+  //     valueGetter: (params) => `${epochToDate(params.getValue('created_at'))}`,
+  //   },
+  //   {
+  //     field: 'edit',
+  //     headerName: 'Edit',
+  //     width: 90,
+  //     renderCell: (params) => (
+  //       <Button
+  //         variant="contained"
+  //         color="primary"
+  //         size="small"
+  //         onClick={() => setEditedData()}
+  //       >
+  //         Edit
+  //       </Button>
+  //     ),
+  //   },
+  // ]
+
+  useEffect(() => {
+    getDevicesHandler()
+  }, [])
 
   return (
     <div>
@@ -77,12 +125,23 @@ function Devices() {
           )}
         </tbody>
       </table>
-      <button onClick={() => setAddDevice(true)} disabled={isLoading}>
+      {/* {
+        <div style={{ height: 400, width: '100%' }}>
+          <DataGrid rows={devices} columns={columns} pageSize={5} />
+        </div>
+      } */}
+      <Button
+        onClick={() => setAddDevice(true)}
+        variant="contained"
+        color="primary"
+        type="submit"
+        disabled={isLoading}
+      >
         Add Device
-      </button>
-      <button onClick={() => getDevicesHandler()} disabled={isLoading}>
-        Get All Device Data
-      </button>
+      </Button>
+      {/* <button onClick={() => setAddDevice(true)} disabled={isLoading}>
+        Add Device
+      </button> */}
     </div>
   )
 }

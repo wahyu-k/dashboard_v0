@@ -12,7 +12,7 @@
   border: 2px solid #89c5cc;
 }
 
-.usergraph__container > button {
+.tabel > button {
   border-style: none;
   border-radius: 10px;
   background-color: Transparent;
@@ -24,15 +24,15 @@
   outline: none;
 }
 
-.usergraph__container > button:hover {
+.tabel > button:hover {
   color: #01b1f7;
 }
 
-.usergraph__container > table {
+/* .usergraph__container > table {
   background: #ffffff;
   border: 1px solid black;
   border-collapse: collapse;
-}
+} */
 
 .table_id {
   background: #c1dee2;
@@ -55,4 +55,8 @@
   border-collapse: collapse;
   text-align: center;
   padding: 10px;
+}
+
+.tabel {
+  margin-left: 30px;
 }

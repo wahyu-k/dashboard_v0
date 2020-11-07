@@ -1,7 +1,7 @@
 .comparation__container {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  /* align-items: flex-start; */
   margin-top: 40px;
 }
 
@@ -34,7 +34,7 @@
 }
 
 .wolf__container {
-  margin-top: 65px;
+  margin-top: 50px;
 }
 
 .wolfram__container {
@@ -127,6 +127,31 @@
   align-items: flex-end;
   /* text-align: right; */
   /* margin-left: 50px; */
+}
+
+.quality__container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.quality__column__container {
+  display: flex;
+  flex-direction: column;
+  flex: 6;
+}
+
+.grey__container {
+  background: #ffffff;
+  border: 2px solid #a3a3a3;
+  box-sizing: border-box;
+  text-align: justify;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.login__link__container {
+  margin-bottom: 20px;
 }
 
 .compar__img {
