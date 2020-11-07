@@ -10,15 +10,21 @@ function SettingAccount(props) {
   }, [props])
 
   return (
-    <div className={css.setting__container}>
-      <div>
-        <UpdateUsername />
+    <div className={css.setting}>
+      <div className={css.setting__container}>
+        <div>
+          <UpdateUsername />
+        </div>
+        <div>
+          <UpdatePassword />
+        </div>
+        <div>
+          <UpdatePersonalData />
+        </div>
       </div>
-      <div>
-        <UpdatePassword />
-      </div>
-      <div>
-        <UpdatePersonalData />
+      <div className={css.footer}>
+        <p>Copyright © 2020 SIAB Indonesia</p>
+        <p>Powered by SIAB Indonesia</p>
       </div>
     </div>
   )

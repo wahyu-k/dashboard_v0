@@ -90,6 +90,7 @@ function DashboardSensors() {
       <UserBill data={data} />
       <UserSensor data={latest} />
       <UserGraph data={data} />
+      {/* <Lapor /> */}
     </div>
   )
 }

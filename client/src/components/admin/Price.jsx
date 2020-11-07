@@ -1,5 +1,7 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import axios from 'axios'
+import { DataGrid } from '@material-ui/data-grid'
+import Button from '@material-ui/core/Button'
 
 function Price() {
   const [prices, setPrices] = useState([])
@@ -22,10 +24,36 @@ function Price() {
     }
   }
 
+  const columns = [
+    { field: 'id', headerName: 'ID', width: 70 },
+    { field: 'price', headerName: 'Price', width: 130 },
+    {
+      field: 'device_id_list',
+      headerName: 'device_id',
+      width: 250,
+      valueGetter: (params) =>
+        `${params.getValue('device_id_list').toString()}`,
+    },
+    {
+      field: 'edit',
+      headerName: 'Edit',
+      width: 90,
+      renderCell: (params) => (
+        <Button variant="contained" color="primary" size="small">
+          Edit
+        </Button>
+      ),
+    },
+  ]
+
+  useEffect(() => {
+    fetchData()
+  }, [])
+
   return (
     <div>
       <h2>Price</h2>
-      <table>
+      {/* <table>
         <tbody>
           <tr>
             <td>Id</td>
@@ -42,8 +70,12 @@ function Price() {
             </tr>
           ))}
         </tbody>
-      </table>
-      <button onClick={() => fetchData()}>Fetch Data</button>
+      </table> */}
+      {
+        <div style={{ height: 400, width: '100%' }}>
+          <DataGrid rows={prices} columns={columns} pageSize={5} />
+        </div>
+      }
     </div>
   )
 }
