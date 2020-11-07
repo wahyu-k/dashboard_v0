@@ -46,6 +46,7 @@ app.put('/v1/devices', adminApi.updateDevice)
 app.post('/v1/binds', adminApi.binds)
 app.get('/v1/binds', adminApi.getBinds)
 app.put('/v1/binds', adminApi.updateBinds)
+app.put('/v1/admin/plan', adminApi.editPlan)
 app.delete('/v1/binds', adminApi.deleteBinds)
 
 const deviceApi = require('./components/device/deviceApi')
@@ -89,6 +90,11 @@ const adminPicApi = require('./components/adminPic/adminPicApi')
 
 app.get('/v1/adminpic/bill', tokenValidator.start, adminPicApi.getBill)
 app.post('/v1/adminpic/bill', tokenValidator.start, adminPicApi.postBill)
+
+const notifApi = require('./components/notif/notifApi')
+
+app.post('/v1/notif', tokenValidator.start, notifApi.postNotif)
+app.get('/v1/notif', tokenValidator.start, notifApi.getNotif)
 
 const port = process.env.PORT || 5000
 

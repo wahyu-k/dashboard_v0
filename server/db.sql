@@ -79,6 +79,15 @@ CREATE TABLE dash(
   title VARCHAR (100) NOT NULL
 );
 
+CREATE TABLE notifs(
+  id SERIAL PRIMARY KEY,
+  device_id BIGINT REFERENCES devices(id),
+  msg VARCHAR(100) NOT NULL,
+  prevent BOOLEAN,
+  prevent_msg VARCHAR(100),
+  created_at BIGINT NOT NULL
+);
+
 -- DUMMY DATA
 
 -- LOGINS TABLE
@@ -118,3 +127,8 @@ INSERT INTO bills(device_id, daily_flow, daily_bill, payment, created_at) VALUES
 INSERT INTO bills(device_id, daily_flow, daily_bill, payment, created_at) VALUES(3, 2.5, 2750, 0, ROUND(EXTRACT(EPOCH FROM NOW()) * 1000));
 INSERT INTO bills(device_id, daily_flow, daily_bill, payment, created_at) VALUES(3, 1.5, 1650, 0, ROUND(EXTRACT(EPOCH FROM NOW()) * 1000));
 INSERT INTO bills(device_id, daily_flow, daily_bill, payment, created_at) VALUES(3, 0, 0, 1000, ROUND(EXTRACT(EPOCH FROM NOW()) * 1000));
+
+--INSERT NOTIF TABLE
+INSERT INTO notifs(device_id, msg, prevent, prevent_msg, created_at) VALUES(2, 'Listrik nonaktif!', FALSE, '', ROUND(EXTRACT(EPOCH FROM NOW()) * 1000));
+INSERT INTO notifs(device_id, msg, prevent, prevent_msg, created_at) VALUES(2, 'Listrik nonaktif!', FALSE, '', (ROUND(EXTRACT(EPOCH FROM NOW()) * 1000) + 3210));
+INSERT INTO notifs(device_id, msg, prevent, prevent_msg, created_at) VALUES(3, 'Listrik nonaktif!', FALSE, '', (ROUND(EXTRACT(EPOCH FROM NOW()) * 1000) + 3210));

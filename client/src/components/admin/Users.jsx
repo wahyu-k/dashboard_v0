@@ -1,14 +1,47 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import epochToDate from '../../helper/epochToDate'
+import Dialog from '@material-ui/core/Dialog'
+import DialogActions from '@material-ui/core/DialogActions'
+import DialogContent from '@material-ui/core/DialogContent'
+import DialogTitle from '@material-ui/core/DialogTitle'
+import Button from '@material-ui/core/Button'
+import TextField from '@material-ui/core/TextField'
 
 function Users() {
   const [users, setUsers] = useState([])
+  const [open, setOpen] = useState(false)
+  const [plan, setPlan] = useState()
+  const [id, setId] = useState([])
   const [isLoading, setIsLoading] = useState(false)
+
+  const handleClickOpen = (user) => {
+    setOpen(true)
+    setPlan(user.plan)
+    setId(user.id)
+  }
+
+  const handleClose = () => {
+    setOpen(false)
+  }
 
   useEffect(() => {
     getUsersHandler()
   }, [])
+
+  const uploadEditData = async () => {
+    try {
+      const response = await axios.put(
+        `${process.env.REACT_APP_BASE_URL}/v1/admin/plan`,
+        { user_id: id, plan },
+      )
+      if (response) {
+        console.log(response.data)
+      }
+    } catch (error) {
+      console.error(error.message)
+    }
+  }
 
   const getUsersHandler = async () => {
     setIsLoading(true)
@@ -25,27 +58,6 @@ function Users() {
       console.error(error.response.data)
     }
   }
-
-  // const columns = [
-  //   { field: 'id', headerName: 'ID', width: 70 },
-  //   { field: 'username', headerName: 'Username', width: 130 },
-  //   { field: 'email', headerName: 'Email', width: 230 },
-  //   {
-  //     field: 'plan',
-  //     headerName: 'Plan',
-  //     width: 80,
-  //   },
-  //   {
-  //     field: 'created_at',
-  //     headerName: 'Created At',
-  //     width: 250,
-  //     valueGetter: (params) => `${epochToDate(params.getValue('created_at'))}`,
-  //   },
-  //   {
-  //     headerName: 'Edit',
-  //     width: 100,
-  //   },
-  // ]
 
   return (
     <div>
@@ -68,12 +80,48 @@ function Users() {
               <td>{user.plan}</td>
               <td>{epochToDate(user.created_at)}</td>
               <td>
-                <button>Edit</button>
+                <button onClick={() => handleClickOpen(user)}>Edit</button>
               </td>
             </tr>
           ))}
         </tbody>
       </table>
+      <Dialog
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="form-dialog-title"
+      >
+        <DialogTitle id="form-dialog-title">
+          <b>Edit</b>
+        </DialogTitle>
+        <DialogContent>
+          <TextField
+            autoFocus
+            margin="dense"
+            id="nominal"
+            label="Nominal"
+            type="number"
+            fullWidth
+            value={plan}
+            onChange={(e) => {
+              setPlan(e.target.value)
+            }}
+          />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose} color="primary">
+            Cancel
+          </Button>
+          <Button
+            onClick={() => {
+              uploadEditData()
+            }}
+            color="primary"
+          >
+            Bayar
+          </Button>
+        </DialogActions>
+      </Dialog>
       <button onClick={() => getUsersHandler()} disabled={isLoading}>
         Get All User Data
       </button>
