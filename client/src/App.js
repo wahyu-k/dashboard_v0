@@ -51,6 +51,7 @@ import UserWidget from './components/user/UserWidget'
 import SettingAccount from './components/admin/SettingAccount'
 // import CreditCardOutlinedIcon from '@material-ui/icons/CreditCardOutlined'
 import Logout from './components/Logout'
+import 'mapbox-gl/dist/mapbox-gl.css'
 
 const drawerWidth = 230
 const useStyles = makeStyles((theme) => ({
