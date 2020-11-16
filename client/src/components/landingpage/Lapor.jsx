@@ -4,18 +4,15 @@ import FormControlLabel from '@material-ui/core/FormControlLabel'
 import Button from '@material-ui/core/Button'
 import css from './ComparationApp.module.css'
 import axios from 'axios'
-// import Login from './../../components/Login'
+import Login from './../../components/Login'
 
 const Lapor = () => {
-  // const [checked, setChecked] = useState(true)
-  const [solution, setSolution] = useState('')
-  const [x, setX] = useState(0)
-
-  // const handleChange = (event) => {
-  //   setChecked(event.target.checked)
-  // }
-
-  // const [qual, setQual] = useState('')
+  const [solution, setSolution] = useState([])
+  const [check1, setCheck1] = useState(0)
+  const [check2, setCheck2] = useState(0)
+  const [check3, setCheck3] = useState(0)
+  const [check4, setCheck4] = useState(0)
+  const [check5, setCheck5] = useState(0)
 
   const [state, setState] = useState({
     checkedA: false,
@@ -27,106 +24,213 @@ const Lapor = () => {
 
   useEffect(() => {
     console.log('state', state)
+    if (
+      state.checkedA === true &&
+      state.checkedB === true &&
+      state.checkedC === true &&
+      state.checkedD === true &&
+      state.checkedE === true
+    ) {
+      setCheck1(1)
+      setCheck2(2)
+      setCheck3(3)
+      setCheck4(4)
+      setCheck5(5)
+    } else if (
+      state.checkedA === true &&
+      state.checkedB === true &&
+      state.checkedC === true &&
+      state.checkedD === true
+    ) {
+      setCheck1(1)
+      setCheck2(2)
+      setCheck3(3)
+      setCheck4(4)
+    } else if (
+      state.checkedA === true &&
+      state.checkedB === true &&
+      state.checkedC === true &&
+      state.checkedE === true
+    ) {
+      setCheck1(1)
+      setCheck2(2)
+      setCheck3(3)
+      setCheck4(5)
+    } else if (
+      state.checkedA === true &&
+      state.checkedB === true &&
+      state.checkedD === true &&
+      state.checkedE === true
+    ) {
+      setCheck1(1)
+      setCheck2(2)
+      setCheck3(4)
+      setCheck4(5)
+    } else if (
+      state.checkedA === true &&
+      state.checkedC === true &&
+      state.checkedD === true &&
+      state.checkedE === true
+    ) {
+      setCheck1(1)
+      setCheck2(3)
+      setCheck3(4)
+      setCheck4(5)
+    } else if (
+      state.checkedB === true &&
+      state.checkedC === true &&
+      state.checkedD === true &&
+      state.checkedE === true
+    ) {
+      setCheck1(2)
+      setCheck2(3)
+      setCheck3(4)
+      setCheck4(5)
+    } else if (
+      state.checkedA === true &&
+      state.checkedB === true &&
+      state.checkedC === true
+    ) {
+      setCheck1(1)
+      setCheck2(2)
+      setCheck3(3)
+    } else if (
+      state.checkedA === true &&
+      state.checkedB === true &&
+      state.checkedD === true
+    ) {
+      setCheck1(1)
+      setCheck2(2)
+      setCheck3(4)
+    } else if (
+      state.checkedA === true &&
+      state.checkedB === true &&
+      state.checkedE === true
+    ) {
+      setCheck1(1)
+      setCheck2(2)
+      setCheck3(5)
+    } else if (
+      state.checkedA === true &&
+      state.checkedC === true &&
+      state.checkedD === true
+    ) {
+      setCheck1(1)
+      setCheck2(3)
+      setCheck3(4)
+    } else if (
+      state.checkedA === true &&
+      state.checkedC === true &&
+      state.checkedE === true
+    ) {
+      setCheck1(1)
+      setCheck2(3)
+      setCheck3(5)
+    } else if (
+      state.checkedA === true &&
+      state.checkedD === true &&
+      state.checkedE === true
+    ) {
+      setCheck1(1)
+      setCheck2(4)
+      setCheck3(5)
+    } else if (
+      state.checkedB === true &&
+      state.checkedC === true &&
+      state.checkedD === true
+    ) {
+      setCheck1(2)
+      setCheck2(3)
+      setCheck3(4)
+    } else if (
+      state.checkedB === true &&
+      state.checkedC === true &&
+      state.checkedE === true
+    ) {
+      setCheck1(2)
+      setCheck2(3)
+      setCheck3(5)
+    } else if (
+      state.checkedB === true &&
+      state.checkedD === true &&
+      state.checkedE === true
+    ) {
+      setCheck1(2)
+      setCheck2(3)
+      setCheck3(5)
+    } else if (
+      state.checkedC === true &&
+      state.checkedD === true &&
+      state.checkedE === true
+    ) {
+      setCheck1(3)
+      setCheck2(4)
+      setCheck3(5)
+    } else if (state.checkedA === true && state.checkedB === true) {
+      setCheck1(1)
+      setCheck2(2)
+    } else if (state.checkedA === true && state.checkedC === true) {
+      setCheck1(1)
+      setCheck2(3)
+    } else if (state.checkedA === true && state.checkedD === true) {
+      setCheck1(1)
+      setCheck2(4)
+    } else if (state.checkedA === true && state.checkedE === true) {
+      setCheck1(1)
+      setCheck2(5)
+    } else if (state.checkedB === true && state.checkedC === true) {
+      setCheck1(2)
+      setCheck2(3)
+    } else if (state.checkedB === true && state.checkedD === true) {
+      setCheck1(2)
+      setCheck2(4)
+    } else if (state.checkedB === true && state.checkedE === true) {
+      setCheck1(2)
+      setCheck2(5)
+    } else if (state.checkedC === true && state.checkedD === true) {
+      setCheck1(3)
+      setCheck2(4)
+    } else if (state.checkedC === true && state.checkedE === true) {
+      setCheck1(3)
+      setCheck2(5)
+    } else if (state.checkedD === true && state.checkedE === true) {
+      setCheck1(4)
+      setCheck2(5)
+    } else if (state.checkedE === true) {
+      setCheck1(5)
+    } else if (state.checkedD === true) {
+      setCheck1(4)
+    } else if (state.checkedC === true) {
+      setCheck1(3)
+    } else if (state.checkedB === true) {
+      setCheck1(2)
+    } else if (state.checkedA === true) {
+      setCheck1(1)
+    }
   }, [state])
 
-  const handleChange = async (event) => {
-    await setState({ ...state, [event.target.name]: event.target.checked })
+  const handleChange = (event) => {
+    setState({ ...state, [event.target.name]: event.target.checked })
   }
 
   const handleSubmit = async (event) => {
     try {
-      if (checkedA === true) {
-        setX(1)
-      } else if (checkedB === true) {
-        setX(2)
-      } else if (checkedC === true) {
-        setX(3)
-      } else if (checkedD === true) {
-        setX(4)
-      } else if (checkedE === true) {
-        setX(5)
-      }
       const update = await axios.post(
         `${process.env.REACT_APP_BASE_URL}/v1/users/keluhan`,
         {
-          checked: parseInt(x),
+          check1: parseInt(check1),
+          check2: parseInt(check2),
+          check3: parseInt(check3),
+          check4: parseInt(check4),
+          check5: parseInt(check5),
         },
       )
       console.log(update.data)
+      setSolution(update.data)
     } catch (err) {
       console.log('error', err)
     }
   }
-
-  // const handleSubmit = async (centang) => {
-  //   let checked = 0
-  //   switch (centang) {
-  //     // case checkedA:
-  //     // case {checkedA===true}:
-  //     case { checkedA: true }:
-  //       // case checkedA === true:
-  //       // case (checkedA: true):
-  //       checked = 1
-  //       break
-  //     case checkedB: true:
-  //       checked = 2
-  //       break
-  //   }
-  //   const resp = await axios.post(
-  //     `${process.env.REACT_APP_BASE_URL}/v1/users/keluhan`,
-  //     {
-  //       headers: {
-  //         Authorization: 'Bearer ' + localStorage.getItem('_s_t'),
-  //       },
-  //       params: {
-  //         checked,
-  //       },
-  //     },
-  //   )
-  //   setSolution(resp.data)
-  //   console.log('solution', solution)
-  // }
-
-  const { checkedA, checkedB, checkedC, checkedD, checkedE } = state
-
-  // const centang = async (checked) => {
-  //   let check = 0
-  //   switch (checked) {
-  //     case 'checkedA===true':
-  //       check = 86400000
-  //       break
-  //     case 'checkedB===true':
-  //       check = 86400000 * 7
-  //       break
-  //     case 'checkedC===true':
-  //       check = 86400000 * 30
-  //       break
-  //     case 'checkedD===true':
-  //       check = 86400000 * 365
-  //       break
-  //     case 'checkedE===true':
-  //       check = 86400000 * 365
-  //       break
-  //     case 'checkedF===true':
-  //       check = 86400000 * 365
-  //       break
-  //     default:
-  //       check = 0
-  //       break
-  //   }
-  //   const resp = await axios.get(
-  //     `${process.env.REACT_APP_BASE_URL}/v1/users/keluhan`,
-  //     {
-  //       headers: {
-  //         Authorization: 'Bearer ' + localStorage.getItem('_s_t'),
-  //       },
-  //       params: {
-  //         keluhan,
-  //       },
-  //     },
-  //   )
-  //   setData(resp.data.primary)
-  // }
 
   return (
     <div className={css.wolf__container}>
@@ -136,86 +240,69 @@ const Lapor = () => {
         <p>
           Silakan beri keterangan kualitas airmu sesuai kriteria dibawah ini :
         </p>
-        {/* <Checkbox
-          checked={checked}
-          onChange={handleChange}
-          inputProps={{ 'aria-label': 'secondary checkbox' }}
-        /> */}
-        <div className={css.quality__container}>
-          <div className={css.quality__column__container}>
-            <FormControlLabel
-              control={
-                <Checkbox
-                  checked={state.checkedA}
-                  onChange={handleChange}
-                  name="checkedA"
-                  color="primary"
-                />
-              }
-              label="Berwarna kuning"
-            />
-            <FormControlLabel
-              control={
-                <Checkbox
-                  checked={state.checkedB}
-                  onChange={handleChange}
-                  name="checkedB"
-                  color="primary"
-                />
-              }
-              label="Berkerak ketika direbus"
-            />
-            <FormControlLabel
-              control={
-                <Checkbox
-                  checked={state.checkedC}
-                  onChange={handleChange}
-                  name="checkedC"
-                  color="primary"
-                />
-              }
-              label="Memiliki rasa"
-            />
-          </div>
-          <div className={css.quality__column__container}>
-            <FormControlLabel
-              control={
-                <Checkbox
-                  checked={state.checkedD}
-                  onChange={handleChange}
-                  name="checkedD"
-                  color="primary"
-                />
-              }
-              label="Memiliki bau"
-            />
-            <FormControlLabel
-              control={
-                <Checkbox
-                  checked={state.checkedE}
-                  onChange={handleChange}
-                  name="checkedE"
-                  color="primary"
-                />
-              }
-              label="Keruh"
-            />
-            {/* <FormControlLabel
-              control={
-                <Checkbox
-                  checked={state.checkedF}
-                  onChange={handleChange}
-                  name="checkedF"
-                  color="primary"
-                />
-              }
-              label="Lain-lain"
-            /> */}
+        <div className={css.lapor__container}>
+          <div className={css.quality__container}>
+            <div className={css.quality__column__container}>
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    checked={state.checkedA}
+                    onChange={handleChange}
+                    name="checkedA"
+                    color="primary"
+                  />
+                }
+                label="Berwarna kuning"
+              />
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    checked={state.checkedB}
+                    onChange={handleChange}
+                    name="checkedB"
+                    color="primary"
+                  />
+                }
+                label="Berkerak ketika direbus"
+              />
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    checked={state.checkedC}
+                    onChange={handleChange}
+                    name="checkedC"
+                    color="primary"
+                  />
+                }
+                label="Memiliki rasa"
+              />
+            </div>
+            <div className={css.quality__column__container}>
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    checked={state.checkedD}
+                    onChange={handleChange}
+                    name="checkedD"
+                    color="primary"
+                  />
+                }
+                label="Memiliki bau"
+              />
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    checked={state.checkedE}
+                    onChange={handleChange}
+                    name="checkedE"
+                    color="primary"
+                  />
+                }
+                label="Keruh"
+              />
+            </div>
           </div>
           <p className={css.login__link__container}>
-            {/* Jika ingin melakukan konsultasi lebih lanjut terkait kualitas air
-            dan solusinya silahkan klik INGIN MENYERTAKAN FOTO/LOKASI? (INGIN
-            KONSULTASI LEBIH LANJUT?) */}
             <a href="login"> INGIN MENYERTAKAN FOTO?</a>
           </p>
         </div>
@@ -235,18 +322,11 @@ const Lapor = () => {
         <h3>Solusi kualitas air anda :</h3>
         <div className={css.line}></div>
         <div className={css.input__container}>
-          <p className={css.grey__container}>
-            {solution}
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea unde et
-            impedit voluptatem ipsum deserunt, eos exercitationem, a quaerat
-            eius in vitae quas culpa molestiae reiciendis consequuntur sequi
-            quasi dignissimos.Lorem ipsum dolor sit amet consectetur adipisicing
-            elit. Ea unde et impedit voluptatem ipsum deserunt, eos
-            exercitationem, a quaerat eius in vitae quas culpa molestiae
-            reiciendis consequuntur sequi quasi dignissimos. Lorem ipsum dolor
-            sit amet consectetur adipisicing elit. Ea unde et impedit voluptatem
-            ipsum deserunt, eos exercitationem, a quaerat eius in vitae quas
-            culpa molestiae reiciendis consequuntur sequi quasi dignissimos.
+          <p
+            className={css.grey__container}
+            placeholder="Solusi Kualitas Air Anda"
+          >
+            {solution.map((element, i) => element.solution + '. ')}
           </p>
         </div>
       </div>

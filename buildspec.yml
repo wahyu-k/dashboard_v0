@@ -1,0 +1,15 @@
+version: 0.2
+phases:
+  pre_build:
+    commands:
+      - echo Installing the NPM package on client ...
+      - cd client && npm install
+      - echo Installing the NPM package on server ...
+      - cd ../server && npm install
+  build:
+    commands:
+      - echo Building React App ...
+      - cd ../client && npm run build
+  post_build:
+    commands:
+      - echo Build completed on `date`

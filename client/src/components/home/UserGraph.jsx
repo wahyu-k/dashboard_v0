@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { useState, useEffect } from 'react'
 import {
   CartesianGrid,
@@ -64,7 +65,6 @@ function UserGraph(props) {
 
   useEffect(() => {
     setData(props.data)
-    console.log('data', props.data)
   }, [props.data])
 
   const columns = [
@@ -80,7 +80,7 @@ function UserGraph(props) {
 
   return (
     <div className={css.usergraph__container}>
-      <h2>Grafik Penggunaan Air Anda</h2>
+      <h3>Grafik Penggunaan Air</h3>
       <div className={css.line}></div>
 
       <ResponsiveContainer width="99%" height={300}>
@@ -92,13 +92,13 @@ function UserGraph(props) {
               page * rowsPerPage + rowsPerPage,
             )
           }
-          margin={{ top: 5, right: 20, left: 10, bottom: 5 }}
+          margin={{ top: 5, right: 10, left: -20, bottom: 5 }}
         >
           <Tooltip />
           <CartesianGrid stroke="#f5f5f5" />
           <Legend verticalAlign="top" height={36} />
           <YAxis />
-          <XAxis dataKey="created_at" />
+          {/* <XAxis dataKey="created_at" /> */}
           <Line
             name="Debit (Liter)"
             type="monotone"

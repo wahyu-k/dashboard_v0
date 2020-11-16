@@ -9,8 +9,8 @@ const pool = require('../../config/db')
  */
 
 const getSensors = async (req, res) => {
+  const time = parseInt(req.query.time)
   try {
-    const { time } = req.body
     if (time === 0) {
       const response = await pool.query(
         'SELECT * FROM sensors ORDER BY created_at DESC',

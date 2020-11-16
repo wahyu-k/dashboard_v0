@@ -84,6 +84,15 @@ CREATE TABLE simplesol(
   solution VARCHAR (500) NOT NULL
 );
 
+CREATE TABLE notifs(
+  id SERIAL PRIMARY KEY,
+  device_id BIGINT REFERENCES devices(id),
+  msg VARCHAR(100) NOT NULL,
+  prevent BOOLEAN,
+  prevent_msg VARCHAR(100),
+  created_at BIGINT NOT NULL
+);
+
 -- DUMMY DATA
 
 -- LOGINS TABLE
@@ -100,9 +109,9 @@ INSERT INTO users(id, first_name, last_name, dob, prov, region, plan, created_at
 INSERT INTO users(id, first_name, last_name, dob, prov, region, plan, created_at, modified_at) VALUES(4, 'Pengelola', 'User', '', 'Jawa Tengah', 'Semarang', 2, ROUND(EXTRACT(EPOCH FROM NOW()) * 1000), ROUND(EXTRACT(EPOCH FROM NOW())) * 1000);
 
 -- DEVICE TABLE
-INSERT INTO devices(name, lat, lng, created_at, modified_at) VALUES('Zeus I', -7.552973, 110.808103,  ROUND(EXTRACT(EPOCH FROM NOW()) * 1000), ROUND(EXTRACT(EPOCH FROM NOW())) * 1000);
-INSERT INTO devices(name, lat, lng, created_at, modified_at) VALUES('Zeus II', -7.562973, 110.809103,  ROUND(EXTRACT(EPOCH FROM NOW()) * 1000), ROUND(EXTRACT(EPOCH FROM NOW())) * 1000);
-INSERT INTO devices(name, lat, lng, created_at, modified_at) VALUES('Zeus III', -7.572973, 110.818103,  ROUND(EXTRACT(EPOCH FROM NOW()) * 1000), ROUND(EXTRACT(EPOCH FROM NOW())) * 1000);
+INSERT INTO devices(name, lat, lng, created_at, modified_at) VALUES('Cawengkal 1', -7.307236, 110.622135,  ROUND(EXTRACT(EPOCH FROM NOW()) * 1000), ROUND(EXTRACT(EPOCH FROM NOW())) * 1000);
+INSERT INTO devices(name, lat, lng, created_at, modified_at) VALUES('Cawengkal 2', -7.3073592, 110.622243,  ROUND(EXTRACT(EPOCH FROM NOW()) * 1000), ROUND(EXTRACT(EPOCH FROM NOW())) * 1000);
+INSERT INTO devices(name, lat, lng, created_at, modified_at) VALUES('Cawengkal 3', -7.307134, 110.6224333,  ROUND(EXTRACT(EPOCH FROM NOW()) * 1000), ROUND(EXTRACT(EPOCH FROM NOW())) * 1000);
 
 -- SENSORS TABLE
 INSERT INTO sensors(ph, tds, turb, temp, flow, device_id, created_at) VALUES(7.12, 80.43, 23.12, 28.43, 1.4, 1, ROUND(EXTRACT(EPOCH FROM NOW()) * 1000));
@@ -137,3 +146,8 @@ INSERT INTO simplesol(solution) VALUES('solusi b tercentang');
 INSERT INTO simplesol(solution) VALUES('solusi c tercentang');
 INSERT INTO simplesol(solution) VALUES('solusi d tercentang');
 INSERT INTO simplesol(solution) VALUES('solusi e tercentang');
+
+--INSERT NOTIF TABLE
+INSERT INTO notifs(device_id, msg, prevent, prevent_msg, created_at) VALUES(2, 'Listrik nonaktif!', FALSE, '', ROUND(EXTRACT(EPOCH FROM NOW()) * 1000));
+INSERT INTO notifs(device_id, msg, prevent, prevent_msg, created_at) VALUES(2, 'Listrik nonaktif!', FALSE, '', (ROUND(EXTRACT(EPOCH FROM NOW()) * 1000) + 3210));
+INSERT INTO notifs(device_id, msg, prevent, prevent_msg, created_at) VALUES(3, 'Listrik nonaktif!', FALSE, '', (ROUND(EXTRACT(EPOCH FROM NOW()) * 1000) + 3210));

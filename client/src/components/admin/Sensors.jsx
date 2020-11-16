@@ -14,9 +14,9 @@ function Sensors() {
   const getSensorsHandler = async () => {
     setIsLoading(true)
     try {
-      const response = await axios.post(
+      const response = await axios.get(
         `${process.env.REACT_APP_BASE_URL}/v1/sensors`,
-        { time: 0 },
+        { params: { time: 0 } },
       )
       if (response) {
         setIsLoading(false)
@@ -75,10 +75,12 @@ function Sensors() {
         time = 0
         break
     }
-    const resp = await axios.post(
+    const resp = await axios.get(
       `${process.env.REACT_APP_BASE_URL}/v1/sensors`,
       {
-        time,
+        params: {
+          time,
+        },
       },
     )
     setSensors(resp.data)
@@ -212,17 +214,19 @@ function Sensors() {
               </tr>
             ))}
         </tbody>
+      </table>
+      {sensors.length === 0 ? null : (
       </table> */}
-      {
-        <div style={{ height: 400, width: '100%' }}>
-          <DataGrid
-            rows={sensors}
-            columns={columns}
-            pageSize={10}
-            disabled={isLoading}
-          />
-        </div>
-      }
+
+      <div style={{ height: 400, width: '100%' }}>
+        <DataGrid
+          rows={sensors}
+          columns={columns}
+          pageSize={10}
+          disabled={isLoading}
+        />
+      </div>
+
       {/* {sensors.length === 0 ? null : (
         <div>
           <button onClick={() => pagination('home')}>Halaman Awal</button>
@@ -234,6 +238,11 @@ function Sensors() {
           </button>
           <button onClick={() => pagination('last')}>Halaman Terakhir</button>
         </div>
+      )}
+
+      <button onClick={() => getSensorsHandler()} disabled={isLoading}>
+        Get Sensors Data
+      </button>
       )} */}
     </div>
   )

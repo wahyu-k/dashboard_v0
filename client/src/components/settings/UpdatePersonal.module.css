@@ -1,10 +1,6 @@
-.update_personal_container {
+.update__personal__container {
   display: flex;
   flex-direction: column;
-}
-
-.update_personal_container > h3 {
-  font-size: 22px;
 }
 
 .form__container {
@@ -17,4 +13,16 @@
   width: 62px;
   height: 0px;
   border: 2px solid #89c5cc;
+}
+
+@media (max-width: 1025px) {
+  .update__personal__container {
+    margin-top: 30px;
+  }
+}
+
+@media (max-width: 450px) {
+  .update__personal__container {
+    margin-top: 0;
+  }
 }

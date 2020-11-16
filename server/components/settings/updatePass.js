@@ -1,5 +1,4 @@
 const pool = require('../../config/db')
-const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt')
 const Joi = require('joi')
 
@@ -8,19 +7,14 @@ const Joi = require('joi')
  * Update Password API
  *
  * @requires
- *  @token - web token
  *  @currentPass - the current password to confirm
  *  @newPassword - the new password
  */
 const updatePass = async (req, res) => {
-  const { token, currentPass, newPassword } = req.body
+  const { id } = req.session
+  const { currentPass, newPassword } = req.body
 
   try {
-    const { id } = await jwt.decode(token, process.env.JWT_SECRET)
-
-    if (!id) {
-      throw new Error('Token invalid!')
-    }
     const response = await pool.query(
       'SELECT password FROM logins WHERE id = $1',
       [id],

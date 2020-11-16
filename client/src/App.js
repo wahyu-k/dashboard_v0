@@ -19,7 +19,8 @@ import loading_siab from './img/loading_siab.png'
 import css from './app.module.css'
 import jwt from 'jsonwebtoken'
 import AdminPIC from './components/AdminPIC'
-import FreeUser from './components/FreeUser'
+import ExitToAppIcon from '@material-ui/icons/ExitToApp'
+// import FreeUser from './components/FreeUser'
 import {
   AppBar,
   Divider,
@@ -48,7 +49,7 @@ import siab_logo from './img/login/logo_siab.png'
 import LandingPage from './components/LandingPage'
 import UserWidget from './components/user/UserWidget'
 import SettingAccount from './components/admin/SettingAccount'
-import CreditCardOutlinedIcon from '@material-ui/icons/CreditCardOutlined'
+// import CreditCardOutlinedIcon from '@material-ui/icons/CreditCardOutlined'
 import Logout from './components/Logout'
 
 const drawerWidth = 230
@@ -208,7 +209,13 @@ function App(props) {
       </div>
       <Divider />
       <List>
-        <Link to="/" style={{ color: '#000' }}>
+        <Link
+          to="/"
+          style={{ color: '#000' }}
+          onClick={() => {
+            mobileOpen && handleDrawerToggle()
+          }}
+        >
           <ListItem button>
             <ListItemIcon>
               <HomeOutlinedIcon />
@@ -220,7 +227,14 @@ function App(props) {
       <Divider />
       <List>
         {accountMenuList.map((menu, index) => (
-          <Link to={menu.link} style={{ color: '#000' }} key={index}>
+          <Link
+            to={menu.link}
+            style={{ color: '#000' }}
+            key={index}
+            onClick={() => {
+              mobileOpen && handleDrawerToggle()
+            }}
+          >
             <ListItem button key={index}>
               <ListItemIcon>{menu.icon}</ListItemIcon>
               <ListItemText primary={menu.name} />
@@ -230,7 +244,13 @@ function App(props) {
       </List>
       <Divider />
       <List>
-        <Link to="/help" style={{ color: '#000' }}>
+        <Link
+          to="/help"
+          style={{ color: '#000' }}
+          onClick={() => {
+            mobileOpen && handleDrawerToggle()
+          }}
+        >
           <ListItem button>
             <ListItemIcon>
               <MenuBookOutlinedIcon />
@@ -251,7 +271,13 @@ function App(props) {
       <UserWidget data={theSession} />
       <Divider />
       <List>
-        <Link to="/" style={{ color: '#000' }}>
+        <Link
+          to="/"
+          style={{ color: '#000' }}
+          onClick={() => {
+            mobileOpen && handleDrawerToggle()
+          }}
+        >
           <ListItem button>
             <ListItemIcon>
               <HomeOutlinedIcon />
@@ -259,18 +285,24 @@ function App(props) {
             <ListItemText primary="Dashboard" />
           </ListItem>
         </Link>
-        <Link to="/payment" style={{ color: '#000' }}>
+        {/* <Link to="/payment" style={{ color: '#000' }}>
           <ListItem button>
             <ListItemIcon>
               <CreditCardOutlinedIcon />
             </ListItemIcon>
             <ListItemText primary="Keuangan" />
           </ListItem>
-        </Link>
+        </Link> */}
       </List>
       <Divider />
       <List>
-        <Link to="/help" style={{ color: '#000' }}>
+        <Link
+          to="/help"
+          style={{ color: '#000' }}
+          onClick={() => {
+            mobileOpen && handleDrawerToggle()
+          }}
+        >
           <ListItem button>
             <ListItemIcon>
               <MenuBookOutlinedIcon />
@@ -337,7 +369,10 @@ function App(props) {
                   onClose={handleClose}
                 >
                   <Link to="/account" style={{ color: '#000' }}>
-                    <MenuItem onClick={handleClose}>Akunku</MenuItem>
+                    <MenuItem onClick={handleClose}>
+                      <AccountCircle style={{ marginRight: '7px' }} />
+                      Akunku
+                    </MenuItem>
                   </Link>
                   <Link to="/logout" style={{ color: '#000' }}>
                     <MenuItem
@@ -345,6 +380,7 @@ function App(props) {
                         handleClose()
                       }}
                     >
+                      <ExitToAppIcon style={{ marginRight: '7px' }} />
                       Keluar Akun
                     </MenuItem>
                   </Link>
@@ -393,7 +429,7 @@ function App(props) {
                 if (!isLogin) {
                   return (
                     <LandingPage
-                      onView={() => setMenuPos('Siaga Air Bersih Indonesia')}
+                      onView={() => setMenuPos('Siaga Air Bersih')}
                     />
                   )
                   // return <FreeUser  />
@@ -420,7 +456,9 @@ function App(props) {
                       } else {
                         if (isFreeUser) {
                           return (
-                            <FreeUser onView={() => setMenuPos('Dashboard')} />
+                            <LandingPage
+                              onView={() => setMenuPos('Siaga Air Bersih')}
+                            />
                           )
                         }
                       }
@@ -450,7 +488,7 @@ function App(props) {
               <ForgetPass onView={() => setMenuPos('Reset Kata Sandi')} />
             </Route>
             <Route path="/reset_password/:token" exact>
-              <ResetPass />
+              <ResetPass onView={() => setMenuPos('Reset Kata Sandi')} />
             </Route>
             <Route path="/logout" exact>
               <Logout />

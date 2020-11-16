@@ -1,14 +1,14 @@
 import React, { Component } from 'react'
 import ReactDom from 'react-dom'
 import ReactS3 from 'react-s3'
-import { aws } from '../../keys'
+
+const aws = require('aws-sdk')
 
 const config = {
-  bucketName: 'camer',
-  dirName: 'image' /* optional */,
+  bucketName: 'siabupload',
   region: 'us-east-2',
-  accessKeyId: 'AKIAJEAR3OCO5QR6I7GA',
-  secretAccessKey: '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',
+  accessKeyId: 'AKIAXJRA2B7A6J5HSXNB',
+  secretAccessKey: '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',
 }
 
 class Uploadtest extends Component {
@@ -16,7 +16,14 @@ class Uploadtest extends Component {
     super()
   }
   upload(e) {
-    console.log('e.target.files', e.target.files)
+    console.log('e.target.files', e.target.files[0])
+    ReactS3.upload(e.target.files[0], config)
+      .then((data) => {
+        console.log('data', data.location)
+      })
+      .catch((err) => {
+        alert(err)
+      })
   }
   render() {
     return (

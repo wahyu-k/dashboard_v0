@@ -46,10 +46,10 @@ const forgetPass = async (req, res) => {
     const info = await mail.sendMail({
       from: '"Siaga Air Bersih" <no-reply@siagaairbersih.com>', // sender address
       to: receiver, // list of receivers
-      subject: 'Password Reset', // Subject line
-      html: `<p>Here is the link to reset your password<p>
+      subject: 'Rest Kata Sandi', // Subject line
+      html: `<p>Berikut adalah link untuk reset kata sandi Anda<p>
              <br />
-             <a>localhost:3000/reset_password/${jwtAuth}</a>`, // html body
+             <a>akun.siagaairbersih.com/reset_password/${jwtAuth}</a>`, // html body
     })
 
     // console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info))
