@@ -4,7 +4,7 @@ import FormControlLabel from '@material-ui/core/FormControlLabel'
 import Button from '@material-ui/core/Button'
 import css from './ComparationApp.module.css'
 import axios from 'axios'
-import Login from './../../components/Login'
+import login from './../../components/Login'
 
 const Lapor = () => {
   const [solution, setSolution] = useState([])
