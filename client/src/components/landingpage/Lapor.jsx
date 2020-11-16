@@ -4,7 +4,6 @@ import FormControlLabel from '@material-ui/core/FormControlLabel'
 import Button from '@material-ui/core/Button'
 import css from './ComparationApp.module.css'
 import axios from 'axios'
-import login from './../../components/Login'
 
 const Lapor = () => {
   const [solution, setSolution] = useState([])
@@ -206,6 +205,12 @@ const Lapor = () => {
       setCheck1(2)
     } else if (state.checkedA === true) {
       setCheck1(1)
+    } else {
+      setCheck1(0)
+      setCheck2(0)
+      setCheck3(0)
+      setCheck4(0)
+      setCheck5(0)
     }
   }, [state])
 

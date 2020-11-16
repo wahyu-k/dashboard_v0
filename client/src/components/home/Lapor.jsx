@@ -162,7 +162,7 @@ import React, { Component } from 'react'
 import axios from 'axios'
 // import css from './lapor.module.css'
 
-export class Lapor extends Component {
+export class Consult extends Component {
   state = { selectedFile: null }
   fileSelectedHandler = (event) => {
     this.setState({
@@ -279,4 +279,4 @@ export class Lapor extends Component {
   }
 }
 
-export default Lapor
+export default Consult

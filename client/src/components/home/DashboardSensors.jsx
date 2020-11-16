@@ -4,7 +4,7 @@ import axios from 'axios'
 import UserBill from './UserBill'
 import UserSensor from './UserSensor'
 import UserGraph from './UserGraph'
-import Lapor from './Lapor'
+import Consult from './Lapor'
 import LinearProgress from '@material-ui/core/LinearProgress'
 import { Collapse, Button } from '@material-ui/core'
 import { Alert } from '@material-ui/lab'
@@ -91,7 +91,7 @@ function DashboardSensors() {
       <UserBill data={data} />
       <UserSensor data={latest} />
       <UserGraph data={data} />
-      <Lapor />
+      <Consult />
     </div>
   )
 }
