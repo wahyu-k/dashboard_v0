@@ -79,6 +79,11 @@ CREATE TABLE dash(
   title VARCHAR (100) NOT NULL
 );
 
+CREATE TABLE simplesol(
+  checked SERIAL PRIMARY KEY,
+  solution VARCHAR (500) NOT NULL
+);
+
 CREATE TABLE notifs(
   id SERIAL PRIMARY KEY,
   device_id BIGINT REFERENCES devices(id),
@@ -128,6 +133,19 @@ INSERT INTO bills(device_id, daily_flow, daily_bill, payment, created_at) VALUES
 INSERT INTO bills(device_id, daily_flow, daily_bill, payment, created_at) VALUES(3, 2.5, 2750, 0, ROUND(EXTRACT(EPOCH FROM NOW()) * 1000));
 INSERT INTO bills(device_id, daily_flow, daily_bill, payment, created_at) VALUES(3, 1.5, 1650, 0, ROUND(EXTRACT(EPOCH FROM NOW()) * 1000));
 INSERT INTO bills(device_id, daily_flow, daily_bill, payment, created_at) VALUES(3, 0, 0, 1000, ROUND(EXTRACT(EPOCH FROM NOW()) * 1000));
+INSERT INTO bills(device_id, daily_flow, daily_bill, payment, created_at) VALUES(3, 5.5, 2750, 0, ROUND(EXTRACT(EPOCH FROM NOW()) * 1000));
+INSERT INTO bills(device_id, daily_flow, daily_bill, payment, created_at) VALUES(3, 7.5, 1650, 0, ROUND(EXTRACT(EPOCH FROM NOW()) * 1000));
+INSERT INTO bills(device_id, daily_flow, daily_bill, payment, created_at) VALUES(3, 3, 0, 1000, ROUND(EXTRACT(EPOCH FROM NOW()) * 1000));
+INSERT INTO bills(device_id, daily_flow, daily_bill, payment, created_at) VALUES(3, 5, 2750, 0, ROUND(EXTRACT(EPOCH FROM NOW()) * 1000));
+INSERT INTO bills(device_id, daily_flow, daily_bill, payment, created_at) VALUES(3, 7, 1650, 0, ROUND(EXTRACT(EPOCH FROM NOW()) * 1000));
+INSERT INTO bills(device_id, daily_flow, daily_bill, payment, created_at) VALUES(3, 3.12, 0, 1000, ROUND(EXTRACT(EPOCH FROM NOW()) * 1000));
+
+-- SIMPLE SOLUTION TABLE
+INSERT INTO simplesol(solution) VALUES('solusi a tercentang');
+INSERT INTO simplesol(solution) VALUES('solusi b tercentang');
+INSERT INTO simplesol(solution) VALUES('solusi c tercentang');
+INSERT INTO simplesol(solution) VALUES('solusi d tercentang');
+INSERT INTO simplesol(solution) VALUES('solusi e tercentang');
 
 --INSERT NOTIF TABLE
 INSERT INTO notifs(device_id, msg, prevent, prevent_msg, created_at) VALUES(2, 'Listrik nonaktif!', FALSE, '', ROUND(EXTRACT(EPOCH FROM NOW()) * 1000));

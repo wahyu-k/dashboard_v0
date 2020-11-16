@@ -20,7 +20,7 @@ import css from './app.module.css'
 import jwt from 'jsonwebtoken'
 import AdminPIC from './components/AdminPIC'
 import ExitToAppIcon from '@material-ui/icons/ExitToApp'
-// import FreeUser from './components/FreeUser'
+import FreeUser from './components/FreeUser'
 import {
   AppBar,
   Divider,
@@ -457,7 +457,7 @@ function App(props) {
                       } else {
                         if (isFreeUser) {
                           return (
-                            <LandingPage
+                            <FreeUser
                               onView={() => setMenuPos('Siaga Air Bersih')}
                             />
                           )

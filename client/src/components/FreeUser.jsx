@@ -3,6 +3,7 @@ import Map from './aksiberbagi/Map'
 import ComparationApp from './landingpage/ComparationApp'
 import DistributionWidget from './landingpage/DistributionWidget'
 import css from './LandingPage.module.css'
+import Consult from './home/Lapor'
 
 function FreeUser(props) {
   //eslint-disable-next-line
@@ -28,6 +29,7 @@ function FreeUser(props) {
       </div>
       <DistributionWidget />
       <ComparationApp />
+      <Consult />
       <div className={css.footer}>
         <p>Copyright © 2020 SIAB Indonesia</p>
         <p>Powered by SIAB Indonesia</p>

@@ -24,6 +24,14 @@ app.get('/', (req, res) => {
   })
 })
 
+// const ImageController = require('./user/imageController')
+// app.post('/api/uploadImage', ImageController.uploadImageToS3)
+
+// const profile = require('./config/profile')
+// app.use('/config/profile', profile)
+// app.post('/api/profile/profile-img-upload', profile)
+// app.post('/api/profile/multiple-file-upload', profile)
+
 const loginApi = require('./components/login/loginApi')
 
 app.post('/v1/register', loginApi.register)
@@ -66,6 +74,7 @@ app.post('/v1/users/sensors', userApi.getSensors)
 app.get('/v1/users/binds', userApi.getBinds)
 app.get('/v1/users/sensors', tokenValidator.start, userApi.getBindSensor)
 app.get('/v1/users/landing', userApi.getLandingPage)
+app.post('/v1/users/keluhan', userApi.keluhan)
 
 const aksiBerbagiApi = require('./components/aksiBerbagi/aksiBerbagiApi')
 
