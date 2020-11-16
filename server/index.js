@@ -52,6 +52,7 @@ app.delete('/v1/binds', adminApi.deleteBinds)
 const deviceApi = require('./components/device/deviceApi')
 
 app.post('/v1/sensors', deviceApi.postSensorVal)
+app.post('/v1/post_sensor_by_device', deviceApi.postByDevice)
 
 const helperApi = require('./components/helper/helperApi')
 
@@ -95,6 +96,10 @@ const notifApi = require('./components/notif/notifApi')
 
 app.post('/v1/notif', tokenValidator.start, notifApi.postNotif)
 app.get('/v1/notif', tokenValidator.start, notifApi.getNotif)
+
+const imageUpload = require('./components/image/uploadImage')
+app.post('/v1/profileImage', imageUpload)
+app.post('/v1/reportImage', imageUpload)
 
 const port = process.env.PORT || 5000
 

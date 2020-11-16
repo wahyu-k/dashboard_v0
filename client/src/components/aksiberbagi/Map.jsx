@@ -3,10 +3,12 @@ import React, { useState, useEffect } from 'react'
 import {
   GoogleMap,
   InfoWindow,
-  Marker,
+  // Marker,
   useLoadScript,
 } from '@react-google-maps/api'
 import axios from 'axios'
+import ReactMapGL, { Marker, NavigationControl } from 'react-map-gl'
+import siab_logo from '../../img/siab_logo.png'
 
 const libraries = ['places']
 
@@ -15,7 +17,11 @@ function Map() {
   const [isError, setIsError] = useState(false)
   const [errorMsg, setErrorMsg] = useState('')
   const [data, setData] = useState(null)
-  const [center, setCenter] = useState({ lat: -7.560618, lng: 110.808655 })
+  const [loc, setLoc] = useState({
+    longitude: 110.808655,
+    latitude: -7.560618,
+    zoom: 12,
+  })
 
   useEffect(() => {
     fetchData()
@@ -34,9 +40,10 @@ function Map() {
     lat = lat / x.length
     lng = lng / x.length
 
-    setCenter({
-      lat,
-      lng,
+    setLoc({
+      latitude: lat,
+      longitude: lng,
+      zoom: 12,
     })
   }
 
@@ -85,29 +92,63 @@ function Map() {
   if (!isLoaded) return 'Peta sedang dimuat...'
 
   return (
-    <GoogleMap mapContainerStyle={mapContainerStyle} zoom={13} center={center}>
+    <ReactMapGL
+      {...loc}
+      width="100%"
+      height="300px"
+      mapboxApiAccessToken="pk.eyJ1Ijoic2lhYiIsImEiOiJja2ZwZ3BsbGgwN2RsMnBwZ2ExMHE0bDJiIn0.ob5RauYOHOSGeNiGH38OWg"
+      onViewportChange={(vp) => {
+        setLoc(vp)
+      }}
+      mapStyle="mapbox://styles/siab/ckhao7qro0t5f19tbk9xctd3j"
+    >
+      <div style={{ position: 'absolute', right: 0 }}>
+        <NavigationControl />
+      </div>
       {data &&
         data.map((theData, i) => {
           return (
             <Marker
+              latitude={theData.lat}
+              longitude={theData.lng}
+              offsetLeft={0}
+              offsetTop={0}
               key={i}
-              onClick={() => setSelected(theData)}
-              position={{ lat: theData.lat, lng: theData.lng }}
-            />
+            >
+              <img
+                src={siab_logo}
+                alt="siab_logo"
+                style={{
+                  width: '20px',
+                }}
+              />
+            </Marker>
           )
         })}
-      {selected && (
-        <InfoWindow
-          position={{ lat: selected.lat, lng: selected.lng }}
-          onCloseClick={() => setSelected(null)}
-        >
-          <div>
-            <h2>{selected.name}</h2>
-            {/* <p>Total Flow: {selected.total_flow} liter</p> */}
-          </div>
-        </InfoWindow>
-      )}
-    </GoogleMap>
+    </ReactMapGL>
+    // <GoogleMap mapContainerStyle={mapContainerStyle} zoom={13} center={center}>
+    //   {data &&
+    //     data.map((theData, i) => {
+    //       return (
+    //         <Marker
+    //           key={i}
+    //           onClick={() => setSelected(theData)}
+    //           position={{ lat: theData.lat, lng: theData.lng }}
+    //         />
+    //       )
+    //     })}
+    //   {selected && (
+    //     <InfoWindow
+    //       position={{ lat: selected.lat, lng: selected.lng }}
+    //       onCloseClick={() => setSelected(null)}
+    //     >
+    //       <div>
+    //         <h2>{selected.name}</h2>
+    //         {/* <p>Total Flow: {selected.total_flow} liter</p> */}
+    //       </div>
+    //     </InfoWindow>
+    //   )}
+    // </GoogleMap>
   )
 }
 
