@@ -3,6 +3,7 @@ import Map from './aksiberbagi/Map'
 import ComparationApp from './landingpage/ComparationApp'
 import DistributionWidget from './landingpage/DistributionWidget'
 import Lapor from './landingpage/Lapor'
+import ImageUpload from './landingpage/ImageUpload'
 // import Uploadtest from './landingpage/Uploadtest'
 // import Khelifupload from './landingpage/Khelifupload'
 import css from './LandingPage.module.css'
@@ -24,6 +25,7 @@ function LandingPage(props) {
       <DistributionWidget />
       <ComparationApp />
       <Lapor />
+      <ImageUpload />
       {/* <Uploadtest /> */}
       {/* <Khelifupload /> */}
       <div className={css.footer}>

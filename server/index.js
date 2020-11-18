@@ -24,14 +24,6 @@ app.get('/', (req, res) => {
   })
 })
 
-// const ImageController = require('./user/imageController')
-// app.post('/api/uploadImage', ImageController.uploadImageToS3)
-
-// const profile = require('./config/profile')
-// app.use('/config/profile', profile)
-// app.post('/api/profile/profile-img-upload', profile)
-// app.post('/api/profile/multiple-file-upload', profile)
-
 const loginApi = require('./components/login/loginApi')
 
 app.post('/v1/register', loginApi.register)
@@ -107,7 +99,7 @@ app.post('/v1/notif', tokenValidator.start, notifApi.postNotif)
 app.get('/v1/notif', tokenValidator.start, notifApi.getNotif)
 
 const imageUpload = require('./components/image/uploadImage')
-app.post('/v1/profileImage', imageUpload)
+app.post('/v1/uploadImage', imageUpload)
 app.post('/v1/reportImage', imageUpload)
 
 const port = process.env.PORT || 5000
