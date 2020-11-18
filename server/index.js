@@ -8,6 +8,17 @@ const helmet = require('helmet')
 
 const app = express()
 
+// const multer = require('multer')
+// const upload = multer()
+
+// for parsing application/json
+
+// for parsing application/x-www-form-urlencoded
+app.use(express.urlencoded({ extended: true }))
+
+// for parsing multipart/form-data
+// app.use(upload.array())
+
 // console.log(path.join(__dirname, '../client/build'))
 // app.use(express.static(path.join(__dirname, '../client/build')))
 
@@ -99,8 +110,9 @@ app.post('/v1/notif', tokenValidator.start, notifApi.postNotif)
 app.get('/v1/notif', tokenValidator.start, notifApi.getNotif)
 
 const imageUpload = require('./components/image/uploadImage')
-app.post('/v1/uploadImage', imageUpload)
-app.post('/v1/reportImage', imageUpload)
+const reportImageUpload = require('./components/image/reportImage')
+app.post('/v1/profileImage', imageUpload)
+app.post('/v1/reportImage', tokenValidator.start, reportImageUpload)
 
 const port = process.env.PORT || 5000
 

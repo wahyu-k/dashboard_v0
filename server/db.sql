@@ -93,6 +93,15 @@ CREATE TABLE notifs(
   created_at BIGINT NOT NULL
 );
 
+CREATE TABLE reports(
+  id SERIAL PRIMARY KEY,
+  user_id BIGINT REFERENCES logins(id),
+  uri VARCHAR(200)[],
+  comments VARCHAR(500),
+  created_at TIMESTAMPTZ DEFAULT NOW(),
+  modified_at TIMESTAMPTZ DEFAULT NOW()
+);
+
 -- DUMMY DATA
 
 -- LOGINS TABLE
