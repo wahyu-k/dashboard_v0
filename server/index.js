@@ -111,8 +111,8 @@ app.get('/v1/notif', tokenValidator.start, notifApi.getNotif)
 
 const imageUpload = require('./components/image/uploadImage')
 const reportImageUpload = require('./components/image/reportImage')
-app.post('/v1/profileImage', imageUpload)
-app.post('/v1/reportImage', tokenValidator.start, reportImageUpload)
+app.post('/v1/profileImage', imageUpload) // SINGLE FILE UPLOAD
+app.post('/v1/reportImage', tokenValidator.start, reportImageUpload) // MULTI FILE UPLOAD
 
 const port = process.env.PORT || 5000
 

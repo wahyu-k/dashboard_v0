@@ -35,7 +35,7 @@ const uploadsBusinessGallery = multer({
   fileFilter: function (req, file, cb) {
     checkFileType(file, cb)
   },
-}).array('images', 4)
+}).array('galleryImage', 4)
 
 /**
  * Check File Type
