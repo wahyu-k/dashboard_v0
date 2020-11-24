@@ -36,11 +36,10 @@
 
   color: #000000;
   background: #89c5cc;
-  /* border-radius: 10px; */
 }
 
 .error__con {
-  margin-left: 350px;
+  margin-left: 30px;
 }
 
 .preview__container {
@@ -75,4 +74,19 @@
 .button__container {
   align-self: center;
   margin-top: 50px;
+}
+
+@media only screen and (max-width: 400px) {
+  .singlepreview {
+    width: 20%;
+    margin: 20px 20px 0 0px;
+  }
+  .preview__container {
+    margin-left: 30px;
+  }
+  .text__container {
+    display: flex;
+    flex-direction: column;
+    margin-left: 30px;
+  }
 }

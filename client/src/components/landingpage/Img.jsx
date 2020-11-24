@@ -10,12 +10,11 @@ class Img extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      selectedFile: null,
+      // selectedFile: null,
       selectedFiles: null,
       selectedImages: [],
       comments: '',
       loc: '',
-      phonenumb: '',
       data: [],
       isError: false,
       isLoading: false,
@@ -36,20 +35,16 @@ class Img extends Component {
       const fileArray = Array.from(event.target.files).map((file) =>
         URL.createObjectURL(file),
       )
-      console.log('fileArray', fileArray)
-      // const selectedImages = selectedImages.concat(fileArray)
       this.setState({
         selectedImages: this.state.selectedImages.concat(fileArray),
         selectedFiles: event.target.files,
       })
       Array.from(event.target.files).map((file) => URL.revokeObjectURL(file))
-      console.log(event.target.files)
     }
   }
 
   renderPhotos = (source) => {
     if (source.length <= 5) {
-      console.log('source', source)
       var filtered = source.filter(function (el) {
         return el != null
       })
@@ -120,8 +115,8 @@ class Img extends Component {
 
   multipleFileUploadHandler = () => {
     const data = new FormData()
-    data.append('comments', '') //append the values with key, value pair
-    data.append('loc', '')
+    data.append('comments', this.state.comments) //append the values with key, value pair
+    data.append('loc', this.state.loc)
     let selectedFiles = this.state.selectedFiles
     // If file selected
     if (selectedFiles.length <= 4) {
@@ -153,8 +148,6 @@ class Img extends Component {
               }
             } else {
               // Success
-              let fileName = response.data
-              console.log('fileName', fileName)
               this.ocShowAlert('File Uploaded', '#3089cf')
             }
           }
@@ -257,7 +250,6 @@ class Img extends Component {
               })
             }}
           />
-          {/* <button onClick={this.multipleFileUploadHandler}>Upload!</button> */}
           <div className={css.preview__container}>
             {this.renderPhotos(this.state.selectedImages)}
           </div>
@@ -291,7 +283,7 @@ class Img extends Component {
               }
             />
           </div>
-          <div className={css.textfield__container}>
+          {/* <div className={css.textfield__container}>
             <TextField
               style={{
                 width: '100%',
@@ -304,7 +296,7 @@ class Img extends Component {
                 })
               }
             />
-          </div>
+          </div> */}
         </div>
         <div className={css.button__container}>
           <Button
@@ -316,14 +308,6 @@ class Img extends Component {
             Submit
           </Button>
         </div>
-        {/* <TextField
-          style={{
-            width: '95%',
-          }}
-          label="Harga Air SIAB"
-          value={x1}
-          onChange={(e) => setX1(e.target.value)}
-        /> */}
       </div>
     )
   }
