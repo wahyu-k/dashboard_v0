@@ -50,8 +50,10 @@ import LandingPage from './components/LandingPage'
 import UserWidget from './components/user/UserWidget'
 import SettingAccount from './components/admin/SettingAccount'
 // import CreditCardOutlinedIcon from '@material-ui/icons/CreditCardOutlined'
+import CameraAltOutlinedIcon from '@material-ui/icons/CameraAltOutlined'
 import Logout from './components/Logout'
 import 'mapbox-gl/dist/mapbox-gl.css'
+import Lapor from './components/home/Lapor'
 
 const drawerWidth = 230
 const useStyles = makeStyles((theme) => ({
@@ -286,7 +288,21 @@ function App(props) {
             <ListItemText primary="Dashboard" />
           </ListItem>
         </Link>
-        {/* <Link to="/payment" style={{ color: '#000' }}>
+        <Link
+          to="/report"
+          style={{ color: '#000' }}
+          onClick={() => {
+            mobileOpen && handleDrawerToggle()
+          }}
+        >
+          <ListItem button>
+            <ListItemIcon>
+              <CameraAltOutlinedIcon />
+            </ListItemIcon>
+            <ListItemText primary="Keluhan Air" />
+          </ListItem>
+        </Link>
+        {/* <Link to="/report" style={{ color: '#000' }}>
           <ListItem button>
             <ListItemIcon>
               <CreditCardOutlinedIcon />
@@ -493,6 +509,13 @@ function App(props) {
             </Route>
             <Route path="/logout" exact>
               <Logout />
+            </Route>
+            <Route path="/report" exact>
+              {isLogin ? (
+                <Lapor onView={() => setMenuPos('Keluhan Kualitas Air')} />
+              ) : (
+                <Redirect to="/" />
+              )}
             </Route>
             <Route path="/help" exact>
               <Help onView={() => setMenuPos('Video Panduan')} />

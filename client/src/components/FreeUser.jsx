@@ -30,10 +30,6 @@ function FreeUser(props) {
       <DistributionWidget />
       <ComparationApp />
       <Consult />
-      <div className={css.footer}>
-        <p>Copyright © 2020 SIAB Indonesia</p>
-        <p>Powered by SIAB Indonesia</p>
-      </div>
     </div>
   )
 }

@@ -1,3 +1,14 @@
+import React, { useEffect } from 'react'
+
+function Lapor(props) {
+  useEffect(() => {
+    props.onView()
+  }, [props])
+  return <div>Keluhan Kualitas Air</div>
+}
+
+export default Lapor
+
 // import React, { Component } from 'react'
 // import earth from './../../img/earth.png'
 // import css from './lapor.module.css'
@@ -158,125 +169,130 @@
 
 // export default Lapor
 
-import React, { Component } from 'react'
-import axios from 'axios'
-// import css from './lapor.module.css'
+// import React, { Component } from 'react'
+// import axios from 'axios'
+// // import css from './lapor.module.css'
 
-export class Consult extends Component {
-  state = { selectedFile: null }
-  fileSelectedHandler = (event) => {
-    this.setState({
-      selectedFile: event.target.files[0],
-    })
-  }
+// export class Consult extends Component {
+//   state = { selectedFile: null }
+//   fileSelectedHandler = (event) => {
+//     this.setState({
+//       selectedFile: event.target.files[0],
+//     })
+//   }
 
-  fileUploadHandler = async (e) => {
-    e.preventDefault()
-    // const fd = new FormData()
-    // fd.append('image', this.state.selectedFile, this.state.selectedFile.name)
-    // axios
-    //   .post(
-    //     'INSERT INTO images (imgname, img) VALUES $1, $2',
-    //     this.state.selectedFile,
-    //     this.state.selectedFile.name,
-    //     {
-    //       onUploadProgress: (progressEvent) => {
-    //         console.log(
-    //           'Upload Progress : ' +
-    //             Math.round((progressEvent.loaded / progressEvent.total) * 100) +
-    //             '%',
-    //         )
-    //       },
-    //     },
-    //   )
-    //   .then((res) => {
-    //     console.log('res', res)
-    //   })
-    try {
-      const resp = await axios.post(
-        `${process.env.REACT_APP_BASE_URL}/v1/users/image`,
-        {
-          imgname: this.state.selectedFile.name,
-          img: this.state.selectedFile,
-        },
-        console.log('this.state.selectedFile.name', this.state.selectedFile),
-        {
-          onUploadProgress: (progressEvent) => {
-            console
-              .log(
-                'Upload Progress : ' +
-                  Math.round(
-                    (progressEvent.loaded / progressEvent.total) * 100,
-                  ) +
-                  '%',
-              )
-              .then((res) => {
-                console.log('res', res)
-              })
-          },
-        },
-        //   onUploadProgress: (progressEvent) => {
-        //     console.log(
-        //       'Upload Progress : ' +
-        //         Math.round((progressEvent.loaded / progressEvent.total) * 100) +
-        //         '%',
-        //     )
-        //     // .then((res) => {
-        //     //   console.log('res', res)
-        //     // })
-        // },
-      )
-      console.log('resp', resp)
-    } catch (err) {
-      console.error(err.data.message)
-    }
-  }
+//   constructor(props) {
+//     super(props)
+//     this.onView()
+//   }
 
-  render() {
-    return (
-      //    <div className={css.lapor__container}>
-      //         <h2>Ingin tahu kualitas air yang anda konsumsi ?</h2>
-      //         <div className={css.line}></div>
-      //         <p>
-      //           Kirimkan foto dan keterangan mengenai kualitas air anda agar dapat
-      //           kita berikan solusi terbaik untuk meningkatkan kualitas air anda
-      //         </p>
-      //         <div className={css.img__container}>
-      //           <img
-      //             src={profileImg}
-      //             alt=""
-      //             id="img"
-      //             width="100%"
-      //             className={css.grey__container}
-      //           />
-      //         </div>
-      //         <div className={css.img__container}>
-      //           <img
-      //             src={profileImg}
-      //             alt=""
-      //             id="img"
-      //             width="100%"
-      //             className={css.grey__container}
-      //           />
-      //         </div>
-      //         <div className={css.upload__container}>
-      //           <input
-      //             className={css.file__upload__container}
-      //             type="file"
-      //             name="image-upload"
-      //             id="input"
-      //             accept="image/*"
-      //             multiple
-      //             onChange={this.imageHandler}
-      //           />
-      //         </div>
-      //       </div>
-      <div>
-        <input type="file" onChange={this.fileSelectedHandler} />
-        <button onClick={this.fileUploadHandler}>Upload</button>
-      </div>
-    )
-  }
-}
+//   fileUploadHandler = async (e) => {
+//     e.preventDefault()
+//     // const fd = new FormData()
+//     // fd.append('image', this.state.selectedFile, this.state.selectedFile.name)
+//     // axios
+//     //   .post(
+//     //     'INSERT INTO images (imgname, img) VALUES $1, $2',
+//     //     this.state.selectedFile,
+//     //     this.state.selectedFile.name,
+//     //     {
+//     //       onUploadProgress: (progressEvent) => {
+//     //         console.log(
+//     //           'Upload Progress : ' +
+//     //             Math.round((progressEvent.loaded / progressEvent.total) * 100) +
+//     //             '%',
+//     //         )
+//     //       },
+//     //     },
+//     //   )
+//     //   .then((res) => {
+//     //     console.log('res', res)
+//     //   })
+//     try {
+//       const resp = await axios.post(
+//         `${process.env.REACT_APP_BASE_URL}/v1/users/image`,
+//         {
+//           imgname: this.state.selectedFile.name,
+//           img: this.state.selectedFile,
+//         },
+//         console.log('this.state.selectedFile.name', this.state.selectedFile),
+//         {
+//           onUploadProgress: (progressEvent) => {
+//             console
+//               .log(
+//                 'Upload Progress : ' +
+//                   Math.round(
+//                     (progressEvent.loaded / progressEvent.total) * 100,
+//                   ) +
+//                   '%',
+//               )
+//               .then((res) => {
+//                 console.log('res', res)
+//               })
+//           },
+//         },
+//         //   onUploadProgress: (progressEvent) => {
+//         //     console.log(
+//         //       'Upload Progress : ' +
+//         //         Math.round((progressEvent.loaded / progressEvent.total) * 100) +
+//         //         '%',
+//         //     )
+//         //     // .then((res) => {
+//         //     //   console.log('res', res)
+//         //     // })
+//         // },
+//       )
+//       console.log('resp', resp)
+//     } catch (err) {
+//       console.error(err.data.message)
+//     }
+//   }
 
-export default Consult
+//   render() {
+//     return (
+//       //    <div className={css.lapor__container}>
+//       //         <h2>Ingin tahu kualitas air yang anda konsumsi ?</h2>
+//       //         <div className={css.line}></div>
+//       //         <p>
+//       //           Kirimkan foto dan keterangan mengenai kualitas air anda agar dapat
+//       //           kita berikan solusi terbaik untuk meningkatkan kualitas air anda
+//       //         </p>
+//       //         <div className={css.img__container}>
+//       //           <img
+//       //             src={profileImg}
+//       //             alt=""
+//       //             id="img"
+//       //             width="100%"
+//       //             className={css.grey__container}
+//       //           />
+//       //         </div>
+//       //         <div className={css.img__container}>
+//       //           <img
+//       //             src={profileImg}
+//       //             alt=""
+//       //             id="img"
+//       //             width="100%"
+//       //             className={css.grey__container}
+//       //           />
+//       //         </div>
+//       //         <div className={css.upload__container}>
+//       //           <input
+//       //             className={css.file__upload__container}
+//       //             type="file"
+//       //             name="image-upload"
+//       //             id="input"
+//       //             accept="image/*"
+//       //             multiple
+//       //             onChange={this.imageHandler}
+//       //           />
+//       //         </div>
+//       //       </div>
+//       <div>
+//         <input type="file" onChange={this.fileSelectedHandler} />
+//         <button onClick={this.fileUploadHandler}>Upload</button>
+//       </div>
+//     )
+//   }
+// }
+
+// export default Consult

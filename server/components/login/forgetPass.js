@@ -19,6 +19,7 @@ const forgetPass = async (req, res) => {
     ])
 
     if (response.rowCount === 0) {
+      // res.status(404).send("Can't find the email!")
       throw new Error("Can't find the email!")
     }
 
@@ -46,10 +47,10 @@ const forgetPass = async (req, res) => {
     const info = await mail.sendMail({
       from: '"Siaga Air Bersih" <no-reply@siagaairbersih.com>', // sender address
       to: receiver, // list of receivers
-      subject: 'Rest Kata Sandi', // Subject line
+      subject: 'Reset Kata Sandi', // Subject line
       html: `<p>Berikut adalah link untuk reset kata sandi Anda<p>
              <br />
-             <a>akun.siagaairbersih.com/reset_password/${jwtAuth}</a>`, // html body
+             <a href="http://akun.siagaairbersih.com/reset_password/${jwtAuth}">Klik disini untuk reset kata sandimu!</a>`, // html body
     })
 
     // console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info))
