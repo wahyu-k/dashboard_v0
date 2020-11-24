@@ -26,6 +26,39 @@
   color: #000000;
 }
 
+.input__images {
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 24px;
+  margin-left: 30px;
+
+  color: #000000;
+  background: #89c5cc;
+  /* border-radius: 10px; */
+}
+
+.error__con {
+  margin-left: 350px;
+}
+
+.preview__container {
+  display: flex;
+  flex: wrap;
+}
+
+.singlepreview {
+  width: 20%;
+  background: #ffffff;
+  border: 2px solid #a3a3a3;
+  box-sizing: border-box;
+  text-align: justify;
+  margin: 20px 10px 0 30px;
+  padding: 10px;
+  border-radius: 10px;
+}
+
 .text__container {
   display: flex;
   flex-wrap: wrap;

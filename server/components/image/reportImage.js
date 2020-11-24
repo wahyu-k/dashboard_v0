@@ -62,7 +62,7 @@ const imageUpload = (req, res) => {
   const { id } = req.session
 
   uploadsBusinessGallery(req, res, async (error) => {
-    const { comments } = req.body
+    const { comments, loc } = req.body
     console.log('files', req.files)
     console.log(req)
     if (error) {
@@ -88,10 +88,10 @@ const imageUpload = (req, res) => {
         try {
           const response = await pool.query(
             `
-            INSERT INTO reports(user_id, uri, comments)
-            VALUES ($1, $2, $3)
+            INSERT INTO reports(user_id, uri, comments, loc)
+            VALUES ($1, $2, $3, $4)
           `,
-            [id, galleryImgLocationArray, comments],
+            [id, galleryImgLocationArray, comments, loc],
           )
 
           if (response) {

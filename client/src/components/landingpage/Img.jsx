@@ -4,6 +4,7 @@ import TextField from '@material-ui/core/TextField'
 import css from './Img.module.css'
 import $ from 'jquery'
 import { Button } from '@material-ui/core'
+import { Alert } from '@material-ui/lab'
 
 class Img extends Component {
   constructor(props) {
@@ -11,15 +12,14 @@ class Img extends Component {
     this.state = {
       selectedFile: null,
       selectedFiles: null,
-      keterangan: '',
+      selectedImages: [],
+      comments: '',
       loc: '',
       phonenumb: '',
-      region: '',
-      prov: '',
       data: [],
       isError: false,
       isLoading: false,
-      errorMsg: '',
+      errorMsg: 'Maksimal mengupload 4 gambar',
       isSuccess: false,
     }
   }
@@ -32,10 +32,44 @@ class Img extends Component {
   // }
 
   multipleFileChangedHandler = (event) => {
-    this.setState({
-      selectedFiles: event.target.files,
-    })
-    console.log(event.target.files)
+    if (event.target.files) {
+      const fileArray = Array.from(event.target.files).map((file) =>
+        URL.createObjectURL(file),
+      )
+      console.log('fileArray', fileArray)
+      // const selectedImages = selectedImages.concat(fileArray)
+      this.setState({
+        selectedImages: this.state.selectedImages.concat(fileArray),
+        selectedFiles: event.target.files,
+      })
+      Array.from(event.target.files).map((file) => URL.revokeObjectURL(file))
+      console.log(event.target.files)
+    }
+  }
+
+  renderPhotos = (source) => {
+    if (source.length <= 5) {
+      console.log('source', source)
+      var filtered = source.filter(function (el) {
+        return el != null
+      })
+      return filtered.map((photo) => {
+        return (
+          <img
+            src={photo}
+            alt={photo}
+            key={photo}
+            className={css.singlepreview}
+          />
+        )
+      })
+    } else {
+      return (
+        <Alert className={css.error__con} severity="error">
+          {this.state.errorMsg}
+        </Alert>
+      )
+    }
   }
 
   // singleFileUploadHandler = (event) => {
@@ -86,9 +120,11 @@ class Img extends Component {
 
   multipleFileUploadHandler = () => {
     const data = new FormData()
+    data.append('comments', '') //append the values with key, value pair
+    data.append('loc', '')
     let selectedFiles = this.state.selectedFiles
     // If file selected
-    if (selectedFiles) {
+    if (selectedFiles.length <= 4) {
       for (let i = 0; i < selectedFiles.length; i++) {
         data.append('galleryImage', selectedFiles[i], selectedFiles[i].name)
       }
@@ -104,7 +140,6 @@ class Img extends Component {
           timeoutErrorMessage: 'Koneksi timeout, periksa kembali koneksi anda!',
         })
         .then((response) => {
-          console.log('res', response)
           if (200 === response.status) {
             // If file size is larger than expected.
             if (response.data.error) {
@@ -130,7 +165,7 @@ class Img extends Component {
         })
     } else {
       // if file not selected throw error
-      this.ocShowAlert('Please upload file', 'red')
+      this.ocShowAlert('Maksimum 4 gambar yang bisa diupload', 'red')
     }
   }
 
@@ -181,24 +216,6 @@ class Img extends Component {
     }
   }
 
-  // handleSubmit = async (event) => {
-  //   try {
-  //     const update = await axios.post(
-  //       `${process.env.REACT_APP_BASE_URL}/v1/users/keluhan`,
-  //       {
-  //         check1: parseInt(check1),
-  //         check2: parseInt(check2),
-  //         check3: parseInt(check3),
-  //         check4: parseInt(check4),
-  //       },
-  //     )
-  //     console.log(update.data)
-  //     setSolution(update.data)
-  //   } catch (err) {
-  //     console.log('error', err)
-  //   }
-  // }
-
   // ShowAlert Function
   ocShowAlert = (message, background = '#3089cf') => {
     let alertContainer = document.querySelector('#oc-alert-container'),
@@ -215,27 +232,35 @@ class Img extends Component {
   }
 
   render() {
-    console.log('this.state', this.state)
     return (
       <div className={css.img__container}>
         {/* For Alert box*/}
         <div id="oc-alert-container"></div>
-        {/* Single File Upload*/}
         <h3>Ingin tahu kualitas air yang anda konsumsi ?</h3>
         <div className={css.line}></div>
         <p>
           Kirimkan foto dan keterangan mengenai kualitas air anda agar dapat
           kita berikan solusi terbaik meningkatkan kualitas air anda
         </p>
-        {/* <p>Upload Size: 250px x 250px ( Max 2MB )</p> */}
-        {/* <p>Please upload an image for your profile</p> */}
         <div align="center">
           <input
+            className={css.input__images}
             type="file"
             multiple
+            id="file"
             onChange={this.multipleFileChangedHandler}
+            onClick={() => {
+              this.setState({
+                selectedFile: null,
+                selectedFiles: null,
+                selectedImages: [null],
+              })
+            }}
           />
-          <button onClick={this.multipleFileUploadHandler}>Upload!</button>
+          {/* <button onClick={this.multipleFileUploadHandler}>Upload!</button> */}
+          <div className={css.preview__container}>
+            {this.renderPhotos(this.state.selectedImages)}
+          </div>
         </div>
         <div className={css.text__container}>
           <div className={css.textfield__container}>
@@ -244,10 +269,10 @@ class Img extends Component {
                 width: '100%',
               }}
               label="Keterangan kualitas air anda"
-              value={this.state.keterangan || ''}
+              value={this.state.comments || ''}
               onChange={(event) =>
                 this.setState({
-                  keterangan: event.target.value,
+                  comments: event.target.value,
                 })
               }
             />
@@ -286,7 +311,7 @@ class Img extends Component {
             variant="contained"
             color="primary"
             type="submit"
-            onClick="lop"
+            onClick={this.multipleFileUploadHandler}
           >
             Submit
           </Button>

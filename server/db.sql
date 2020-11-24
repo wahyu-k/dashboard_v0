@@ -98,6 +98,7 @@ CREATE TABLE reports(
   user_id BIGINT REFERENCES logins(id),
   uri VARCHAR(200)[],
   comments VARCHAR(500),
+  loc VARCHAR(100),
   created_at TIMESTAMPTZ DEFAULT NOW(),
   modified_at TIMESTAMPTZ DEFAULT NOW()
 );
