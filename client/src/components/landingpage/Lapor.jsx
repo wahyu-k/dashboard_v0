@@ -83,12 +83,24 @@ const Lapor = () => {
       setCheck2(4)
     } else if (state.checkedD === true) {
       setCheck1(4)
+      setCheck2(0)
+      setCheck3(0)
+      setCheck4(0)
     } else if (state.checkedC === true) {
       setCheck1(3)
+      setCheck2(0)
+      setCheck3(0)
+      setCheck4(0)
     } else if (state.checkedB === true) {
       setCheck1(2)
+      setCheck2(0)
+      setCheck3(0)
+      setCheck4(0)
     } else if (state.checkedA === true) {
       setCheck1(1)
+      setCheck2(0)
+      setCheck3(0)
+      setCheck4(0)
     } else {
       setCheck1(0)
       setCheck2(0)

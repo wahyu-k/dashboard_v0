@@ -7,7 +7,7 @@ const keluhan = async (req, res) => {
   try {
     const { check1, check2, check3, check4 } = req.body
     const view = await pool.query(
-      'SELECT DISTINCT solution FROM simplesol WHERE checked = $1 OR checked = $2 OR checked = $3 OR checked = $4 ORDER BY solution',
+      'SELECT DISTINCT solution FROM simplesol WHERE checked = $1 OR checked = $2 OR checked = $3 OR checked = $4',
       [check1, check2, check3, check4],
     )
     res.json(view.rows)
