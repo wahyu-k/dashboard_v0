@@ -35,14 +35,6 @@ app.get('/', (req, res) => {
   })
 })
 
-// const ImageController = require('./user/imageController')
-// app.post('/api/uploadImage', ImageController.uploadImageToS3)
-
-// const profile = require('./config/profile')
-// app.use('/config/profile', profile)
-// app.post('/api/profile/profile-img-upload', profile)
-// app.post('/api/profile/multiple-file-upload', profile)
-
 const loginApi = require('./components/login/loginApi')
 
 app.post('/v1/register', loginApi.register)
@@ -119,8 +111,8 @@ app.get('/v1/notif', tokenValidator.start, notifApi.getNotif)
 
 const imageUpload = require('./components/image/uploadImage')
 const reportImageUpload = require('./components/image/reportImage')
-app.post('/v1/profileImage', imageUpload)
-app.post('/v1/reportImage', tokenValidator.start, reportImageUpload)
+app.post('/v1/profileImage', imageUpload) // SINGLE FILE UPLOAD
+app.post('/v1/reportImage', tokenValidator.start, reportImageUpload) // MULTI FILE UPLOAD
 
 const port = process.env.PORT || 5000
 

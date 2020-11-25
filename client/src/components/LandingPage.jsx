@@ -3,8 +3,6 @@ import Map from './aksiberbagi/Map'
 import ComparationApp from './landingpage/ComparationApp'
 import DistributionWidget from './landingpage/DistributionWidget'
 import Lapor from './landingpage/Lapor'
-// import Uploadtest from './landingpage/Uploadtest'
-// import Khelifupload from './landingpage/Khelifupload'
 import css from './LandingPage.module.css'
 
 function LandingPage(props) {
@@ -27,6 +25,7 @@ function LandingPage(props) {
       {/* <Uploadtest /> */}
       {/* <Khelifupload /> */}
       {/* <div className={css.footer}>
+      <div className={css.footer}>
         <p>Copyright © 2020 SIAB Indonesia</p>
         <p>Powered by SIAB Indonesia</p>
       </div> */}

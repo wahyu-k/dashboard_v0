@@ -11,31 +11,17 @@ const Lapor = () => {
   const [check2, setCheck2] = useState(0)
   const [check3, setCheck3] = useState(0)
   const [check4, setCheck4] = useState(0)
-  const [check5, setCheck5] = useState(0)
 
   const [state, setState] = useState({
     checkedA: false,
     checkedB: false,
     checkedC: false,
     checkedD: false,
-    checkedE: false,
   })
 
   useEffect(() => {
     console.log('state', state)
     if (
-      state.checkedA === true &&
-      state.checkedB === true &&
-      state.checkedC === true &&
-      state.checkedD === true &&
-      state.checkedE === true
-    ) {
-      setCheck1(1)
-      setCheck2(2)
-      setCheck3(3)
-      setCheck4(4)
-      setCheck5(5)
-    } else if (
       state.checkedA === true &&
       state.checkedB === true &&
       state.checkedC === true &&
@@ -45,46 +31,6 @@ const Lapor = () => {
       setCheck2(2)
       setCheck3(3)
       setCheck4(4)
-    } else if (
-      state.checkedA === true &&
-      state.checkedB === true &&
-      state.checkedC === true &&
-      state.checkedE === true
-    ) {
-      setCheck1(1)
-      setCheck2(2)
-      setCheck3(3)
-      setCheck4(5)
-    } else if (
-      state.checkedA === true &&
-      state.checkedB === true &&
-      state.checkedD === true &&
-      state.checkedE === true
-    ) {
-      setCheck1(1)
-      setCheck2(2)
-      setCheck3(4)
-      setCheck4(5)
-    } else if (
-      state.checkedA === true &&
-      state.checkedC === true &&
-      state.checkedD === true &&
-      state.checkedE === true
-    ) {
-      setCheck1(1)
-      setCheck2(3)
-      setCheck3(4)
-      setCheck4(5)
-    } else if (
-      state.checkedB === true &&
-      state.checkedC === true &&
-      state.checkedD === true &&
-      state.checkedE === true
-    ) {
-      setCheck1(2)
-      setCheck2(3)
-      setCheck3(4)
-      setCheck4(5)
     } else if (
       state.checkedA === true &&
       state.checkedB === true &&
@@ -103,36 +49,12 @@ const Lapor = () => {
       setCheck3(4)
     } else if (
       state.checkedA === true &&
-      state.checkedB === true &&
-      state.checkedE === true
-    ) {
-      setCheck1(1)
-      setCheck2(2)
-      setCheck3(5)
-    } else if (
-      state.checkedA === true &&
       state.checkedC === true &&
       state.checkedD === true
     ) {
       setCheck1(1)
       setCheck2(3)
       setCheck3(4)
-    } else if (
-      state.checkedA === true &&
-      state.checkedC === true &&
-      state.checkedE === true
-    ) {
-      setCheck1(1)
-      setCheck2(3)
-      setCheck3(5)
-    } else if (
-      state.checkedA === true &&
-      state.checkedD === true &&
-      state.checkedE === true
-    ) {
-      setCheck1(1)
-      setCheck2(4)
-      setCheck3(5)
     } else if (
       state.checkedB === true &&
       state.checkedC === true &&
@@ -141,30 +63,6 @@ const Lapor = () => {
       setCheck1(2)
       setCheck2(3)
       setCheck3(4)
-    } else if (
-      state.checkedB === true &&
-      state.checkedC === true &&
-      state.checkedE === true
-    ) {
-      setCheck1(2)
-      setCheck2(3)
-      setCheck3(5)
-    } else if (
-      state.checkedB === true &&
-      state.checkedD === true &&
-      state.checkedE === true
-    ) {
-      setCheck1(2)
-      setCheck2(3)
-      setCheck3(5)
-    } else if (
-      state.checkedC === true &&
-      state.checkedD === true &&
-      state.checkedE === true
-    ) {
-      setCheck1(3)
-      setCheck2(4)
-      setCheck3(5)
     } else if (state.checkedA === true && state.checkedB === true) {
       setCheck1(1)
       setCheck2(2)
@@ -174,29 +72,15 @@ const Lapor = () => {
     } else if (state.checkedA === true && state.checkedD === true) {
       setCheck1(1)
       setCheck2(4)
-    } else if (state.checkedA === true && state.checkedE === true) {
-      setCheck1(1)
-      setCheck2(5)
     } else if (state.checkedB === true && state.checkedC === true) {
       setCheck1(2)
       setCheck2(3)
     } else if (state.checkedB === true && state.checkedD === true) {
       setCheck1(2)
       setCheck2(4)
-    } else if (state.checkedB === true && state.checkedE === true) {
-      setCheck1(2)
-      setCheck2(5)
     } else if (state.checkedC === true && state.checkedD === true) {
       setCheck1(3)
       setCheck2(4)
-    } else if (state.checkedC === true && state.checkedE === true) {
-      setCheck1(3)
-      setCheck2(5)
-    } else if (state.checkedD === true && state.checkedE === true) {
-      setCheck1(4)
-      setCheck2(5)
-    } else if (state.checkedE === true) {
-      setCheck1(5)
     } else if (state.checkedD === true) {
       setCheck1(4)
     } else if (state.checkedC === true) {
@@ -210,7 +94,6 @@ const Lapor = () => {
       setCheck2(0)
       setCheck3(0)
       setCheck4(0)
-      setCheck5(0)
     }
   }, [state])
 
@@ -227,13 +110,12 @@ const Lapor = () => {
           check2: parseInt(check2),
           check3: parseInt(check3),
           check4: parseInt(check4),
-          check5: parseInt(check5),
         },
       )
-      console.log(update.data)
+      // console.log(update.data)
       setSolution(update.data)
     } catch (err) {
-      console.log('error', err)
+      // console.log('error', err)
     }
   }
 
@@ -257,7 +139,7 @@ const Lapor = () => {
                     color="primary"
                   />
                 }
-                label="Berwarna kuning"
+                label="Air berwarna kuning"
               />
               <FormControlLabel
                 control={
@@ -268,8 +150,10 @@ const Lapor = () => {
                     color="primary"
                   />
                 }
-                label="Berkerak ketika direbus"
+                label="Timbul kerak pada kran air"
               />
+            </div>
+            <div className={css.quality__column__container}>
               <FormControlLabel
                 control={
                   <Checkbox
@@ -279,10 +163,8 @@ const Lapor = () => {
                     color="primary"
                   />
                 }
-                label="Memiliki rasa"
+                label="Memiliki rasa dan memiliki bau"
               />
-            </div>
-            <div className={css.quality__column__container}>
               <FormControlLabel
                 control={
                   <Checkbox
@@ -292,23 +174,12 @@ const Lapor = () => {
                     color="primary"
                   />
                 }
-                label="Memiliki bau"
-              />
-              <FormControlLabel
-                control={
-                  <Checkbox
-                    checked={state.checkedE}
-                    onChange={handleChange}
-                    name="checkedE"
-                    color="primary"
-                  />
-                }
                 label="Keruh"
               />
             </div>
           </div>
           <p className={css.login__link__container}>
-            <a href="login"> INGIN MENYERTAKAN FOTO?</a>
+            <a href="login">Ingin Menyertakan Foto?</a>
           </p>
         </div>
         <div align="center">
@@ -327,14 +198,14 @@ const Lapor = () => {
         <h3>Solusi kualitas air anda :</h3>
         <div className={css.line}></div>
         <div className={css.input__container}>
-          <p
-            className={css.grey__container}
-            placeholder="Solusi Kualitas Air Anda"
-          >
+          <p className={css.grey__container}>
             {solution.map((element, i) => element.solution + '. ')}
           </p>
         </div>
       </div>
+      <br />
+      <br />
+      <br />
     </div>
   )
 }
