@@ -1,0 +1,92 @@
+.img__container {
+  display: flex;
+  flex-direction: column;
+}
+
+.img__container > h3 {
+  color: #6599ae;
+}
+
+.line {
+  margin-top: 5px;
+  width: 62px;
+  height: 0px;
+  border: 2px solid #89c5cc;
+  margin-bottom: 10px;
+}
+
+.img__container > p {
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 24px;
+  margin-left: 30px;
+
+  color: #000000;
+}
+
+.input__images {
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 24px;
+  margin-left: 30px;
+
+  color: #000000;
+  background: #89c5cc;
+}
+
+.error__con {
+  margin-left: 30px;
+}
+
+.preview__container {
+  display: flex;
+  flex: wrap;
+}
+
+.singlepreview {
+  width: 20%;
+  background: #ffffff;
+  border: 2px solid #a3a3a3;
+  box-sizing: border-box;
+  text-align: justify;
+  margin: 20px 10px 0 30px;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.text__container {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  margin-left: 30px;
+}
+
+.textfield__container {
+  flex: 3;
+  margin-right: 20px;
+  margin-top: 20px;
+}
+
+.button__container {
+  align-self: center;
+  margin-top: 50px;
+}
+
+@media only screen and (max-width: 400px) {
+  .singlepreview {
+    width: 20%;
+    margin: 20px 20px 0 0px;
+  }
+  .preview__container {
+    margin-left: 30px;
+  }
+  .text__container {
+    display: flex;
+    flex-direction: column;
+    margin-left: 30px;
+  }
+}

@@ -11,10 +11,33 @@ const s3 = new aws.S3({
   bucket: 'upload-siab',
 })
 
-/**
- * Single Upload
- */
-const profileImgUpload = multer({
+// /**
+//  * Single Upload
+//  */
+// const profileImgUpload = multer({
+//   storage: multerS3({
+//     s3: s3,
+//     bucket: 'upload-siab',
+//     acl: 'public-read',
+//     key: function (req, file, cb) {
+//       cb(
+//         null,
+//         path.basename(file.originalname, path.extname(file.originalname)) +
+//           '-' +
+//           Date.now() +
+//           path.extname(file.originalname),
+//       )
+//     },
+//   }),
+//   limits: { fileSize: 2000000 }, // In bytes: 2000000 bytes = 2 MB
+//   fileFilter: function (req, file, cb) {
+//     checkFileType(file, cb)
+//   },
+// }).array('galleryImage', 4)
+// // single('profileImage')
+
+// Multiple File Uploads ( max 4 )
+const uploadsBusinessGallery = multer({
   storage: multerS3({
     s3: s3,
     bucket: 'upload-siab',
@@ -33,7 +56,7 @@ const profileImgUpload = multer({
   fileFilter: function (req, file, cb) {
     checkFileType(file, cb)
   },
-}).single('profileImage')
+}).array('galleryImage', 4)
 
 /**
  * Check File Type
@@ -55,29 +78,69 @@ function checkFileType(file, cb) {
     cb('Error: Images Only!')
   }
 }
-
 const imageUpload = (req, res) => {
-  profileImgUpload(req, res, (error) => {
+  uploadsBusinessGallery(req, res, (error) => {
+    console.log('files', req.files)
     if (error) {
       console.log('errors', error)
       res.json({ error: error })
     } else {
       // If File not found
-      if (req.file === undefined) {
+      if (req.files === undefined) {
         console.log('Error: No File Selected!')
         res.json('Error: No File Selected')
       } else {
         // If Success
-        const imageName = req.file.key
-        const imageLocation = req.file.location
-
+        let fileArray = req.files,
+          fileLocation
+        const galleryImgLocationArray = []
+        for (let i = 0; i < fileArray.length; i++) {
+          fileLocation = fileArray[i].location
+          console.log('filenm', fileLocation)
+          galleryImgLocationArray.push(fileLocation)
+        }
+        // Save the file name into database
         res.json({
-          image: imageName,
-          location: imageLocation,
+          filesArray: fileArray,
+          locationArray: galleryImgLocationArray,
         })
       }
     }
   })
 }
+// const imageUpload = (req, res) => {
+//   profileImgUpload(req, res, async (error) => {
+//     if (error) {
+//       console.log('errors', error)
+//       res.json({ error: error })
+//     } else {
+//       // If File not found
+//       if (req.files === undefined) {
+//         console.log('Error: No File Selected!')
+//         res.json('Error: No File Selected')
+//       } else {
+//         // If Success
+//         let fileArray = req.files,
+//           fileLocation
+//         // const imageName = req.file.key
+//         // const imageLocation = req.file.location
+
+//         const galleryImgLocationArray = []
+//         for (let i = 0; i < fileArray.length; i++) {
+//           fileLocation = fileArray[i].location
+//           console.log('filenm', fileLocation)
+//           galleryImgLocationArray.push(fileLocation)
+//         }
+
+//         res.json({
+//           filesArray: fileArray,
+//           locationArray: galleryImgLocationArray,
+//           // image: imageName,
+//           // location: imageLocation,
+//         })
+//       }
+//     }
+//   })
+// }
 
 module.exports = imageUpload

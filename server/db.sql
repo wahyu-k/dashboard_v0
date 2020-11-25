@@ -81,7 +81,7 @@ CREATE TABLE dash(
 
 CREATE TABLE simplesol(
   checked SERIAL PRIMARY KEY,
-  solution VARCHAR (500) NOT NULL
+  solution VARCHAR (1000) NOT NULL
 );
 
 CREATE TABLE notifs(
@@ -98,6 +98,7 @@ CREATE TABLE reports(
   user_id BIGINT REFERENCES logins(id),
   uri VARCHAR(200)[],
   comments VARCHAR(500),
+  loc VARCHAR(100),
   created_at TIMESTAMPTZ DEFAULT NOW(),
   modified_at TIMESTAMPTZ DEFAULT NOW()
 );
@@ -150,11 +151,10 @@ INSERT INTO bills(device_id, daily_flow, daily_bill, payment, created_at) VALUES
 INSERT INTO bills(device_id, daily_flow, daily_bill, payment, created_at) VALUES(3, 3.12, 0, 1000, ROUND(EXTRACT(EPOCH FROM NOW()) * 1000));
 
 -- SIMPLE SOLUTION TABLE
-INSERT INTO simplesol(solution) VALUES('solusi a tercentang');
-INSERT INTO simplesol(solution) VALUES('solusi b tercentang');
-INSERT INTO simplesol(solution) VALUES('solusi c tercentang');
-INSERT INTO simplesol(solution) VALUES('solusi d tercentang');
-INSERT INTO simplesol(solution) VALUES('solusi e tercentang');
+INSERT INTO simplesol(solution) VALUES('Air yang berwarna kuning pada umumnya disebabkan oleh kandungan logam Fe yang berlebih. Keadaan tersebut dapat di antisipasi dengan melakukan aerasi (mengalirkan gas oksigen ke dalam tempat penampungan air) yang dilanjutkan dengan pengendapan air selama satu hari satu malam. Akan tetapi, hal tersebut harus diimbangi dengan pembersihan tempat penampungan air secara rutin (Wiyono dkk., 2017)');
+INSERT INTO simplesol(solution) VALUES('Kerak pada kran menunjukkan bahwa air mengandung mineral. Jika hal tersebut tidak segera diatasi maka air sadah secara perlahan akan menyumbat pipa air, memperpendek pipa masa pakai pipa, dan menurunkan tekanan air. Jika kerak yang terbentuk masih sedikit dan pipa air masih berfungsi dengan baik, maka Anda bisa mengatasinya dengan cara menggosokkan cuka atau bahan pembersih abrasif seperti baking powder ke alat rumah tangga atau kran yang berkerak, merebus air sampai mendidih dan mendiamkan air tersebut selama satu haru satu malam sebelum digunakan untuk konsumsi, dan menggunakan filter dengan yang menggunakan komponen resin kation (Said dan Ruliasih, 2007)');
+INSERT INTO simplesol(solution) VALUES('Rasa yang timbul pada air dapat disebabkan oleh adanya mineral dalam air tersebut, rasa yang menyebabkan konsumen air tidak nyaman dapat dihilangkan dengan memanfaatkan karbon aktif pada toren atau memasangkan filter karbon aktif pada system perpipaan sebelum air masuk ke toren (Surest dkk., 2010)');
+INSERT INTO simplesol(solution) VALUES('Air yang keruh dapat disebabkan karena TDS (Total Dissolved Solids) yang berlebih pada air. Hal tersebut dapat disiasati dengan melakukan penyaringan air secara sederhana yang memanfaatkan sabut kelapa, karbon aktif, dan kain yang dilapiskan pada spons. Ketiga material terebut dapat disusun secara pada tempat penampungan air (toren) sehingga air yang mengalir ke kran sudah tersaring (Yudi Ayunanta, 2019)');
 
 --INSERT NOTIF TABLE
 INSERT INTO notifs(device_id, msg, prevent, prevent_msg, created_at) VALUES(2, 'Listrik nonaktif!', FALSE, '', ROUND(EXTRACT(EPOCH FROM NOW()) * 1000));
