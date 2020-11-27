@@ -110,11 +110,11 @@ function UserGraph(props) {
       </ResponsiveContainer>
 
       <div className={css.tabel}>
-        <button onClick={() => filter('day')}>Hari</button>
+        {/* <button onClick={() => filter('day')}>Hari</button>
         <button onClick={() => filter('week')}>Minggu</button>
         <button onClick={() => filter('month')}>Bulan</button>
         <button onClick={() => filter('year')}>Tahun</button>
-        <button onClick={() => filter()}>Semua Data</button>
+        <button onClick={() => filter()}>Semua Data</button> */}
 
         {/* <table>
         <tbody>

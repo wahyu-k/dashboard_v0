@@ -17,6 +17,7 @@ export class UpdatePersonalData extends Component {
       region: '',
       prov: '',
       data: [],
+      phone: '',
       isError: false,
       isLoading: false,
       errorMsg: '',
@@ -50,7 +51,14 @@ export class UpdatePersonalData extends Component {
       )
 
       if (response) {
-        const { first_name, last_name, dob, region, prov } = response.data
+        const {
+          first_name,
+          last_name,
+          dob,
+          region,
+          prov,
+          phone,
+        } = response.data
 
         this.setState({
           first_name,
@@ -58,6 +66,7 @@ export class UpdatePersonalData extends Component {
           dob,
           region,
           prov,
+          phone,
           isLoading: false,
         })
       }
@@ -87,7 +96,7 @@ export class UpdatePersonalData extends Component {
     })
 
     event.preventDefault()
-    const { first_name, last_name, dob, prov, region } = this.state
+    const { first_name, last_name, dob, prov, region, phone } = this.state
     try {
       const response = await axios.put(
         `${process.env.REACT_APP_BASE_URL}/v1/users`,
@@ -96,6 +105,7 @@ export class UpdatePersonalData extends Component {
           last_name,
           dob,
           prov,
+          phone,
           region,
         },
         {
@@ -216,6 +226,20 @@ export class UpdatePersonalData extends Component {
               onChange={(event) =>
                 this.setState({
                   prov: event.target.value,
+                })
+              }
+            />
+          </div>
+          <div className={css.form__container}>
+            <TextField
+              style={{
+                width: '100%',
+              }}
+              label="Nomor Telepon"
+              value={this.state.phone || ''}
+              onChange={(event) =>
+                this.setState({
+                  phone: event.target.value,
                 })
               }
             />

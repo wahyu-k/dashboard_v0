@@ -15,7 +15,11 @@ function UserBill(props) {
     <div className={css.userbill__container}>
       <h3>Tagihan dan Pembayaran</h3>
       <div className={css.line}></div>
-      <h1>{data && 'Rp. ' + data.bill?.toLocaleString() + ',-'}</h1>
+      <h1>
+        {data &&
+          'Rp. ' + (data.bill === null ? 0 : data.bill).toLocaleString() + ',-'}
+      </h1>
+      {/* // <h1>{data && 'Rp. ' + (data.bill === undefined?  ).toLocaleString() + ',-'}</h1> */}
       <div className={css.allboks}>
         <div className={css.boks}>
           <img alt="present" src={present} />
@@ -29,7 +33,12 @@ function UserBill(props) {
           <div className={css.blueboks}>
             <h3>Debit Anda Hari Ini</h3>
             <p className={css.units}>liter</p>
-            <h4>{data && data.local[0]?.daily_flow}</h4>
+            <h4>
+              {data &&
+                (data.local[0]?.daily_flow === undefined
+                  ? 0
+                  : data.local[0].daily_flow)}
+            </h4>
           </div>
         </div>
       </div>

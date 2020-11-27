@@ -21,7 +21,7 @@ function UserSensor(props) {
           <img alt="labu" src={labu} />
           <div className={css.blueboks}>
             <h4>pH</h4>
-            <p className={css.nominal}>{data && data.ph} </p>
+            <p className={css.nominal}>{data ? data.ph : '0'}</p>
           </div>
         </div>
         <div className={css.boks}>
@@ -29,7 +29,7 @@ function UserSensor(props) {
           <div className={css.blueboks}>
             <h3>Kekeruhan</h3>
             <p className={css.units}>ppm</p>
-            <p className={css.nominal}>{data && data.turb}</p>
+            <p className={css.nominal}>{data ? data.turb : '0'}</p>
           </div>
         </div>
         <div className={css.boks}>
@@ -37,7 +37,7 @@ function UserSensor(props) {
           <div className={css.blueboks}>
             <h3>Debit Utama</h3>
             <p className={css.units}>liter</p>
-            <p className={css.nominal}>{data && data.flow}</p>
+            <p className={css.nominal}>{data ? data.flow : '0'}</p>
           </div>
         </div>
         <div className={css.boks}>
@@ -45,7 +45,7 @@ function UserSensor(props) {
           <div className={css.blueboks}>
             <h3>TDS</h3>
             <p className={css.units}>uS/mm</p>
-            <p className={css.nominal}>{data && data.tds}</p>
+            <p className={css.nominal}>{data ? data.tds : '0'}</p>
           </div>
         </div>
         <div className={css.boks}>
@@ -55,7 +55,7 @@ function UserSensor(props) {
             <p className={css.units}>
               <sup>o</sup>C
             </p>
-            <p className={css.nominal}>{data && data.temp}</p>
+            <p className={css.nominal}>{data ? data.temp : '0'}</p>
           </div>
         </div>
       </div>

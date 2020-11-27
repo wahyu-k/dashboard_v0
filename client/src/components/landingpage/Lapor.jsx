@@ -138,10 +138,10 @@ const Lapor = () => {
           check4: parseInt(check4),
         },
       )
-      console.log(update.data)
+      // console.log(update.data)
       setSolution(update.data)
     } catch (err) {
-      console.log('error', err)
+      // console.log('error', err)
     }
   }
 
@@ -205,7 +205,7 @@ const Lapor = () => {
             </div>
           </div>
           <p className={css.login__link__container}>
-            <a href="login"> INGIN MENYERTAKAN FOTO?</a>
+            <a href="login">Ingin Menyertakan Foto?</a>
           </p>
         </div>
         <div align="center">
@@ -229,6 +229,9 @@ const Lapor = () => {
           </p>
         </div>
       </div>
+      <br />
+      <br />
+      <br />
     </div>
   )
 }
