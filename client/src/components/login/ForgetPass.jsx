@@ -35,7 +35,7 @@ function ForgetPass(props) {
           receiver: email,
         },
         {
-          timeout: 5000,
+          timeout: 20000,
           timeoutErrorMessage: 'Koneksi timeout, periksa kembali koneksi anda!',
         },
       )

@@ -7,6 +7,11 @@
   color: #6599ae;
 }
 
+.img__container > p {
+  margin-left: 30px;
+  margin-bottom: 17px;
+}
+
 .line {
   margin-top: 5px;
   width: 62px;
@@ -72,21 +77,63 @@
 }
 
 .button__container {
-  align-self: center;
-  margin-top: 50px;
+  align-items: center;
+  justify-content: center;
+  margin-top: 40px;
 }
 
-@media only screen and (max-width: 400px) {
+.form > div {
+  align-items: center;
+}
+
+@media only screen and (max-width: 420px) {
   .singlepreview {
     width: 20%;
     margin: 20px 20px 0 0px;
   }
+
   .preview__container {
     margin-left: 30px;
   }
+
   .text__container {
     display: flex;
     flex-direction: column;
-    margin-left: 30px;
+    margin-left: 0px;
+  }
+
+  .img__container > p {
+    margin-left: 0px;
+  }
+
+  .input__images {
+    margin-left: 0px;
+  }
+
+  .form > div {
+    align-items: flex-start;
+  }
+
+  .preview__container {
+    width: 100%;
+    display: flex;
+    /* flex: wrap; */
+    margin: 0;
+  }
+
+  .singlepreview {
+    flex: 6;
+    /* width: 45%; */
+    background: #ffffff;
+    border: 2px solid #a3a3a3;
+    box-sizing: border-box;
+    text-align: justify;
+    /* margin: 20px 10px 0 30px; */
+    padding: 10px;
+    border-radius: 10px;
+  }
+
+  .error__con {
+    margin-left: 0px;
   }
 }

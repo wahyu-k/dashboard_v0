@@ -3,6 +3,10 @@
   flex-direction: column;
 }
 
+.update__personal__container > form {
+  margin-bottom: 30px;
+}
+
 .form__container {
   margin-bottom: 10px;
 }

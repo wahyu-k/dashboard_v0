@@ -3,7 +3,7 @@ import Map from './aksiberbagi/Map'
 import ComparationApp from './landingpage/ComparationApp'
 import DistributionWidget from './landingpage/DistributionWidget'
 import css from './LandingPage.module.css'
-import Img from './landingpage/Img'
+// import Img from './landingpage/Img'
 // import Lapor from './home/Lapor'
 
 function FreeUser(props) {
@@ -31,11 +31,11 @@ function FreeUser(props) {
       <DistributionWidget />
       <ComparationApp />
       {/* <Lapor /> */}
-      <Img />
-      <div className={css.footer}>
+      {/* <Img /> */}
+      {/* <div className={css.footer}>
         <p>Copyright © 2020 SIAB Indonesia</p>
         <p>Powered by SIAB Indonesia</p>
-      </div>
+      </div> */}
     </div>
   )
 }

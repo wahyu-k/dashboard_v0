@@ -22,10 +22,13 @@ function LandingPage(props) {
       <DistributionWidget />
       <ComparationApp />
       <Lapor />
+      {/* <Uploadtest /> */}
+      {/* <Khelifupload /> */}
+      {/* <div className={css.footer}>
       <div className={css.footer}>
         <p>Copyright © 2020 SIAB Indonesia</p>
         <p>Powered by SIAB Indonesia</p>
-      </div>
+      </div> */}
     </div>
   )
 }
