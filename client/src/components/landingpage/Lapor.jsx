@@ -39,6 +39,7 @@ const Lapor = () => {
       setCheck1(1)
       setCheck2(2)
       setCheck3(3)
+      setCheck4(0)
     } else if (
       state.checkedA === true &&
       state.checkedB === true &&
@@ -47,6 +48,7 @@ const Lapor = () => {
       setCheck1(1)
       setCheck2(2)
       setCheck3(4)
+      setCheck4(0)
     } else if (
       state.checkedA === true &&
       state.checkedC === true &&
@@ -55,6 +57,7 @@ const Lapor = () => {
       setCheck1(1)
       setCheck2(3)
       setCheck3(4)
+      setCheck4(0)
     } else if (
       state.checkedB === true &&
       state.checkedC === true &&
@@ -63,32 +66,55 @@ const Lapor = () => {
       setCheck1(2)
       setCheck2(3)
       setCheck3(4)
+      setCheck4(0)
     } else if (state.checkedA === true && state.checkedB === true) {
       setCheck1(1)
       setCheck2(2)
+      setCheck3(0)
+      setCheck4(0)
     } else if (state.checkedA === true && state.checkedC === true) {
       setCheck1(1)
       setCheck2(3)
+      setCheck3(0)
+      setCheck4(0)
     } else if (state.checkedA === true && state.checkedD === true) {
       setCheck1(1)
       setCheck2(4)
     } else if (state.checkedB === true && state.checkedC === true) {
       setCheck1(2)
       setCheck2(3)
+      setCheck3(0)
+      setCheck4(0)
     } else if (state.checkedB === true && state.checkedD === true) {
       setCheck1(2)
       setCheck2(4)
+      setCheck3(0)
+      setCheck4(0)
     } else if (state.checkedC === true && state.checkedD === true) {
       setCheck1(3)
       setCheck2(4)
+      setCheck3(0)
+      setCheck4(0)
     } else if (state.checkedD === true) {
       setCheck1(4)
+      setCheck2(0)
+      setCheck3(0)
+      setCheck4(0)
     } else if (state.checkedC === true) {
       setCheck1(3)
+      setCheck2(0)
+      setCheck3(0)
+      setCheck4(0)
     } else if (state.checkedB === true) {
       setCheck1(2)
+      setCheck2(0)
+      setCheck3(0)
+      setCheck4(0)
     } else if (state.checkedA === true) {
       setCheck1(1)
+      setCheck2(0)
+      setCheck3(0)
+      setCheck4(0)
     } else {
       setCheck1(0)
       setCheck2(0)
