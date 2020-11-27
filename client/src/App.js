@@ -54,6 +54,7 @@ import CameraAltOutlinedIcon from '@material-ui/icons/CameraAltOutlined'
 import Logout from './components/Logout'
 import 'mapbox-gl/dist/mapbox-gl.css'
 import Lapor from './components/home/Lapor'
+import WhatsAppIcon from '@material-ui/icons/WhatsApp'
 
 const drawerWidth = 230
 const useStyles = makeStyles((theme) => ({
@@ -261,6 +262,18 @@ function App(props) {
             <ListItemText primary="Panduan" />
           </ListItem>
         </Link>
+
+        <ListItem
+          button
+          component="a"
+          target="_blank"
+          href="https://api.whatsapp.com/send?phone=085878036981"
+        >
+          <ListItemIcon>
+            <WhatsAppIcon style={{ marginRight: '10px' }} />
+          </ListItemIcon>
+          <ListItemText primary="Kontak Kami" />
+        </ListItem>
       </List>
     </div>
   )
@@ -302,6 +315,7 @@ function App(props) {
             <ListItemText primary="Keluhan Air" />
           </ListItem>
         </Link>
+
         {/* <Link to="/report" style={{ color: '#000' }}>
           <ListItem button>
             <ListItemIcon>
@@ -327,6 +341,17 @@ function App(props) {
             <ListItemText primary="Panduan" />
           </ListItem>
         </Link>
+        <ListItem
+          button
+          component="a"
+          target="_blank"
+          href="https://api.whatsapp.com/send?phone=085878036981"
+        >
+          <ListItemIcon>
+            <WhatsAppIcon style={{ marginRight: '10px' }} />
+          </ListItemIcon>
+          <ListItemText primary="Kontak Kami" />
+        </ListItem>
       </List>
     </div>
   )

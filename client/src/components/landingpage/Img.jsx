@@ -6,6 +6,7 @@ import $ from 'jquery'
 import { Button } from '@material-ui/core'
 import { Alert } from '@material-ui/lab'
 import CircularProgress from '@material-ui/core/CircularProgress'
+import BackupIcon from '@material-ui/icons/Backup'
 class Img extends Component {
   constructor(props) {
     super(props)
@@ -404,9 +405,26 @@ class Img extends Component {
                   size={18}
                   style={{ marginRight: '10px' }}
                 />
-              ) : null}
+              ) : (
+                <BackupIcon color="inherit" style={{ marginRight: '10px' }} />
+              )}
               Upload
             </Button>
+            <br />
+            {/* <Button
+              variant="contained"
+              style={{
+                background: '#25D366',
+                color: '#fff',
+                marginTop: '20px',
+              }}
+              onClick={() => {
+                window.open('https://api.whatsapp.com/send?phone=085878036981')
+              }}
+            >
+              <WhatsAppIcon style={{ marginRight: '10px', color: '#fff' }} />
+              Konsultasi lewat WA
+            </Button> */}
           </div>
         </form>
         <br />

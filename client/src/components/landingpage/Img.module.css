@@ -77,8 +77,9 @@
 }
 
 .button__container {
-  align-self: center;
-  margin-top: 50px;
+  align-items: center;
+  justify-content: center;
+  margin-top: 40px;
 }
 
 .form > div {
