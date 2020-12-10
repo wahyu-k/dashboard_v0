@@ -249,52 +249,52 @@ class Img extends Component {
     }
   }
 
-  fetchData = async () => {
-    try {
-      this.setState({
-        isLoading: true,
-        isError: false,
-        errorMsg: '',
-      })
+  // fetchData = async () => {
+  //   try {
+  //     this.setState({
+  //       isLoading: true,
+  //       isError: false,
+  //       errorMsg: '',
+  //     })
 
-      const response = await axios.get(
-        `${process.env.REACT_APP_BASE_URL}/v1/users`,
-        {
-          headers: {
-            Authorization: 'Bearer ' + localStorage.getItem('_s_t'),
-          },
-        },
-        {
-          timeout: 5000,
-          timeoutErrorMessage: 'Koneksi timeout, periksa kembali koneksi anda!',
-        },
-      )
+  //     const response = await axios.get(
+  //       `${process.env.REACT_APP_BASE_URL}/v1/users`,
+  //       {
+  //         headers: {
+  //           Authorization: 'Bearer ' + localStorage.getItem('_s_t'),
+  //         },
+  //       },
+  //       {
+  //         timeout: 5000,
+  //         timeoutErrorMessage: 'Koneksi timeout, periksa kembali koneksi anda!',
+  //       },
+  //     )
 
-      if (response) {
-        const { region, prov } = response.data
+  //     if (response) {
+  //       const { region, prov } = response.data
 
-        this.setState({
-          region,
-          prov,
-          isLoading: false,
-        })
-      }
-    } catch (error) {
-      if (error.code === 'ECONNABORTED') {
-        this.setState({
-          errorMsg: error.message,
-        })
-      } else {
-        this.setState({
-          errorMsg: 'Ada yang salah, coba beberapa saat lagi!',
-        })
-      }
-      this.setState({
-        isLoading: false,
-        isError: true,
-      })
-    }
-  }
+  //       this.setState({
+  //         region,
+  //         prov,
+  //         isLoading: false,
+  //       })
+  //     }
+  //   } catch (error) {
+  //     if (error.code === 'ECONNABORTED') {
+  //       this.setState({
+  //         errorMsg: error.message,
+  //       })
+  //     } else {
+  //       this.setState({
+  //         errorMsg: 'Ada yang salah, coba beberapa saat lagi!',
+  //       })
+  //     }
+  //     this.setState({
+  //       isLoading: false,
+  //       isError: true,
+  //     })
+  //   }
+  // }
 
   // ShowAlert Function
   ocShowAlert = (message, background = '#3089cf') => {

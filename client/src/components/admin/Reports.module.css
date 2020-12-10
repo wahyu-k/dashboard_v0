@@ -1,0 +1,24 @@
+.reports__container {
+  display: flex;
+  flex-direction: column;
+}
+/* 
+.table__container {
+  width: 50%;
+} */
+
+.singlepreview {
+  /* flex-direction: row; */
+  /* display: flex;
+  flex: wrap; */
+  /* width: 50%; */
+  width: 175px;
+  height: 175px;
+  background: #ffffff;
+  border: 2px solid #a3a3a3;
+  box-sizing: border-box;
+  text-align: justify;
+  /* margin: 20px 10px 0 30px; */
+  padding: 10px;
+  border-radius: 10px;
+}

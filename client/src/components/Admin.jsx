@@ -6,6 +6,7 @@ import UpdateCompApp from './admin/UpdateCompApp'
 import Bills from './admin/Bills'
 import Price from './admin/Price'
 import Binds from './admin/Binds'
+import Reports from './admin/Reports'
 import css from './Admin.module.css'
 // import Button from '@material-ui/core/Button'
 
@@ -28,6 +29,7 @@ function Admin(props) {
       <Price />
       <UpdateCompApp />
       <Binds />
+      <Reports />
       <div className={css.footer}>
         <p>Copyright © 2020 SIAB Indonesia</p>
         <p>Powered by SIAB Indonesia</p>

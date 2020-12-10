@@ -59,6 +59,7 @@ app.get('/v1/binds', adminApi.getBinds)
 app.put('/v1/binds', adminApi.updateBinds)
 app.put('/v1/admin/plan', adminApi.editPlan)
 app.delete('/v1/binds', adminApi.deleteBinds)
+app.get('/v1/reports', adminApi.getReports)
 
 const deviceApi = require('./components/device/deviceApi')
 

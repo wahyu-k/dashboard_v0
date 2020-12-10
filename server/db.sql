@@ -29,15 +29,15 @@ CREATE TABLE sensors(
 
 CREATE TABLE users(
   id BIGINT REFERENCES logins(id),
-  first_name VARCHAR(70) ,
+  first_name VARCHAR(70),
   last_name VARCHAR(70),
   dob VARCHAR(30),
   prov VARCHAR(50),
   region VARCHAR(50),
-  phone VARCHAR(20),
   plan INT NOT NULL,
   created_at BIGINT NOT NULL,
-  modified_at BIGINT NOT NULL
+  modified_at BIGINT NOT NULL,
+  phone VARCHAR(20)
 );
 
 CREATE TABLE calcs

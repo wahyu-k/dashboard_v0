@@ -9,7 +9,7 @@ const pool = require('../../config/db')
 const s3 = new aws.S3({
   accessKeyId: 'AKIAXJRA2B7AQOMFSQ6H',
   secretAccessKey: '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',
-  bucket: 'upload-siab',
+  bucket: 'siabuploadbucket',
 })
 
 let username = ''
@@ -21,7 +21,7 @@ let username = ''
 const uploadsBusinessGallery = multer({
   storage: multerS3({
     s3: s3,
-    bucket: 'upload-siab',
+    bucket: 'siabuploadbucket',
     acl: 'public-read',
     key: function (req, file, cb) {
       cb(
