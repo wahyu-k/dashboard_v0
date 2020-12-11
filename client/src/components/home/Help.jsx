@@ -13,29 +13,58 @@ function Help(props) {
 
   return (
     <div className={css.help}>
-      <p>Panduan Pembuatan Akun Baru SIAB Indonesia</p>
-      <div className={css.video__container}>
-        <iframe
-          title="video ab"
-          width="644"
-          height="362"
-          src="https://www.youtube.com/embed/z1i3nrJmYMM"
-          frameborder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen="1"
-        ></iframe>
-      </div>
-      <p>Panduan Penggunaan Akun Pengelola</p>
-      <div className={css.video__container}>
-        <iframe
-          title="video ac"
-          width="644"
-          height="362"
-          src="https://www.youtube.com/embed/zje3KjcIcJE"
-          frameborder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen="1"
-        ></iframe>
+      <div className={css.grid__container}>
+        <div className={css.vid__container}>
+          <p>Panduan Pembuatan Akun Baru</p>
+          <iframe
+            title="daftar"
+            width="426"
+            height="240"
+            src="https://www.youtube.com/embed/z1i3nrJmYMM"
+            // frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen="1"
+          ></iframe>
+        </div>
+        <div className={css.vid__container}>
+          {/*<div className={css.grid__container}> */}
+          <p>Panduan Login Akun</p>
+          <iframe
+            title="login"
+            width="426"
+            height="240"
+            src="https://www.youtube.com/embed/2MasJ-8xf2Q"
+            // frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen="1"
+          ></iframe>
+        </div>
+        <div className={css.vid__container}>
+          {/* <div className={css.grid__container}> */}
+          <p>Panduan Penggunaan Akun Premium</p>
+          <iframe
+            title="premium"
+            width="426"
+            height="240"
+            src="https://www.youtube.com/embed/ghDOH8ejWu4"
+            // frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen="1"
+          ></iframe>
+        </div>
+        <div className={css.vid__container}>
+          {/*<div className={css.grid__container}> */}
+          <p>Panduan Penggunaan Akun Pengelola</p>
+          <iframe
+            title="pengelola"
+            width="426"
+            height="240"
+            src="https://www.youtube.com/embed/zje3KjcIcJE"
+            // frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen="1"
+          ></iframe>
+        </div>
       </div>
       <div className={css.manualbook__container}>
         <Button variant="contained" color="primary">

@@ -543,11 +543,7 @@ function App(props) {
               )}
             </Route>
             <Route path="/help" exact>
-              <Help
-                onView={() =>
-                  setMenuPos('Panduan Penggunaan Website SIAB Indonesia')
-                }
-              />
+              <Help onView={() => setMenuPos('Panduan Penggunaan Website')} />
             </Route>
             <Route path="*">
               <NoMatch onView={() => setMenuPos('Halaman Tidak Ditemukan')} />
