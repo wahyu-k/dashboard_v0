@@ -5,8 +5,6 @@ import css from './help.module.css'
 import Button from '@material-ui/core/Button'
 
 function Help(props) {
-  // const [isLoading, setIsLoading] = useState(false)
-
   useEffect(() => {
     props.onView()
   }, [props])
@@ -27,7 +25,6 @@ function Help(props) {
           ></iframe>
         </div>
         <div className={css.vid__container}>
-          {/*<div className={css.grid__container}> */}
           <p>Panduan Login Akun</p>
           <iframe
             title="login"
@@ -40,7 +37,6 @@ function Help(props) {
           ></iframe>
         </div>
         <div className={css.vid__container}>
-          {/* <div className={css.grid__container}> */}
           <p>Panduan Penggunaan Akun Premium</p>
           <iframe
             title="premium"
@@ -53,7 +49,6 @@ function Help(props) {
           ></iframe>
         </div>
         <div className={css.vid__container}>
-          {/*<div className={css.grid__container}> */}
           <p>Panduan Penggunaan Akun Pengelola</p>
           <iframe
             title="pengelola"
