@@ -7,6 +7,7 @@ import { Button } from '@material-ui/core'
 import { Alert } from '@material-ui/lab'
 import CircularProgress from '@material-ui/core/CircularProgress'
 import BackupIcon from '@material-ui/icons/Backup'
+import logo from './logo_hitam_putih.png'
 class Img extends Component {
   constructor(props) {
     super(props)
@@ -353,13 +354,9 @@ class Img extends Component {
             />
             <div className={css.preview__container}>
               <img
-                src={
-                  'https://s3.us-east-2.amazonaws.com/assets.siagaairbersih.com/siab_logo.png'
-                }
+                src={logo}
                 alt={'siab_logo'}
-                key={
-                  'https://s3.us-east-2.amazonaws.com/assets.siagaairbersih.com/siab_logo.png'
-                }
+                key={logo}
                 className={css.singlepreview}
               />
               {this.renderPhotos(this.state.selectedImages)}
