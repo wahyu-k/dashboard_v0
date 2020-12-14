@@ -1,8 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import present from '../../img/present.png'
-import linegraph from './../../img/linegraph.png'
 import css from './userbill.module.css'
-import databack from './../../img/databack.png'
 
 function UserBill(props) {
   const [data, setData] = useState(null)
@@ -22,14 +19,24 @@ function UserBill(props) {
       {/* // <h1>{data && 'Rp. ' + (data.bill === undefined?  ).toLocaleString() + ',-'}</h1> */}
       <div className={css.allboks}>
         <div className={css.boks}>
-          <img alt="present" src={present} />
+          <img
+            alt="present"
+            src={
+              'https://s3.us-east-2.amazonaws.com/assets.siagaairbersih.com/present.png'
+            }
+          />
           <div className={css.blueboks}>
             <h5>Harga per Liter</h5>
             <h4>{data && 'Rp. ' + data.price?.toLocaleString() + ',-'}</h4>
           </div>
         </div>
         <div className={css.boks}>
-          <img alt="linegraph" src={linegraph} />
+          <img
+            alt="linegraph"
+            src={
+              'https://s3.us-east-2.amazonaws.com/assets.siagaairbersih.com/linegraph.png'
+            }
+          />
           <div className={css.blueboks}>
             <h3>Debit Anda Hari Ini</h3>
             <p className={css.units}>liter</p>
@@ -42,7 +49,12 @@ function UserBill(props) {
           </div>
         </div>
       </div>
-      <img alt="databack" src={databack} />
+      <img
+        alt="databack"
+        src={
+          'https://s3.us-east-2.amazonaws.com/assets.siagaairbersih.com/databack.png'
+        }
+      />
     </div>
   )
 }

@@ -1,9 +1,6 @@
 import { Avatar } from '@material-ui/core'
 import React from 'react'
 import css from './userWidget.module.css'
-import crown from '../../img/userWidget/crown.png'
-import crown_bw from '../../img/userWidget/crown-bw.png'
-import dragon from '../../img/userWidget/dragon.png'
 
 function UserWidget(props) {
   const { first_name, last_name, email, plan } = props.data
@@ -38,7 +35,13 @@ function UserWidget(props) {
           <div className={css.plan__container}>
             <img
               alt="crown-img"
-              src={plan === 0 ? crown_bw : plan === 1 ? crown : dragon}
+              src={
+                plan === 0
+                  ? 'https://s3.us-east-2.amazonaws.com/assets.siagaairbersih.com/userWidget/crown-bw.png'
+                  : plan === 1
+                  ? 'https://s3.us-east-2.amazonaws.com/assets.siagaairbersih.com/userWidget/crown.png'
+                  : 'https://s3.us-east-2.amazonaws.com/assets.siagaairbersih.com/userWidget/dragon.png'
+              }
             />
             <div>
               {plan === 0

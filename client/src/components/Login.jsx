@@ -1,15 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import css from './login/login.module.css'
-import banner from '../img/login/auth.png'
-import mail_icon from '../img/login/mail_icon.png'
-import pass_icon from '../img/login/pass_icon.png'
 import { TextField, InputAdornment, Collapse } from '@material-ui/core'
 import { Alert } from '@material-ui/lab'
 import * as Yup from 'yup'
 import { useFormik } from 'formik'
-import loading from '../img/loading.gif'
-import { Link, } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 function Login(props) {
   const [isLoading, setIsLoading] = useState(false)
@@ -98,7 +94,12 @@ function Login(props) {
           InputProps={{
             endAdornment: (
               <InputAdornment position="end">
-                <img alt="mail" src={mail_icon} />
+                <img
+                  alt="mail"
+                  src={
+                    'https://s3.us-east-2.amazonaws.com/assets.siagaairbersih.com/login/mail_icon.png'
+                  }
+                />
               </InputAdornment>
             ),
           }}
@@ -117,18 +118,37 @@ function Login(props) {
           InputProps={{
             endAdornment: (
               <InputAdornment position="end">
-                <img alt="password" src={pass_icon} />
+                <img
+                  alt="password"
+                  src={
+                    'https://s3.us-east-2.amazonaws.com/assets.siagaairbersih.com/login/pass_icon.png'
+                  }
+                />
               </InputAdornment>
             ),
           }}
         />
         <button type="submit" disabled={isLoading}>
-          {isLoading ? <img alt="loading" src={loading} /> : 'Masuk'}
+          {isLoading ? (
+            <img
+              alt="loading"
+              src={
+                'https://s3.us-east-2.amazonaws.com/assets.siagaairbersih.com/loading.gif'
+              }
+            />
+          ) : (
+            'Masuk'
+          )}
         </button>
         <Link to="/forget_password">lupa kata sandi?</Link>
         <Link to="/register">belum punya akun?</Link>
       </form>
-      <img alt="auth-img" src={banner} />
+      <img
+        alt="auth-img"
+        src={
+          'https://s3.us-east-2.amazonaws.com/assets.siagaairbersih.com/login/auth.png'
+        }
+      />
     </div>
   )
 }

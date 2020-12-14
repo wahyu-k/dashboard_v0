@@ -103,6 +103,7 @@ class Img extends Component {
       return filtered.map((photo) => {
         return (
           <img
+            // placeholder={siab_logo}
             src={photo}
             alt={photo}
             key={photo}
@@ -110,6 +111,15 @@ class Img extends Component {
           />
         )
       })
+      // } else if (source.length <= 1) {
+      //   return (
+      //     <img
+      //       src={siab_logo}
+      //       alt={siab_logo}
+      //       key={siab_logo}
+      //       className={css.singlepreview}
+      //     />
+      //   )
     } else {
       return (
         <Alert className={css.error__con} severity="error">
@@ -342,6 +352,16 @@ class Img extends Component {
               required
             />
             <div className={css.preview__container}>
+              <img
+                src={
+                  'https://s3.us-east-2.amazonaws.com/assets.siagaairbersih.com/siab_logo.png'
+                }
+                alt={'siab_logo'}
+                key={
+                  'https://s3.us-east-2.amazonaws.com/assets.siagaairbersih.com/siab_logo.png'
+                }
+                className={css.singlepreview}
+              />
               {this.renderPhotos(this.state.selectedImages)}
             </div>
           </div>
@@ -389,6 +409,20 @@ class Img extends Component {
                   })
                 }
                 required
+              />
+            </div>
+            <div className={css.textfield__container}>
+              <TextField
+                style={{
+                  width: '100%',
+                }}
+                label="Referral"
+                // value={this.state.phonenumb || ''}
+                onChange={(event) =>
+                  this.setState({
+                    phonenumb: event.target.value,
+                  })
+                }
               />
             </div>
           </div>

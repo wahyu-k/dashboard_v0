@@ -4,8 +4,6 @@ import { useHistory } from 'react-router-dom'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
 import css from './register.module.css'
-import banner from '../../img/register/register.png'
-import loading from '../../img/loading.gif'
 import { TextField, Collapse } from '@material-ui/core'
 import { Alert } from '@material-ui/lab'
 import { Link } from 'react-router-dom'
@@ -149,11 +147,25 @@ function Register(props) {
 
         <br />
         <button type="submit" disabled={isLoading}>
-          {isLoading ? <img alt="loading" src={loading} /> : 'Daftar'}
+          {isLoading ? (
+            <img
+              alt="loading"
+              src={
+                'https://s3.us-east-2.amazonaws.com/assets.siagaairbersih.com/loading.gif'
+              }
+            />
+          ) : (
+            'Daftar'
+          )}
         </button>
         <Link to="/login">sudah punya akun?</Link>
       </form>
-      <img alt="register-img" src={banner} />
+      <img
+        alt="register-img"
+        src={
+          'https://s3.us-east-2.amazonaws.com/assets.siagaairbersih.com/register/register.png'
+        }
+      />
     </div>
   )
 }

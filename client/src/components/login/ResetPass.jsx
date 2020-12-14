@@ -2,12 +2,10 @@ import React, { useState, useEffect } from 'react'
 import { useHistory, useParams } from 'react-router-dom'
 import axios from 'axios'
 import css from './resetPass.module.css'
-import banner from '../../img/login/laptop.png'
 import { TextField, Collapse } from '@material-ui/core'
 import { Alert } from '@material-ui/lab'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
-import loading from '../../img/loading.gif'
 
 function ResetPass(props) {
   const [isLoading, setIsLoading] = useState(false)
@@ -117,10 +115,24 @@ function ResetPass(props) {
           error={formik.errors.repeatPassword ? true : false}
         />
         <button type="submit" disabled={isLoading}>
-          {isLoading ? <img alt="loading" src={loading} /> : 'Reset Kata Sandi'}
+          {isLoading ? (
+            <img
+              alt="loading"
+              src={
+                'https://s3.us-east-2.amazonaws.com/assets.siagaairbersih.com/loading.gif'
+              }
+            />
+          ) : (
+            'Reset Kata Sandi'
+          )}
         </button>
       </form>
-      <img alt="forpass-img" src={banner} />
+      <img
+        alt="forpass-img"
+        src={
+          'https://s3.us-east-2.amazonaws.com/assets.siagaairbersih.com/login/auth.png'
+        }
+      />
     </div>
   )
 }

@@ -15,7 +15,6 @@ import Home from './components/Home'
 import NoMatch from './components/NoMatch'
 import Admin from './components/Admin'
 // import AksiBerbagi from './components/AksiBerbagi'
-import loading_siab from './img/loading_siab.png'
 import css from './app.module.css'
 import jwt from 'jsonwebtoken'
 import AdminPIC from './components/AdminPIC'
@@ -45,7 +44,6 @@ import CreateOutlinedIcon from '@material-ui/icons/CreateOutlined'
 import VpnKeyOutlinedIcon from '@material-ui/icons/VpnKeyOutlined'
 import MenuBookOutlinedIcon from '@material-ui/icons/MenuBookOutlined'
 import ListItemIcon from '@material-ui/core/ListItemIcon'
-import siab_logo from './img/login/logo_siab.png'
 import LandingPage from './components/LandingPage'
 import UserWidget from './components/user/UserWidget'
 import SettingAccount from './components/admin/SettingAccount'
@@ -201,7 +199,12 @@ function App(props) {
   if (isLoading) {
     return (
       <div className={css.loading__container}>
-        <img alt="loading_siab" src={loading_siab} />
+        <img
+          alt="loading_siab"
+          src={
+            'https://s3.us-east-2.amazonaws.com/assets.siagaairbersih.com/loading_siab.gif'
+          }
+        />
       </div>
     )
   }
@@ -209,7 +212,13 @@ function App(props) {
   const nonLoggedFreeUserDrawer = (
     <div>
       <div className={classes.toolbar}>
-        <img className={classes.logoSiab} alt="siab-logo" src={siab_logo} />
+        <img
+          className={classes.logoSiab}
+          alt="logo_siab"
+          src={
+            'https://s3.us-east-2.amazonaws.com/assets.siagaairbersih.com/login/logo_siab.png'
+          }
+        />
       </div>
       <Divider />
       <List>
@@ -281,7 +290,13 @@ function App(props) {
   const loggedFreeUserDrawer = (
     <div>
       <div className={classes.toolbar}>
-        <img className={classes.logoSiab} alt="siab-logo" src={siab_logo} />
+        <img
+          className={classes.logoSiab}
+          alt="logo_siab"
+          src={
+            'https://s3.us-east-2.amazonaws.com/assets.siagaairbersih.com/login/logo_siab.png'
+          }
+        />
       </div>
       <Divider />
       <UserWidget data={theSession} />

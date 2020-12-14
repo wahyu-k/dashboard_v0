@@ -2,10 +2,8 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import css from './forgetPass.module.css'
 import { useHistory } from 'react-router-dom'
-import banner from '../../img/forgetPass/forget_pass.png'
 import { TextField, Collapse } from '@material-ui/core'
 import { Alert } from '@material-ui/lab'
-import loading from '../../img/loading.gif'
 
 function ForgetPass(props) {
   const [email, setEmail] = useState('')
@@ -80,7 +78,16 @@ function ForgetPass(props) {
         />
         {!isSuccess ? (
           <button type="submit" disabled={isLoading}>
-            {isLoading ? <img alt="loading" src={loading} /> : 'Kirim'}
+            {isLoading ? (
+              <img
+                alt="loading"
+                src={
+                  'https://s3.us-east-2.amazonaws.com/assets.siagaairbersih.com/loading.gif'
+                }
+              />
+            ) : (
+              'Kirim'
+            )}
           </button>
         ) : (
           <button type="submit" disabled={isLoading}>
@@ -92,7 +99,12 @@ function ForgetPass(props) {
           cek email anda
         </p>
       </form>
-      <img alt="forpass-img" src={banner} />
+      <img
+        alt="forpass-img"
+        src={
+          'https://s3.us-east-2.amazonaws.com/assets.siagaairbersih.com/forgetPass/forget_pass.png'
+        }
+      />
     </div>
   )
 }

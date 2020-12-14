@@ -8,7 +8,6 @@ import {
 } from '@react-google-maps/api'
 import axios from 'axios'
 import ReactMapGL, { Marker, NavigationControl } from 'react-map-gl'
-import siab_logo from '../../img/siab_logo.png'
 
 const libraries = ['places']
 
@@ -116,7 +115,9 @@ function Map() {
               key={i}
             >
               <img
-                src={siab_logo}
+                src={
+                  'https://s3.us-east-2.amazonaws.com/assets.siagaairbersih.com/siab_logo.png'
+                }
                 alt="siab_logo"
                 style={{
                   width: '20px',

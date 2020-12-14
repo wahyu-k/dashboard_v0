@@ -1,11 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
-import earth from './../../img/earth.png'
-import land from './../../img/land.png'
-import sea from './../../img/sea.png'
-import compar from './../../img/compar.png'
 import css from './ComparationApp.module.css'
 import { TextField } from '@material-ui/core'
+
 const ComparationApp = () => {
   const [input, setInput] = useState(0)
   const [resp, setResp] = useState({
@@ -66,7 +63,13 @@ const ComparationApp = () => {
               </div>
             </div>
           </div>
-          <img alt="compar" src={compar} className={css.compar__img} />
+          <img
+            alt="compar"
+            src={
+              'https://s3.us-east-2.amazonaws.com/assets.siagaairbersih.com/compar.png'
+            }
+            className={css.compar__img}
+          />
         </div>
       </div>
       <div className={css.wolf__container}>
@@ -74,7 +77,13 @@ const ComparationApp = () => {
         <div className={css.line}></div>
         <div className={css.wolfram__container}>
           <div className={css.flex__row}>
-            <img alt="earth" src={earth} className={css.icon__wolf__img} />
+            <img
+              alt="earth"
+              src={
+                'https://s3.us-east-2.amazonaws.com/assets.siagaairbersih.com/earth.png'
+              }
+              className={css.icon__wolf__img}
+            />
             <div>
               <h2>Luas Area Bumi</h2>
               <p className={css.wolfram__form}>
@@ -85,7 +94,13 @@ const ComparationApp = () => {
           </div>
           <div className={css.land__container}>
             <div className={css.flex__row}>
-              <img alt="land" src={land} className={css.icon__wolf__img} />
+              <img
+                alt="land"
+                src={
+                  'https://s3.us-east-2.amazonaws.com/assets.siagaairbersih.com/land.png'
+                }
+                className={css.icon__wolf__img}
+              />
               <div>
                 <h2>Luas Daratan</h2>
                 <p className={css.wolfram__form}>
@@ -97,7 +112,13 @@ const ComparationApp = () => {
             </div>
           </div>
           <div className={css.flex__row}>
-            <img alt="sea" src={sea} className={css.icon__wolf__img} />
+            <img
+              alt="sea"
+              src={
+                'https://s3.us-east-2.amazonaws.com/assets.siagaairbersih.com/sea.png'
+              }
+              className={css.icon__wolf__img}
+            />
             <div>
               <h2>Luas Perairan</h2>
               <p className={css.wolfram__form}>
