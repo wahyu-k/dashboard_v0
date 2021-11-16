@@ -21,7 +21,7 @@
   },
   "homepage": "https://github.com/siagaairbersih/dashboard_v0#readme",
   "dependencies": {
-    "aws-sdk": "^2.790.0",
+    "aws-sdk": "^2.814.0",
     "dotenv": "^8.2.0",
     "jquery": "^3.5.1",
     "multer": "^1.4.2",
